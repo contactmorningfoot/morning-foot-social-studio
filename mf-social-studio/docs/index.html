@@ -1,10 +1,534 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Morning Foot Social Studio V3</title><style>:root{font-family:Arial,sans-serif;color:#f4f7ff;background:#06142e}*{box-sizing:border-box}body{margin:0}header{padding:28px max(20px,5vw);border-bottom:1px solid #314263}h1{margin:0 0 8px}p{color:#b9c9e5}main{max-width:1400px;margin:auto;padding:24px}select,button,textarea{font:inherit}select,button{padding:11px 15px;border:1px solid #445779;border-radius:8px;background:#14284c;color:white;cursor:pointer}button.primary{background:#ffd200;color:#071633;border:0;font-weight:700}.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}.card{background:#102447;border:1px solid #344a70;border-radius:14px;overflow:hidden;padding-bottom:16px}.preview{aspect-ratio:4/5;background:#071a46;display:flex;flex-direction:column;position:relative;overflow:hidden}.preview img{width:100%;height:58%;object-fit:contain;background:#101d35}.preview .cover{padding:14px 17px;flex:1;display:flex;flex-direction:column;justify-content:center;background:#071a46}.tag{font-size:11px;font-weight:bold;background:#ffd200;color:#071633;padding:5px 8px;width:max-content}.preview h2{font-size:21px;line-height:1.12;text-transform:uppercase}.preview small{color:#ffd200}.content{padding:15px}.content h3{line-height:1.3}.meta{color:#ffd200;font-size:12px}textarea{width:100%;height:145px;background:#071733;color:white;border:1px solid #435579;border-radius:8px;padding:10px;resize:vertical}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.empty{padding:30px;border:1px dashed #63789e;border-radius:12px}</style></head><body><header><h1>MORNING <span style="color:#ffd200">FOOT</span> / SOCIAL STUDIO</h1><p>V3 — sélection automatique des meilleurs sujets, fiches DataScout et brouillons Instagram. Validation manuelle avant publication.</p></header><main><div class="toolbar"><select id="filter"><option value="selected">Sélection du studio</option><option value="all">Tous les articles</option><option value="STATS">Stats</option><option value="MERCATO">Mercato</option><option value="MATCH">Match</option></select><span id="count"></span></div><div id="grid" class="grid"></div></main><script>
-let posts=[];const $=id=>document.getElementById(id);const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function wrap(ctx,s,max=24){let lines=[],line='';for(let word of s.split(/\s+/)){if((line+' '+word).length>max&&line){lines.push(line);line=word}else line+=(line?' ':'')+word}if(line)lines.push(line);return lines.slice(0,7)}
-function canvas(post,slide){let c=document.createElement('canvas');c.width=1080;c.height=1350;let x=c.getContext('2d');x.fillStyle='#061a46';x.fillRect(0,0,1080,1350);x.fillStyle='#ffd200';x.fillRect(0,0,1080,14);x.font='bold 42px Arial';x.fillText('MORNING FOOT',65,90);x.font='bold 28px Arial';x.fillText(post.category,65,160);return {c,x}}
-async function exportPng(post,slide){let {c,x}=canvas(post,slide);if(slide===2&&post.image){let im=await load(post.image);let ratio=Math.min(960/im.width,1090/im.height);let w=im.width*ratio,h=im.height*ratio;x.drawImage(im,(1080-w)/2,180+(1090-h)/2,w,h);x.font='24px Arial';x.fillStyle='#ffffff';x.fillText('Source : Morning-Foot.com / DataScout (si applicable)',65,1310)}else{if(post.image){let im=await load(post.image);let k=Math.min(970/im.width,850/im.height);let w=im.width*k,h=im.height*k;x.drawImage(im,(1080-w)/2,130+(850-h)/2,w,h)}x.fillStyle='#061a46';x.fillRect(0,990,1080,360);x.fillStyle='#fff';x.font='bold 43px Arial';let lines=wrap(x,post.title.toUpperCase(),38).slice(0,4);lines.forEach((s,i)=>x.fillText(s,60,1055+i*52));x.fillStyle='#ffd200';x.font='bold 25px Arial';x.fillText(post.question.toUpperCase().slice(0,65),60,1300)}let a=document.createElement('a');a.download=`morning-foot-${post.id}-slide-${slide}.png`;a.href=c.toDataURL('image/png');a.click()}
-function load(src){return new Promise((ok,fail)=>{let im=new Image();im.onload=()=>ok(im);im.onerror=fail;im.src=src})}
-function render(){let f=$('filter').value;let data=posts.filter(p=>f==='all'||f==='selected'&&p.selected||p.category===f).sort((a,b)=>b.score-a.score);$('count').textContent=data.length+' brouillon(s)';$('grid').innerHTML=data.length?data.map(p=>`<article class="card"><div class="preview">${p.image?`<img src="${esc(p.image)}" alt="">`:''}<div class="cover"><span class="tag">${esc(p.category)}</span><h2>${esc(p.title)}</h2><small>${esc(p.question)}</small></div></div><div class="content"><div class="meta">${esc(p.date)} · Score ${p.score}/100 ${p.report?'· DATASCOUT':''} ${p.selected?'· SÉLECTIONNÉ':''}</div><h3>${esc(p.title)}</h3><p>${esc((p.reasons||[]).join(' · '))}</p><textarea id="caption-${p.id}">${esc(p.caption)}</textarea><div class="buttons"><button class="primary" onclick="copyCaption('${p.id}')">Copier la légende</button><button onclick="exportById('${p.id}',1)">PNG couverture</button>${p.report&&p.image?`<button onclick="exportById('${p.id}',2)">PNG fiche</button>`:''}<button onclick="window.open('${esc(p.url)}','_blank')">Article</button></div></div></article>`).join(''):'<div class="empty">Aucun article dans cette sélection. Choisissez « Tous les articles ».</div>'}
-function copyCaption(id){navigator.clipboard.writeText($('caption-'+id).value)}function exportById(id,n){exportPng(posts.find(p=>p.id===id),n).catch(e=>alert('Image indisponible : '+e.message))}
-$('filter').onchange=render;fetch('posts.json?v='+Date.now()).then(r=>{if(!r.ok)throw Error('posts.json introuvable');return r.json()}).then(data=>{posts=data;render()}).catch(e=>{$('grid').innerHTML='<div class="empty">Impossible de charger les brouillons : '+esc(e.message)+'</div>'});
-</script></body></html>
+
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Morning Foot — Social Studio Premium</title>
+<style>
+:root{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#f4f7ff;
+  background:#06142e;
+}
+*{box-sizing:border-box}
+body{margin:0}
+header{
+  padding:28px max(20px,5vw);
+  border-bottom:1px solid #314263;
+  background:#06142e;
+}
+h1{margin:0 0 8px;font-size:29px;letter-spacing:-.5px}
+header p{color:#aebfda;margin:0;line-height:1.5}
+main{max-width:1450px;margin:auto;padding:25px}
+select,button,textarea{font:inherit}
+select,button{
+  padding:11px 15px;
+  border:1px solid #445779;
+  border-radius:8px;
+  background:#14284c;
+  color:white;
+  cursor:pointer;
+}
+button:hover{filter:brightness(1.15)}
+button.primary{
+  background:#ffd200;
+  color:#071633;
+  border:0;
+  font-weight:700;
+}
+.toolbar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
+}
+#count{color:#b9c9e5}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  gap:22px;
+}
+.card{
+  background:#102447;
+  border:1px solid #344a70;
+  border-radius:13px;
+  overflow:hidden;
+}
+.preview{
+  aspect-ratio:4/5;
+  background:#061a46;
+  overflow:hidden;
+}
+.preview canvas{
+  width:100%;
+  height:100%;
+  display:block;
+}
+.content{padding:17px}
+.content h3{
+  font-size:17px;
+  line-height:1.35;
+  margin:12px 0;
+}
+.meta{
+  color:#ffd200;
+  font-size:12px;
+  line-height:1.5;
+}
+.reasons{
+  color:#b9c9e5;
+  font-size:13px;
+  min-height:30px;
+}
+textarea{
+  width:100%;
+  height:145px;
+  background:#071733;
+  color:white;
+  border:1px solid #435579;
+  border-radius:8px;
+  padding:12px;
+  resize:vertical;
+  line-height:1.5;
+}
+.buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.buttons button{font-size:12px}
+.empty{
+  padding:30px;
+  border:1px dashed #63789e;
+  border-radius:12px;
+  color:#b9c9e5;
+}
+.notice{
+  color:#aebfda;
+  font-size:12px;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>MORNING <span style="color:#ffd200">FOOT</span> / SOCIAL STUDIO</h1>
+  <p>Édition Premium — sélection des meilleurs sujets, visuels DataScout, carrousels Instagram et validation éditoriale.</p>
+</header>
+
+<main>
+  <div class="toolbar">
+    <select id="filter">
+      <option value="selected">Sélection du studio</option>
+      <option value="all">Tous les articles</option>
+      <option value="STATS">Statistiques</option>
+      <option value="MERCATO">Mercato</option>
+      <option value="MATCH">Matchs</option>
+      <option value="DÉBAT">Débats</option>
+    </select>
+    <span id="count"></span>
+  </div>
+
+  <div id="grid" class="grid"></div>
+
+  <p class="notice">
+    Les publications sont des brouillons. Vérifiez les titres,
+    les légendes et les droits des images avant publication.
+    Aucun post n'est publié automatiquement.
+  </p>
+</main>
+
+<script>
+"use strict";
+
+let posts=[];
+const imageCache=new Map();
+const $=id=>document.getElementById(id);
+
+function esc(s){
+  return String(s??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
+}
+
+function load(src){
+  if(!src)return Promise.resolve(null);
+  if(imageCache.has(src))return imageCache.get(src);
+
+  const promise=new Promise((resolve,reject)=>{
+    const im=new Image();
+    im.onload=()=>resolve(im);
+    im.onerror=()=>reject(new Error("Image indisponible"));
+    im.src=src;
+  });
+
+  imageCache.set(src,promise);
+  return promise;
+}
+
+function fitImage(ctx,im,x,y,w,h){
+  if(!im)return;
+  const ratio=Math.min(w/im.width,h/im.height);
+  const iw=im.width*ratio;
+  const ih=im.height*ratio;
+  ctx.drawImage(
+    im,
+    x+(w-iw)/2,
+    y+(h-ih)/2,
+    iw,ih
+  );
+}
+
+function roundedRect(ctx,x,y,w,h,r,fill){
+  ctx.beginPath();
+  ctx.roundRect(x,y,w,h,r);
+  ctx.fillStyle=fill;
+  ctx.fill();
+}
+
+function linesFor(ctx,text,maxWidth,maxLines){
+  const words=String(text||"").split(/\s+/);
+  const lines=[];
+  let line="";
+
+  for(const word of words){
+    const test=line?line+" "+word:word;
+    if(ctx.measureText(test).width>maxWidth&&line){
+      lines.push(line);
+      line=word;
+    }else{
+      line=test;
+    }
+  }
+  if(line)lines.push(line);
+
+  if(lines.length>maxLines){
+    const result=lines.slice(0,maxLines);
+    let last=result[maxLines-1];
+    while(last&&ctx.measureText(last+"…").width>maxWidth){
+      last=last.slice(0,-1);
+    }
+    result[maxLines-1]=last.trimEnd()+"…";
+    return result;
+  }
+  return lines;
+}
+
+function titleText(ctx,title,x,y,maxWidth,maxLines,fontSize,lineHeight){
+  ctx.font=`800 ${fontSize}px Arial`;
+  ctx.fillStyle="#ffffff";
+  ctx.textBaseline="top";
+
+  const lines=linesFor(ctx,title.toUpperCase(),maxWidth,maxLines);
+
+  lines.forEach((line,i)=>{
+    ctx.fillText(line,x,y+i*lineHeight);
+  });
+
+  return lines.length*lineHeight;
+}
+
+function baseCanvas(){
+  const canvas=document.createElement("canvas");
+  canvas.width=1080;
+  canvas.height=1350;
+
+  const ctx=canvas.getContext("2d");
+  ctx.fillStyle="#061a46";
+  ctx.fillRect(0,0,1080,1350);
+
+  return {canvas,ctx};
+}
+
+function branding(ctx){
+  ctx.fillStyle="#ffd200";
+  ctx.fillRect(0,0,1080,9);
+
+  ctx.font="900 39px Arial";
+  ctx.fillStyle="#ffffff";
+  ctx.fillText("MORNING",62,80);
+
+  ctx.fillStyle="#ffd200";
+  ctx.fillText("FOOT",270,80);
+
+  ctx.fillStyle="#40577d";
+  ctx.fillRect(62,109,956,2);
+}
+
+function footer(ctx,label){
+  ctx.fillStyle="#06142e";
+  ctx.fillRect(0,1250,1080,100);
+
+  ctx.fillStyle="#304c7c";
+  ctx.fillRect(62,1250,956,2);
+
+  ctx.font="bold 23px Arial";
+  ctx.fillStyle="#ffd200";
+  ctx.fillText("MORNING-FOOT.COM",62,1302);
+
+  ctx.textAlign="right";
+  ctx.fillStyle="#b6c8e6";
+  ctx.font="20px Arial";
+  ctx.fillText(label,1018,1302);
+  ctx.textAlign="left";
+}
+
+function categoryLabel(ctx,category,x,y){
+  ctx.font="bold 23px Arial";
+  const width=ctx.measureText(category).width+40;
+  roundedRect(ctx,x,y,width,47,5,"#ffd200");
+
+  ctx.fillStyle="#06142e";
+  ctx.fillText(category,x+20,y+32);
+}
+
+async function makeCanvas(post,slide){
+  const {canvas,ctx}=baseCanvas();
+  branding(ctx);
+
+  if(slide===2){
+    categoryLabel(ctx,"DATASCOUT",62,142);
+
+    ctx.font="bold 27px Arial";
+    ctx.fillStyle="#ffffff";
+    const heading=linesFor(ctx,post.title,945,2);
+    heading.forEach((line,i)=>ctx.fillText(line,62,235+i*35));
+
+    roundedRect(ctx,45,310,990,910,12,"#101d35");
+
+    if(post.image){
+      try{
+        const im=await load(post.image);
+        fitImage(ctx,im,65,330,950,870);
+      }catch(e){
+        ctx.fillStyle="#ffffff";
+        ctx.font="28px Arial";
+        ctx.fillText("Fiche indisponible",90,420);
+      }
+    }
+
+    footer(ctx,"FICHE STATISTIQUE");
+    return canvas;
+  }
+
+  categoryLabel(ctx,post.category||"FOOTBALL",62,142);
+
+  if(post.image){
+    roundedRect(ctx,40,215,1000,750,12,"#101d35");
+    try{
+      const im=await load(post.image);
+      fitImage(ctx,55,230,970,720);
+    }catch(e){
+      ctx.fillStyle="#aebfda";
+      ctx.font="28px Arial";
+      ctx.fillText("Visuel indisponible",70,450);
+    }
+  }else{
+    ctx.fillStyle="#102a59";
+    ctx.fillRect(40,215,1000,750);
+
+    ctx.font="bold 64px Arial";
+    ctx.fillStyle="#ffd200";
+    ctx.fillText("FOOTBALL",75,500);
+
+    ctx.fillStyle="#ffffff";
+    ctx.fillText("ANALYSE",75,580);
+  }
+
+  ctx.fillStyle="#061a46";
+  ctx.fillRect(0,955,1080,295);
+
+  ctx.fillStyle="#ffd200";
+  ctx.fillRect(62,968,80,6);
+
+  const title=post.title||"Actualité football";
+
+  ctx.font="800 44px Arial";
+  const titleLines=linesFor(ctx,title.toUpperCase(),950,4);
+
+  const fontSize=titleLines.length>=4?40:46;
+  const lineHeight=fontSize+8;
+
+  titleText(ctx,title,62,1000,950,4,fontSize,lineHeight);
+
+  ctx.font="bold 24px Arial";
+  ctx.fillStyle="#ffd200";
+  const question=linesFor(ctx,post.question||"",950,1)[0]||"";
+  ctx.fillText(question,62,1225);
+
+  footer(ctx,"L'ACTU FOOT AUTREMENT");
+
+  return canvas;
+}
+
+async function exportPng(post,slide){
+  const canvas=await makeCanvas(post,slide);
+
+  const blob=await new Promise(resolve=>{
+    canvas.toBlob(resolve,"image/png");
+  });
+
+  if(!blob)throw new Error("Export impossible");
+
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+
+  a.href=url;
+  a.download=`morning-foot-${post.id}-slide-${slide}.png`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+
+async function drawPreview(post){
+  const canvas=$("preview-"+post.id);
+  if(!canvas)return;
+
+  try{
+    const rendered=await makeCanvas(post,1);
+    const ctx=canvas.getContext("2d");
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(rendered,0,0,canvas.width,canvas.height);
+  }catch(e){
+    console.warn("Aperçu impossible",e);
+  }
+}
+
+function render(){
+  const filter=$("filter").value;
+
+  const data=posts.filter(p=>{
+    if(filter==="all")return true;
+    if(filter==="selected")return !!p.selected;
+    return p.category===filter;
+  }).sort((a,b)=>
+    (Number(b.score)||0)-(Number(a.score)||0)
+  );
+
+  $("count").textContent=data.length+" brouillon(s)";
+
+  if(!data.length){
+    $("grid").innerHTML=
+      '<div class="empty">Aucun article dans cette sélection. Essayez « Tous les articles ».</div>';
+    return;
+  }
+
+  $("grid").innerHTML=data.map(p=>`
+    <article class="card">
+      <div class="preview">
+        <canvas
+          id="preview-${esc(p.id)}"
+          width="540"
+          height="675"
+        ></canvas>
+      </div>
+
+      <div class="content">
+        <div class="meta">
+          ${esc(p.date)}
+          · Score ${esc(p.score)}/100
+          ${p.report?" · DATASCOUT":""}
+          ${p.selected?" · SÉLECTIONNÉ":""}
+        </div>
+
+        <h3>${esc(p.title)}</h3>
+
+        <p class="reasons">
+          ${esc((p.reasons||[]).join(" · "))}
+        </p>
+
+        <textarea id="caption-${esc(p.id)}">${esc(p.caption)}</textarea>
+
+        <div class="buttons">
+          <button class="primary" data-action="copy" data-id="${esc(p.id)}">
+            Copier la légende
+          </button>
+
+          <button data-action="cover" data-id="${esc(p.id)}">
+            PNG couverture
+          </button>
+
+          ${p.report&&p.image?`
+            <button data-action="report" data-id="${esc(p.id)}">
+              PNG DataScout
+            </button>
+          `:""}
+
+          <button data-action="article" data-id="${esc(p.id)}">
+            Voir l'article
+          </button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  for(const p of data){
+    drawPreview(p);
+  }
+}
+
+document.getElementById("grid").addEventListener("click",async event=>{
+  const button=event.target.closest("button[data-action]");
+  if(!button)return;
+
+  const post=posts.find(p=>p.id===button.dataset.id);
+  if(!post)return;
+
+  const action=button.dataset.action;
+
+  try{
+    if(action==="copy"){
+      const value=$("caption-"+post.id).value;
+      await navigator.clipboard.writeText(value);
+      const old=button.textContent;
+      button.textContent="Copié !";
+      setTimeout(()=>button.textContent=old,1500);
+    }
+
+    if(action==="cover"){
+      await exportPng(post,1);
+    }
+
+    if(action==="report"){
+      await exportPng(post,2);
+    }
+
+    if(action==="article"){
+      window.open(post.url,"_blank","noopener,noreferrer");
+    }
+  }catch(e){
+    alert("Une erreur est survenue : "+e.message);
+  }
+});
+
+$("filter").addEventListener("change",render);
+
+fetch("posts.json?v="+Date.now())
+  .then(response=>{
+    if(!response.ok)throw new Error("posts.json introuvable");
+    return response.json();
+  })
+  .then(data=>{
+    if(!Array.isArray(data))throw new Error("Format JSON invalide");
+    posts=data;
+    render();
+  })
+  .catch(error=>{
+    $("grid").innerHTML=
+      '<div class="empty">Impossible de charger les brouillons : '+
+      esc(error.message)+
+      '</div>';
+  });
+</script>
+</body>
+</html>
