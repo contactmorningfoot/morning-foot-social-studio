@@ -1,0 +1,39 @@
+
+name: Actualiser les posts Morning Foot
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-studio
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperer les fichiers
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer les dependances
+        run: pip install -r mf-social-studio/requirements.txt
+
+      - name: Generer les publications Instagram
+        run: python mf-social-studio/scripts/build.py
+
+      - name: Sauvegarder les nouveaux brouillons
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mf-social-studio/docs/posts.json mf-social-studio/docs/assets/
+          git diff --cached --quiet || (git commit -m "Actualisation des posts Morning Foot" && git push)
