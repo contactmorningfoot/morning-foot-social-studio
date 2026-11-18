@@ -90,21 +90,37 @@ def main():
     if not feed.entries:
         raise SystemExit("RSS vide ou non interprétable")
 
- previous=[]; p=DOCS/'posts.json'
- if p.exists():
-  try:previous=json.loads(p.read_text(encoding='utf8'))
-  except:pass
- byurl={p['url']:p for p in previous}
- for e in feed.entries[:25]:
-  if e.get('link') not in byurl:
-   try:byurl[e.link]=parse(e)
-   except Exception as ex:print('ARTICLE ERROR',e.get('link'),ex)
- items=sorted(byurl.values(),key=lambda x:(x['score'],x['date']),reverse=True)[:120]
- # Selection globale par potentiel parmi les articles recents, sans photo non autorisee.
- recent=sorted(items,key=lambda x:x['date'],reverse=True)[:35]
- eligible=sorted((x for x in recent if x.get('report') and x.get('image')),key=lambda x:x['score'],reverse=True)
- chosen={x['id'] for x in eligible[:7] if x['score']>=35}
- for item in items:item['selected']=item['id'] in chosen
- p.write_text(json.dumps(items,ensure_ascii=False,indent=2),encoding='utf8')
- print('Posts:',len(items),'Sélectionnés:',sum(x['selected'] for x in items))
-if __name__=='__main__':main()
+    previous = []
+    p = DOCS / 'posts.json'
+    if p.exists():
+        try:
+            previous = json.loads(p.read_text(encoding='utf8'))
+        except Exception:
+            pass
+
+    byurl = {item['url']: item for item in previous}
+    for e in feed.entries[:25]:
+        if e.get('link') not in byurl:
+            try:
+                byurl[e.link] = parse(e)
+            except Exception as ex:
+                print('ARTICLE ERROR', e.get('link'), ex)
+
+    items = sorted(byurl.values(), key=lambda x: (x['score'], x['date']), reverse=True)[:120]
+    recent = sorted(items, key=lambda x: x['date'], reverse=True)[:35]
+    eligible = sorted(
+        (x for x in recent if x.get('report') and x.get('image')),
+        key=lambda x: x['score'],
+        reverse=True
+    )
+    chosen = {x['id'] for x in eligible[:7] if x['score'] >= 35}
+
+    for item in items:
+        item['selected'] = item['id'] in chosen
+
+    p.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding='utf8')
+    print('Posts:', len(items), 'Sélectionnés:', sum(x['selected'] for x in items))
+
+
+if __name__ == '__main__':
+    main()
