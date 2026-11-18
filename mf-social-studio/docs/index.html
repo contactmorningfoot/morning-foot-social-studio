@@ -159,13 +159,75 @@ function esc(s){
   }[c]));
 }
 
-function load(src){
-  if(!src)return Promise.resolve(null);
+/*
+  Résout les chemins d'images fournis par posts.json.
+  Les images locales GitHub Pages sont prioritaires.
+*/
+function imageCandidates(post){
+  const values=[
+    post.image,
+    post.image_url,
+    post.report_image,
+    post.report_url
+  ].filter(v=>typeof v==="string"&&v.trim());
+
+  const candidates=[];
+  const add=url=>{
+    if(url&&!candidates.includes(url))candidates.push(url);
+  };
+
+  for(const raw of values){
+    const src=raw.trim();
+
+    if(/^https?:\/\//i.test(src)){
+      add(src);
+      try{
+        const u=new URL(src);
+        if(u.pathname.includes("/assets/")){
+          const file=u.pathname.split("/assets/").pop();
+          add(new URL("assets/"+file,document.baseURI).href);
+        }
+      }catch(e){}
+      continue;
+    }
+
+    const clean=src.replace(/^\/+/,"");
+
+    if(clean.startsWith("assets/")){
+      add(new URL(clean,document.baseURI).href);
+      add(new URL(clean,location.origin+"/morning-foot-social-studio/").href);
+    }else{
+      add(new URL(clean,document.baseURI).href);
+      add(new URL("assets/"+clean.split("/").pop(),document.baseURI).href);
+    }
+  }
+
+  return candidates;
+}
+
+function loadSingle(src){
   if(imageCache.has(src))return imageCache.get(src);
 
   const promise=new Promise((resolve,reject)=>{
     const im=new Image();
-    im.onload=()=>resolve(im);
+
+    /*
+      Les images locales fonctionnent sur le même domaine.
+      Pour les images externes, CORS permet un export
+      canvas uniquement si le serveur distant l'autorise.
+    */
+    if(new URL(src,document.baseURI).origin!==location.origin){
+      im.crossOrigin="anonymous";
+    }
+
+    im.onload=()=>{
+      if(im.naturalWidth>0&&im.naturalHeight>0){
+        resolve(im);
+      }else{
+        reject(new Error("Image vide"));
+      }
+    };
+
     im.onerror=()=>reject(new Error("Image indisponible"));
     im.src=src;
   });
@@ -174,11 +236,26 @@ function load(src){
   return promise;
 }
 
+async function loadPostImage(post){
+  const candidates=imageCandidates(post);
+
+  for(const src of candidates){
+    try{
+      return await loadSingle(src);
+    }catch(e){
+      console.warn("Image non chargée :",src);
+    }
+  }
+
+  return null;
+}
+
 function fitImage(ctx,im,x,y,w,h){
   if(!im)return;
   const ratio=Math.min(w/im.width,h/im.height);
   const iw=im.width*ratio;
   const ih=im.height*ratio;
+
   ctx.drawImage(
     im,
     x+(w-iw)/2,
@@ -201,6 +278,7 @@ function linesFor(ctx,text,maxWidth,maxLines){
 
   for(const word of words){
     const test=line?line+" "+word:word;
+
     if(ctx.measureText(test).width>maxWidth&&line){
       lines.push(line);
       line=word;
@@ -208,17 +286,21 @@ function linesFor(ctx,text,maxWidth,maxLines){
       line=test;
     }
   }
+
   if(line)lines.push(line);
 
   if(lines.length>maxLines){
     const result=lines.slice(0,maxLines);
     let last=result[maxLines-1];
+
     while(last&&ctx.measureText(last+"…").width>maxWidth){
       last=last.slice(0,-1);
     }
+
     result[maxLines-1]=last.trimEnd()+"…";
     return result;
   }
+
   return lines;
 }
 
@@ -284,35 +366,67 @@ function footer(ctx,label){
 function categoryLabel(ctx,category,x,y){
   ctx.font="bold 23px Arial";
   const width=ctx.measureText(category).width+40;
+
   roundedRect(ctx,x,y,width,47,5,"#ffd200");
 
   ctx.fillStyle="#06142e";
   ctx.fillText(category,x+20,y+32);
 }
 
+function fallbackVisual(ctx){
+  const gradient=ctx.createLinearGradient(40,215,1040,965);
+  gradient.addColorStop(0,"#17366d");
+  gradient.addColorStop(1,"#071632");
+
+  ctx.fillStyle=gradient;
+  ctx.fillRect(40,215,1000,750);
+
+  ctx.fillStyle="rgba(255,210,0,.08)";
+  ctx.beginPath();
+  ctx.arc(830,420,270,0,Math.PI*2);
+  ctx.fill();
+
+  ctx.fillStyle="#ffd200";
+  ctx.font="bold 65px Arial";
+  ctx.fillText("FOOTBALL",75,510);
+
+  ctx.fillStyle="#ffffff";
+  ctx.fillText("ANALYSE",75,590);
+
+  ctx.fillStyle="#aebfda";
+  ctx.font="25px Arial";
+  ctx.fillText("MORNING FOOT",78,645);
+}
+
 async function makeCanvas(post,slide){
   const {canvas,ctx}=baseCanvas();
   branding(ctx);
+
+  const im=await loadPostImage(post);
 
   if(slide===2){
     categoryLabel(ctx,"DATASCOUT",62,142);
 
     ctx.font="bold 27px Arial";
     ctx.fillStyle="#ffffff";
+
     const heading=linesFor(ctx,post.title,945,2);
-    heading.forEach((line,i)=>ctx.fillText(line,62,235+i*35));
+    heading.forEach((line,i)=>{
+      ctx.fillText(line,62,235+i*35);
+    });
 
     roundedRect(ctx,45,310,990,910,12,"#101d35");
 
-    if(post.image){
-      try{
-        const im=await load(post.image);
-        fitImage(ctx,im,65,330,950,870);
-      }catch(e){
-        ctx.fillStyle="#ffffff";
-        ctx.font="28px Arial";
-        ctx.fillText("Fiche indisponible",90,420);
-      }
+    if(im){
+      fitImage(ctx,im,65,330,950,870);
+    }else{
+      ctx.fillStyle="#ffd200";
+      ctx.font="bold 32px Arial";
+      ctx.fillText("FICHE STATISTIQUE",90,430);
+
+      ctx.fillStyle="#b9c9e5";
+      ctx.font="25px Arial";
+      ctx.fillText("Image source non disponible",90,485);
     }
 
     footer(ctx,"FICHE STATISTIQUE");
@@ -321,26 +435,11 @@ async function makeCanvas(post,slide){
 
   categoryLabel(ctx,post.category||"FOOTBALL",62,142);
 
-  if(post.image){
+  if(im){
     roundedRect(ctx,40,215,1000,750,12,"#101d35");
-    try{
-      const im=await load(post.image);
-      fitImage(ctx,55,230,970,720);
-    }catch(e){
-      ctx.fillStyle="#aebfda";
-      ctx.font="28px Arial";
-      ctx.fillText("Visuel indisponible",70,450);
-    }
+    fitImage(ctx,im,55,230,970,720);
   }else{
-    ctx.fillStyle="#102a59";
-    ctx.fillRect(40,215,1000,750);
-
-    ctx.font="bold 64px Arial";
-    ctx.fillStyle="#ffd200";
-    ctx.fillText("FOOTBALL",75,500);
-
-    ctx.fillStyle="#ffffff";
-    ctx.fillText("ANALYSE",75,580);
+    fallbackVisual(ctx);
   }
 
   ctx.fillStyle="#061a46";
@@ -361,6 +460,7 @@ async function makeCanvas(post,slide){
 
   ctx.font="bold 24px Arial";
   ctx.fillStyle="#ffd200";
+
   const question=linesFor(ctx,post.question||"",950,1)[0]||"";
   ctx.fillText(question,62,1225);
 
@@ -376,13 +476,16 @@ async function exportPng(post,slide){
     canvas.toBlob(resolve,"image/png");
   });
 
-  if(!blob)throw new Error("Export impossible");
+  if(!blob){
+    throw new Error("Export impossible");
+  }
 
   const url=URL.createObjectURL(blob);
   const a=document.createElement("a");
 
   a.href=url;
   a.download=`morning-foot-${post.id}-slide-${slide}.png`;
+
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -397,6 +500,7 @@ async function drawPreview(post){
   try{
     const rendered=await makeCanvas(post,1);
     const ctx=canvas.getContext("2d");
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.drawImage(rendered,0,0,canvas.width,canvas.height);
   }catch(e){
@@ -458,7 +562,7 @@ function render(){
             PNG couverture
           </button>
 
-          ${p.report&&p.image?`
+          ${p.report&&imageCandidates(p).length?`
             <button data-action="report" data-id="${esc(p.id)}">
               PNG DataScout
             </button>
@@ -481,7 +585,7 @@ document.getElementById("grid").addEventListener("click",async event=>{
   const button=event.target.closest("button[data-action]");
   if(!button)return;
 
-  const post=posts.find(p=>p.id===button.dataset.id);
+  const post=posts.find(p=>String(p.id)===button.dataset.id);
   if(!post)return;
 
   const action=button.dataset.action;
@@ -490,9 +594,13 @@ document.getElementById("grid").addEventListener("click",async event=>{
     if(action==="copy"){
       const value=$("caption-"+post.id).value;
       await navigator.clipboard.writeText(value);
+
       const old=button.textContent;
       button.textContent="Copié !";
-      setTimeout(()=>button.textContent=old,1500);
+
+      setTimeout(()=>{
+        button.textContent=old;
+      },1500);
     }
 
     if(action==="cover"){
@@ -515,11 +623,16 @@ $("filter").addEventListener("change",render);
 
 fetch("posts.json?v="+Date.now())
   .then(response=>{
-    if(!response.ok)throw new Error("posts.json introuvable");
+    if(!response.ok){
+      throw new Error("posts.json introuvable");
+    }
     return response.json();
   })
   .then(data=>{
-    if(!Array.isArray(data))throw new Error("Format JSON invalide");
+    if(!Array.isArray(data)){
+      throw new Error("Format JSON invalide");
+    }
+
     posts=data;
     render();
   })
