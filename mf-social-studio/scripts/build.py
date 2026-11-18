@@ -67,25 +67,29 @@ def parse(entry):
  caption=f'{hook}\n\nUne analyse à découvrir sur Morning Foot.\n\n💬 {question}\n\n📊 Visuel : DataScout (si présent). Article complet sur Morning-Foot.com — lien en bio.'
  return {'id':id,'title':title,'url':url,'date':day,'category':c,'score':score,'reasons':reasons,'report':bool(report and image),'image':image,'caption':caption,'question':question,'status':'brouillon'}
 
+
 def main():
- r=get(FEED)
- if not r:raise SystemExit('RSS inaccessible : aucun changement publié')
- print("RSS HTTP :", r.status_code)
-print("RSS URL finale :", r.url)
-print("RSS Content-Type :", r.headers.get("Content-Type"))
-print("RSS taille :", len(r.content))
-print("RSS début :", repr(r.text[:300]))
+    r = get(FEED)
+    if r is None:
+        raise SystemExit("RSS inaccessible : aucun changement publié")
 
-feed = feedparser.parse(r.content)
+    print("RSS HTTP :", r.status_code)
+    print("RSS URL finale :", r.url)
+    print("RSS Content-Type :", r.headers.get("Content-Type"))
+    print("RSS taille :", len(r.content))
+    print("RSS début :", repr(r.text[:300]))
 
-print("RSS articles détectés :", len(feed.entries))
-print("RSS erreur parsing :", feed.get("bozo", 0))
+    feed = feedparser.parse(r.content)
 
-if feed.get("bozo"):
-    print("RSS détail erreur :", feed.get("bozo_exception"))
+    print("RSS articles détectés :", len(feed.entries))
+    print("RSS erreur parsing :", feed.get("bozo", 0))
 
-if not feed.entries:
-    raise SystemExit("RSS vide ou non interprétable")
+    if feed.get("bozo"):
+        print("RSS détail erreur :", feed.get("bozo_exception"))
+
+    if not feed.entries:
+        raise SystemExit("RSS vide ou non interprétable")
+
  previous=[]; p=DOCS/'posts.json'
  if p.exists():
   try:previous=json.loads(p.read_text(encoding='utf8'))
