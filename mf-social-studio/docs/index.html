@@ -44,8 +44,7 @@ header{
 .brand img{
   width:56px;
   height:56px;
-  object-fit:cover;
-  border-radius:10px;
+  object-fit:contain;
 }
 .brand-name{
   font-size:26px;
@@ -249,15 +248,15 @@ button.primary{
 
 <header>
   <div class="brand">
-    <img src="assets/logo-mf.jpg" alt="Logo Morning Foot" onerror="this.style.display='none'">
+    <img src="assets/logo-mf.png.png" alt="Logo Morning Foot" onerror="this.style.display='none'">
     <div>
       <div class="brand-name">MORNING <b>FOOT</b></div>
       <div class="brand-sub">SOCIAL STUDIO / BLACK EDITION V6</div>
     </div>
   </div>
   <div class="header-note">
-    LE FOOTBALL, AUTREMENT.<br>
-    Carrousels Instagram · Création éditoriale · Export HD
+    LE FOOTBALL, AUTREMENT.
+    <div>Carrousels Instagram · Création éditoriale · Export HD</div>
   </div>
 </header>
 
@@ -292,7 +291,7 @@ const slideState=new Map();
 
 const $=id=>document.getElementById(id);
 
-const LOGO_URL=new URL("assets/logo-mf.jpg",document.baseURI).href;
+const LOGO_URL=new URL("assets/logo-mf.png.png",document.baseURI).href;
 
 function esc(s){
   return String(s??"").replace(/[&<>"']/g,c=>({
