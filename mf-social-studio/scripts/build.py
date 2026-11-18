@@ -39,6 +39,9 @@ def parse(entry):
  url=entry.get('link',''); id=hashlib.sha1(url.encode()).hexdigest()[:14]; title=txt(entry.get('title',''))
  page=get(url); soup=BeautifulSoup(page.text,'html.parser') if page else BeautifulSoup('','html.parser')
  article=soup.select_one('.entry-content, .post-content, article .content, .et_pb_post .entry-content, article') or soup
+ 
+ for unwanted in article.select('nav, .breadcrumb, .breadcrumbs, .yoast-breadcrumb, script, style, .sharedaddy, .jp-relatedposts'):
+  unwanted.decompose()
  text=txt(str(article))[:5000]; imgs=list(image_candidates(soup)); reports=[]; featured=[]
  for src,tag in imgs:
   desc=(src+' '+tag.get('alt','')).lower(); w=int(tag.get('width','0') or 0);h=int(tag.get('height','0') or 0)
@@ -47,7 +50,9 @@ def parse(entry):
   elif not any(x in desc for x in ['logo','avatar','icon','emoji']):featured.append(src)
  report=reports[0] if reports else None
  image=save_image(report,id+'-report') if report else None
- if not image and featured:image=save_image(featured[0],id+'-photo')
+ # Ne pas reutiliser de photos sans verification des droits.
+ # Les fiches DataScout autorisees restent les seules images exportables.
+
  c=category(title+' '+text[:450]); score=0; reasons=[]
  if report:score+=35;reasons.append('Fiche statistique')
  if c=='STATS':score+=20;reasons.append('Statistiques')
@@ -56,10 +61,11 @@ def parse(entry):
  if any(k in title.lower() for k in ['?', 'record','incroyable','révélation','surprise','explose','pourquoi','combien']):score+=12;reasons.append('Angle de discussion')
  if image:score+=8
  score+=min(10,max(0,len(text)//350))
+ score=min(100,score)
  date=entry.get('published_parsed') or entry.get('updated_parsed'); day=datetime.date(*date[:3]).isoformat() if date else datetime.date.today().isoformat()
  hook=title.rstrip(' .!?'); question={'STATS':'Quel chiffre vous impressionne le plus ?','MERCATO':'Ce serait une bonne opération selon vous ?','MATCH':'Vous partagez cette analyse ?','DÉBAT':'Vous êtes d’accord ?'}[c]
- caption=f'{hook}\n\n{txt(text)[:370].rsplit(" ",1)[0]}…\n\n💬 {question}\n\nSource : Morning-Foot.com — lien de l’article dans la bio.'
- return {'id':id,'title':title,'url':url,'date':day,'category':c,'score':score,'reasons':reasons,'report':bool(report),'image':image,'caption':caption,'question':question,'status':'brouillon'}
+ caption=f'{hook}\n\nUne analyse à découvrir sur Morning Foot.\n\n💬 {question}\n\n📊 Visuel : DataScout (si présent). Article complet sur Morning-Foot.com — lien en bio.'
+ return {'id':id,'title':title,'url':url,'date':day,'category':c,'score':score,'reasons':reasons,'report':bool(report and image),'image':image,'caption':caption,'question':question,'status':'brouillon'}
 
 def main():
  r=get(FEED)
@@ -75,13 +81,12 @@ def main():
   if e.get('link') not in byurl:
    try:byurl[e.link]=parse(e)
    except Exception as ex:print('ARTICLE ERROR',e.get('link'),ex)
- items=sorted(byurl.values(),key=lambda x:(x['date'],x['score']),reverse=True)[:120]
- days={}
- for item in items:
-  day=item['date'];days.setdefault(day,[]).append(item)
- for day,group in days.items():
-  for i,item in enumerate(sorted(group,key=lambda x:x['score'],reverse=True)):
-   item['selected']=i<3 and item['score']>=35
+ items=sorted(byurl.values(),key=lambda x:(x['score'],x['date']),reverse=True)[:120]
+ # Selection globale par potentiel parmi les articles recents, sans photo non autorisee.
+ recent=sorted(items,key=lambda x:x['date'],reverse=True)[:35]
+ eligible=sorted((x for x in recent if x.get('report') and x.get('image')),key=lambda x:x['score'],reverse=True)
+ chosen={x['id'] for x in eligible[:7] if x['score']>=35}
+ for item in items:item['selected']=item['id'] in chosen
  p.write_text(json.dumps(items,ensure_ascii=False,indent=2),encoding='utf8')
  print('Posts:',len(items),'Sélectionnés:',sum(x['selected'] for x in items))
 if __name__=='__main__':main()
