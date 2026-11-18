@@ -70,8 +70,22 @@ def parse(entry):
 def main():
  r=get(FEED)
  if not r:raise SystemExit('RSS inaccessible : aucun changement publié')
- feed=feedparser.parse(r.content)
- if not feed.entries:raise SystemExit('RSS vide')
+ print("RSS HTTP :", r.status_code)
+print("RSS URL finale :", r.url)
+print("RSS Content-Type :", r.headers.get("Content-Type"))
+print("RSS taille :", len(r.content))
+print("RSS début :", repr(r.text[:300]))
+
+feed = feedparser.parse(r.content)
+
+print("RSS articles détectés :", len(feed.entries))
+print("RSS erreur parsing :", feed.get("bozo", 0))
+
+if feed.get("bozo"):
+    print("RSS détail erreur :", feed.get("bozo_exception"))
+
+if not feed.entries:
+    raise SystemExit("RSS vide ou non interprétable")
  previous=[]; p=DOCS/'posts.json'
  if p.exists():
   try:previous=json.loads(p.read_text(encoding='utf8'))
