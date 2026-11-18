@@ -4,644 +4,160 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Morning Foot — Social Studio Premium</title>
+<title>Morning Foot — Social Studio V4</title>
 <style>
-:root{
-  font-family:Arial,Helvetica,sans-serif;
-  color:#f4f7ff;
-  background:#06142e;
-}
-*{box-sizing:border-box}
-body{margin:0}
-header{
-  padding:28px max(20px,5vw);
-  border-bottom:1px solid #314263;
-  background:#06142e;
-}
-h1{margin:0 0 8px;font-size:29px;letter-spacing:-.5px}
-header p{color:#aebfda;margin:0;line-height:1.5}
-main{max-width:1450px;margin:auto;padding:25px}
-select,button,textarea{font:inherit}
-select,button{
-  padding:11px 15px;
-  border:1px solid #445779;
-  border-radius:8px;
-  background:#14284c;
-  color:white;
-  cursor:pointer;
-}
-button:hover{filter:brightness(1.15)}
-button.primary{
-  background:#ffd200;
-  color:#071633;
-  border:0;
-  font-weight:700;
-}
-.toolbar{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-bottom:22px;
-}
-#count{color:#b9c9e5}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
-  gap:22px;
-}
-.card{
-  background:#102447;
-  border:1px solid #344a70;
-  border-radius:13px;
-  overflow:hidden;
-}
-.preview{
-  aspect-ratio:4/5;
-  background:#061a46;
-  overflow:hidden;
-}
-.preview canvas{
-  width:100%;
-  height:100%;
-  display:block;
-}
-.content{padding:17px}
-.content h3{
-  font-size:17px;
-  line-height:1.35;
-  margin:12px 0;
-}
-.meta{
-  color:#ffd200;
-  font-size:12px;
-  line-height:1.5;
-}
-.reasons{
-  color:#b9c9e5;
-  font-size:13px;
-  min-height:30px;
-}
-textarea{
-  width:100%;
-  height:145px;
-  background:#071733;
-  color:white;
-  border:1px solid #435579;
-  border-radius:8px;
-  padding:12px;
-  resize:vertical;
-  line-height:1.5;
-}
-.buttons{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-.buttons button{font-size:12px}
-.empty{
-  padding:30px;
-  border:1px dashed #63789e;
-  border-radius:12px;
-  color:#b9c9e5;
-}
-.notice{
-  color:#aebfda;
-  font-size:12px;
-  margin-top:20px;
-}
+:root{font-family:Inter,Arial,Helvetica,sans-serif;color:#f6f8ff;background:#07142b;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button,select,textarea{font:inherit}
+header{padding:32px clamp(18px,5vw,70px);border-bottom:1px solid #233657;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.brand{font-size:clamp(24px,3vw,38px);font-weight:900;letter-spacing:-1.5px}.brand b{color:#ffd200}.tag{font-size:11px;letter-spacing:2px;font-weight:800;color:#ffd200;margin-top:7px}.intro{color:#aabbd4;font-size:13px;max-width:420px;line-height:1.6}
+main{max-width:1480px;margin:auto;padding:30px clamp(16px,3vw,42px) 70px}
+.toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}.toolbar select{background:#14274a;color:white;border:1px solid #35496c;border-radius:9px;padding:12px 15px}.count{font-size:13px;color:#aebfda}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:24px}.card{background:#0d203e;border:1px solid #263e62;border-radius:16px;overflow:hidden}.card-top{padding:19px 21px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{font-size:11px;letter-spacing:1.3px;font-weight:800;color:#ffd200}.score{font-size:11px;color:#aabbd4}.card-title{font-size:20px;line-height:1.25;font-weight:800;margin:0;padding:0 21px 16px;letter-spacing:-.4px}
+.slides{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:0 14px}.slide{min-width:0}.slide canvas{width:100%;height:auto;aspect-ratio:4/5;display:block;background:#061a46;border-radius:5px}.slide-label{text-align:center;color:#afc0d8;font-size:10px;letter-spacing:.5px;margin:9px 0 12px}.slide.unavailable{opacity:.65}
+.card-bottom{border-top:1px solid #263e62;padding:18px 20px 20px}.reasons{font-size:12px;color:#aabbd4;line-height:1.5;margin:0 0 12px}.caption-label{font-size:11px;color:#ffd200;font-weight:800;letter-spacing:1px;margin:0 0 8px}textarea{width:100%;min-height:125px;resize:vertical;padding:12px;border-radius:8px;background:#07172e;border:1px solid #31486a;color:#f2f6ff;line-height:1.5;font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}button{cursor:pointer;border-radius:8px;border:1px solid #3b5172;background:#162c50;color:white;padding:10px 12px;font-size:12px;font-weight:700}button:hover{filter:brightness(1.15)}button.primary{background:#ffd200;color:#081936;border-color:#ffd200}.empty{padding:30px;border:1px dashed #3b5172;border-radius:12px;color:#b9c9e5}.notice{font-size:12px;color:#91a5c3;margin-top:24px;line-height:1.6}
+@media(max-width:550px){header{padding:23px 18px}.grid{grid-template-columns:1fr}.slides{gap:5px;padding:0 9px}.card-title{font-size:18px}.slide-label{font-size:9px}}
 </style>
 </head>
-
 <body>
-<header>
-  <h1>MORNING <span style="color:#ffd200">FOOT</span> / SOCIAL STUDIO</h1>
-  <p>Édition Premium — sélection des meilleurs sujets, visuels DataScout, carrousels Instagram et validation éditoriale.</p>
-</header>
-
+<header><div><div class="brand">MORNING <b>FOOT</b><span style="font-weight:400;color:#7088aa"> / STUDIO</span></div><div class="tag">SOCIAL STUDIO · V4</div></div><div class="intro">Des sujets sélectionnés automatiquement. Des carrousels pensés pour le mobile. Vous gardez la main avant publication.</div></header>
 <main>
-  <div class="toolbar">
-    <select id="filter">
-      <option value="selected">Sélection du studio</option>
-      <option value="all">Tous les articles</option>
-      <option value="STATS">Statistiques</option>
-      <option value="MERCATO">Mercato</option>
-      <option value="MATCH">Matchs</option>
-      <option value="DÉBAT">Débats</option>
-    </select>
-    <span id="count"></span>
-  </div>
-
-  <div id="grid" class="grid"></div>
-
-  <p class="notice">
-    Les publications sont des brouillons. Vérifiez les titres,
-    les légendes et les droits des images avant publication.
-    Aucun post n'est publié automatiquement.
-  </p>
+<div class="toolbar"><select id="filter"><option value="selected">Sélection du studio</option><option value="all">Tous les articles</option><option value="STATS">Statistiques</option><option value="MERCATO">Mercato</option><option value="MATCH">Matchs</option><option value="DÉBAT">Débats</option></select><span class="count" id="count"></span></div>
+<div id="grid" class="grid"></div>
+<p class="notice">Brouillons uniquement : aucun contenu n'est publié automatiquement. Les images externes ne peuvent être exportées que si leur hébergeur autorise leur utilisation dans un canvas. Les fichiers locaux du dossier assets sont privilégiés.</p>
 </main>
-
 <script>
 "use strict";
-
+const $=id=>document.getElementById(id);
 let posts=[];
 const imageCache=new Map();
-const $=id=>document.getElementById(id);
-
-function esc(s){
-  return String(s??"").replace(/[&<>"']/g,c=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  }[c]));
-}
-
-/*
-  Résout les chemins d'images fournis par posts.json.
-  Les images locales GitHub Pages sont prioritaires.
-*/
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function imageCandidates(post){
-  const values=[
-    post.image,
-    post.image_url,
-    post.report_image,
-    post.report_url
-  ].filter(v=>typeof v==="string"&&v.trim());
-
-  const candidates=[];
-  const add=url=>{
-    if(url&&!candidates.includes(url))candidates.push(url);
-  };
-
-  for(const raw of values){
-    const src=raw.trim();
-
-    if(/^https?:\/\//i.test(src)){
-      add(src);
-      try{
-        const u=new URL(src);
-        if(u.pathname.includes("/assets/")){
-          const file=u.pathname.split("/assets/").pop();
-          add(new URL("assets/"+file,document.baseURI).href);
-        }
-      }catch(e){}
-      continue;
-    }
-
-    const clean=src.replace(/^\/+/,"");
-
-    if(clean.startsWith("assets/")){
-      add(new URL(clean,document.baseURI).href);
-      add(new URL(clean,location.origin+"/morning-foot-social-studio/").href);
-    }else{
-      add(new URL(clean,document.baseURI).href);
-      add(new URL("assets/"+clean.split("/").pop(),document.baseURI).href);
-    }
-  }
-
-  return candidates;
-}
-
-function loadSingle(src){
-  if(imageCache.has(src))return imageCache.get(src);
-
-  const promise=new Promise((resolve,reject)=>{
-    const im=new Image();
-
-    /*
-      Les images locales fonctionnent sur le même domaine.
-      Pour les images externes, CORS permet un export
-      canvas uniquement si le serveur distant l'autorise.
-    */
-    if(new URL(src,document.baseURI).origin!==location.origin){
-      im.crossOrigin="anonymous";
-    }
-
-    im.onload=()=>{
-      if(im.naturalWidth>0&&im.naturalHeight>0){
-        resolve(im);
-      }else{
-        reject(new Error("Image vide"));
-      }
-    };
-
-    im.onerror=()=>reject(new Error("Image indisponible"));
-    im.src=src;
-  });
-
-  imageCache.set(src,promise);
-  return promise;
-}
-
-async function loadPostImage(post){
-  const candidates=imageCandidates(post);
-
-  for(const src of candidates){
-    try{
-      return await loadSingle(src);
-    }catch(e){
-      console.warn("Image non chargée :",src);
-    }
-  }
-
-  return null;
-}
-
-function fitImage(ctx,im,x,y,w,h){
-  if(!im)return;
-  const ratio=Math.min(w/im.width,h/im.height);
-  const iw=im.width*ratio;
-  const ih=im.height*ratio;
-
-  ctx.drawImage(
-    im,
-    x+(w-iw)/2,
-    y+(h-ih)/2,
-    iw,ih
-  );
-}
-
-function roundedRect(ctx,x,y,w,h,r,fill){
-  ctx.beginPath();
-  ctx.roundRect(x,y,w,h,r);
-  ctx.fillStyle=fill;
-  ctx.fill();
-}
-
-function linesFor(ctx,text,maxWidth,maxLines){
-  const words=String(text||"").split(/\s+/);
-  const lines=[];
-  let line="";
-
-  for(const word of words){
-    const test=line?line+" "+word:word;
-
-    if(ctx.measureText(test).width>maxWidth&&line){
-      lines.push(line);
-      line=word;
-    }else{
-      line=test;
-    }
-  }
-
-  if(line)lines.push(line);
-
-  if(lines.length>maxLines){
-    const result=lines.slice(0,maxLines);
-    let last=result[maxLines-1];
-
-    while(last&&ctx.measureText(last+"…").width>maxWidth){
-      last=last.slice(0,-1);
-    }
-
-    result[maxLines-1]=last.trimEnd()+"…";
-    return result;
-  }
-
-  return lines;
-}
-
-function titleText(ctx,title,x,y,maxWidth,maxLines,fontSize,lineHeight){
-  ctx.font=`800 ${fontSize}px Arial`;
-  ctx.fillStyle="#ffffff";
-  ctx.textBaseline="top";
-
-  const lines=linesFor(ctx,title.toUpperCase(),maxWidth,maxLines);
-
-  lines.forEach((line,i)=>{
-    ctx.fillText(line,x,y+i*lineHeight);
-  });
-
-  return lines.length*lineHeight;
-}
-
-function baseCanvas(){
-  const canvas=document.createElement("canvas");
-  canvas.width=1080;
-  canvas.height=1350;
-
-  const ctx=canvas.getContext("2d");
-  ctx.fillStyle="#061a46";
-  ctx.fillRect(0,0,1080,1350);
-
-  return {canvas,ctx};
-}
-
-function branding(ctx){
-  ctx.fillStyle="#ffd200";
-  ctx.fillRect(0,0,1080,9);
-
-  ctx.font="900 39px Arial";
-  ctx.fillStyle="#ffffff";
-  ctx.fillText("MORNING",62,80);
-
-  ctx.fillStyle="#ffd200";
-  ctx.fillText("FOOT",270,80);
-
-  ctx.fillStyle="#40577d";
-  ctx.fillRect(62,109,956,2);
-}
-
-function footer(ctx,label){
-  ctx.fillStyle="#06142e";
-  ctx.fillRect(0,1250,1080,100);
-
-  ctx.fillStyle="#304c7c";
-  ctx.fillRect(62,1250,956,2);
-
-  ctx.font="bold 23px Arial";
-  ctx.fillStyle="#ffd200";
-  ctx.fillText("MORNING-FOOT.COM",62,1302);
-
-  ctx.textAlign="right";
-  ctx.fillStyle="#b6c8e6";
-  ctx.font="20px Arial";
-  ctx.fillText(label,1018,1302);
-  ctx.textAlign="left";
-}
-
-function categoryLabel(ctx,category,x,y){
-  ctx.font="bold 23px Arial";
-  const width=ctx.measureText(category).width+40;
-
-  roundedRect(ctx,x,y,width,47,5,"#ffd200");
-
-  ctx.fillStyle="#06142e";
-  ctx.fillText(category,x+20,y+32);
-}
-
-function fallbackVisual(ctx){
-  const gradient=ctx.createLinearGradient(40,215,1040,965);
-  gradient.addColorStop(0,"#17366d");
-  gradient.addColorStop(1,"#071632");
-
-  ctx.fillStyle=gradient;
-  ctx.fillRect(40,215,1000,750);
-
-  ctx.fillStyle="rgba(255,210,0,.08)";
-  ctx.beginPath();
-  ctx.arc(830,420,270,0,Math.PI*2);
-  ctx.fill();
-
-  ctx.fillStyle="#ffd200";
-  ctx.font="bold 65px Arial";
-  ctx.fillText("FOOTBALL",75,510);
-
-  ctx.fillStyle="#ffffff";
-  ctx.fillText("ANALYSE",75,590);
-
-  ctx.fillStyle="#aebfda";
-  ctx.font="25px Arial";
-  ctx.fillText("MORNING FOOT",78,645);
-}
-
-async function makeCanvas(post,slide){
-  const {canvas,ctx}=baseCanvas();
-  branding(ctx);
-
-  const im=await loadPostImage(post);
-
-  if(slide===2){
-    categoryLabel(ctx,"DATASCOUT",62,142);
-
-    ctx.font="bold 27px Arial";
-    ctx.fillStyle="#ffffff";
-
-    const heading=linesFor(ctx,post.title,945,2);
-    heading.forEach((line,i)=>{
-      ctx.fillText(line,62,235+i*35);
-    });
-
-    roundedRect(ctx,45,310,990,910,12,"#101d35");
-
-    if(im){
-      fitImage(ctx,im,65,330,950,870);
-    }else{
-      ctx.fillStyle="#ffd200";
-      ctx.font="bold 32px Arial";
-      ctx.fillText("FICHE STATISTIQUE",90,430);
-
-      ctx.fillStyle="#b9c9e5";
-      ctx.font="25px Arial";
-      ctx.fillText("Image source non disponible",90,485);
-    }
-
-    footer(ctx,"FICHE STATISTIQUE");
-    return canvas;
-  }
-
-  categoryLabel(ctx,post.category||"FOOTBALL",62,142);
-
-  if(im){
-    roundedRect(ctx,40,215,1000,750,12,"#101d35");
-    fitImage(ctx,im,55,230,970,720);
-  }else{
-    fallbackVisual(ctx);
-  }
-
-  ctx.fillStyle="#061a46";
-  ctx.fillRect(0,955,1080,295);
-
-  ctx.fillStyle="#ffd200";
-  ctx.fillRect(62,968,80,6);
-
-  const title=post.title||"Actualité football";
-
-  ctx.font="800 44px Arial";
-  const titleLines=linesFor(ctx,title.toUpperCase(),950,4);
-
-  const fontSize=titleLines.length>=4?40:46;
-  const lineHeight=fontSize+8;
-
-  titleText(ctx,title,62,1000,950,4,fontSize,lineHeight);
-
-  ctx.font="bold 24px Arial";
-  ctx.fillStyle="#ffd200";
-
-  const question=linesFor(ctx,post.question||"",950,1)[0]||"";
-  ctx.fillText(question,62,1225);
-
-  footer(ctx,"L'ACTU FOOT AUTREMENT");
-
-  return canvas;
-}
-
-async function exportPng(post,slide){
-  const canvas=await makeCanvas(post,slide);
-
-  const blob=await new Promise(resolve=>{
-    canvas.toBlob(resolve,"image/png");
-  });
-
-  if(!blob){
-    throw new Error("Export impossible");
-  }
-
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-
-  a.href=url;
-  a.download=`morning-foot-${post.id}-slide-${slide}.png`;
-
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  setTimeout(()=>URL.revokeObjectURL(url),1500);
-}
-
-async function drawPreview(post){
-  const canvas=$("preview-"+post.id);
-  if(!canvas)return;
-
+ const fields=[post.image,post.image_url,post.report_image,post.report_url].filter(v=>typeof v==="string"&&v.trim());
+ const result=[];const add=u=>{if(u&&!result.includes(u))result.push(u)};
+ for(const value of fields){const raw=value.trim();
   try{
-    const rendered=await makeCanvas(post,1);
-    const ctx=canvas.getContext("2d");
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.drawImage(rendered,0,0,canvas.width,canvas.height);
-  }catch(e){
-    console.warn("Aperçu impossible",e);
-  }
+   if(/^https?:\/\//i.test(raw)){
+    const u=new URL(raw);if(u.pathname.includes('/assets/'))add(new URL('assets/'+u.pathname.split('/assets/').pop(),document.baseURI).href);
+    add(u.href);continue;
+   }
+   const clean=raw.replace(/^\/+/,"");
+   if(clean.startsWith('assets/'))add(new URL(clean,document.baseURI).href);
+   else{add(new URL(clean,document.baseURI).href);add(new URL('assets/'+clean.split('/').pop(),document.baseURI).href)}
+  }catch(e){console.warn('Chemin image invalide',raw)}
+ }
+ return result;
 }
-
+function loadOne(src){
+ if(imageCache.has(src))return imageCache.get(src);
+ const p=new Promise((resolve,reject)=>{const im=new Image();
+  try{if(new URL(src,document.baseURI).origin!==location.origin)im.crossOrigin='anonymous'}catch(e){}
+  im.onload=()=>im.naturalWidth?resolve(im):reject(new Error('Image vide'));
+  im.onerror=()=>reject(new Error('Image indisponible'));
+  im.src=src;
+ });imageCache.set(src,p);return p;
+}
+async function loadPostImage(post){for(const src of imageCandidates(post)){try{return await loadOne(src)}catch(e){console.warn('Image inaccessible',src)}}return null}
+function baseCanvas(){const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1350;const ctx=canvas.getContext('2d');ctx.fillStyle='#061a46';ctx.fillRect(0,0,1080,1350);return {canvas,ctx}}
+function textLines(ctx,text,maxWidth,maxLines){
+ const words=String(text||'').trim().split(/\s+/).filter(Boolean);const lines=[];let line='';
+ for(const word of words){const t=line?line+' '+word:word;if(ctx.measureText(t).width>maxWidth&&line){lines.push(line);line=word}else line=t}
+ if(line)lines.push(line);
+ if(lines.length>maxLines){const a=lines.slice(0,maxLines);let last=a[maxLines-1];while(last&&ctx.measureText(last+'…').width>maxWidth)last=last.slice(0,-1);a[maxLines-1]=last.trimEnd()+'…';return a}return lines;
+}
+function fitTypography(ctx,text,maxWidth,maxLines,maxSize,minSize){
+ for(let size=maxSize;size>=minSize;size-=2){ctx.font=`900 ${size}px Arial`;const lines=textLines(ctx,text,maxWidth,maxLines);const total=lines.length*(size*1.12);if(lines.length<=maxLines&&total<=670)return {size,lines}}
+ ctx.font=`900 ${minSize}px Arial`;return {size:minSize,lines:textLines(ctx,text,maxWidth,maxLines)};
+}
+function drawBrand(ctx,number){
+ ctx.fillStyle='#ffd200';ctx.fillRect(0,0,1080,10);
+ ctx.font='900 33px Arial';ctx.fillStyle='#fff';ctx.fillText('MORNING',64,86);ctx.fillStyle='#ffd200';ctx.fillText('FOOT',257,86);
+ ctx.fillStyle='#476087';ctx.fillRect(64,111,952,2);
+ ctx.fillStyle='#9aafce';ctx.font='700 20px Arial';ctx.fillText('MORNING-FOOT.COM',64,1300);
+ ctx.textAlign='right';ctx.fillText(String(number).padStart(2,'0')+' / 03',1016,1300);ctx.textAlign='left';
+}
+function label(ctx,value,x,y){
+ const text=String(value||'FOOTBALL').toUpperCase();ctx.font='800 23px Arial';const w=Math.min(650,ctx.measureText(text).width+34);
+ ctx.fillStyle='#ffd200';ctx.fillRect(x,y,w,45);ctx.fillStyle='#061a46';ctx.fillText(text,x+17,y+31);
+}
+function drawCover(post){
+ const {canvas,ctx}=baseCanvas();drawBrand(ctx,1);
+ label(ctx,post.category||'FOOTBALL',64,185);
+ ctx.fillStyle='#ffd200';ctx.fillRect(64,315,92,9);
+ const title=String(post.social_title||post.cover_title||post.title||'ACTUALITÉ FOOTBALL').trim().toUpperCase();
+ const layout=fitTypography(ctx,title,940,6,100,52);
+ ctx.fillStyle='#fff';ctx.textBaseline='top';
+ const height=layout.size*1.12;const block=layout.lines.length*height;const y=Math.max(370,740-block/2);
+ layout.lines.forEach((line,i)=>ctx.fillText(line,64,y+i*height));
+ ctx.textBaseline='alphabetic';
+ ctx.fillStyle='#ffd200';ctx.fillRect(64,1135,952,2);
+ ctx.font='700 25px Arial';ctx.fillStyle='#c4d2e8';ctx.fillText('LE FOOTBALL, AUTREMENT.',64,1194);
+ return canvas;
+}
+function contain(ctx,im,x,y,w,h){const scale=Math.min(w/im.naturalWidth,h/im.naturalHeight);const iw=im.naturalWidth*scale,ih=im.naturalHeight*scale;ctx.drawImage(im,x+(w-iw)/2,y+(h-ih)/2,iw,ih)}
+async function drawData(post){
+ const {canvas,ctx}=baseCanvas();drawBrand(ctx,2);
+ ctx.fillStyle='#fff';ctx.fillRect(18,135,1044,1090);
+ const im=await loadPostImage(post);
+ if(im){contain(ctx,im,25,142,1030,1076)}else{
+  ctx.fillStyle='#061a46';ctx.font='800 45px Arial';ctx.fillText('DONNÉES & ANALYSE',75,315);
+  ctx.fillStyle='#45516a';ctx.font='29px Arial';ctx.fillText('Aucune infographie disponible',75,385);
+ }
+ return canvas;
+}
+function drawQuestion(post){
+ const {canvas,ctx}=baseCanvas();drawBrand(ctx,3);
+ label(ctx,'À VOUS DE JOUER',64,190);
+ ctx.fillStyle='#ffd200';ctx.fillRect(64,340,92,9);
+ const question=String(post.question||'ET VOUS, QU’EN PENSEZ-VOUS ?').trim().toUpperCase();
+ const layout=fitTypography(ctx,question,930,6,100,54);ctx.fillStyle='#fff';ctx.textBaseline='top';
+ const lh=layout.size*1.15;const y=Math.max(420,770-layout.lines.length*lh/2);
+ layout.lines.forEach((line,i)=>ctx.fillText(line,64,y+i*lh));ctx.textBaseline='alphabetic';
+ ctx.fillStyle='#ffd200';ctx.fillRect(64,1115,952,3);
+ ctx.fillStyle='#c4d2e8';ctx.font='700 28px Arial';ctx.fillText('DITES-NOUS EN COMMENTAIRE.',64,1185);
+ return canvas;
+}
+async function makeSlide(post,n){if(n===1)return drawCover(post);if(n===2)return drawData(post);return drawQuestion(post)}
+async function preview(post,n){const dest=$(`preview-${post.id}-${n}`);if(!dest)return;try{const src=await makeSlide(post,n);if(!dest.isConnected)return;const ctx=dest.getContext('2d');ctx.clearRect(0,0,dest.width,dest.height);ctx.drawImage(src,0,0,dest.width,dest.height)}catch(e){console.warn('Aperçu impossible',e)}}
+async function download(post,n){const canvas=await makeSlide(post,n);const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));if(!blob)throw new Error('Export impossible');const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`morning-foot-${post.id}-slide-${n}.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000)}
 function render(){
-  const filter=$("filter").value;
-
-  const data=posts.filter(p=>{
-    if(filter==="all")return true;
-    if(filter==="selected")return !!p.selected;
-    return p.category===filter;
-  }).sort((a,b)=>
-    (Number(b.score)||0)-(Number(a.score)||0)
-  );
-
-  $("count").textContent=data.length+" brouillon(s)";
-
-  if(!data.length){
-    $("grid").innerHTML=
-      '<div class="empty">Aucun article dans cette sélection. Essayez « Tous les articles ».</div>';
-    return;
-  }
-
-  $("grid").innerHTML=data.map(p=>`
-    <article class="card">
-      <div class="preview">
-        <canvas
-          id="preview-${esc(p.id)}"
-          width="540"
-          height="675"
-        ></canvas>
-      </div>
-
-      <div class="content">
-        <div class="meta">
-          ${esc(p.date)}
-          · Score ${esc(p.score)}/100
-          ${p.report?" · DATASCOUT":""}
-          ${p.selected?" · SÉLECTIONNÉ":""}
-        </div>
-
-        <h3>${esc(p.title)}</h3>
-
-        <p class="reasons">
-          ${esc((p.reasons||[]).join(" · "))}
-        </p>
-
-        <textarea id="caption-${esc(p.id)}">${esc(p.caption)}</textarea>
-
-        <div class="buttons">
-          <button class="primary" data-action="copy" data-id="${esc(p.id)}">
-            Copier la légende
-          </button>
-
-          <button data-action="cover" data-id="${esc(p.id)}">
-            PNG couverture
-          </button>
-
-          ${p.report&&imageCandidates(p).length?`
-            <button data-action="report" data-id="${esc(p.id)}">
-              PNG DataScout
-            </button>
-          `:""}
-
-          <button data-action="article" data-id="${esc(p.id)}">
-            Voir l'article
-          </button>
-        </div>
-      </div>
-    </article>
-  `).join("");
-
-  for(const p of data){
-    drawPreview(p);
-  }
+ const filter=$('filter').value;const data=posts.filter(p=>filter==='all'||(filter==='selected'?!!p.selected:p.category===filter)).sort((a,b)=>(Number(b.score)||0)-(Number(a.score)||0));
+ $('count').textContent=`${data.length} brouillon(s)`;
+ if(!data.length){$('grid').innerHTML='<div class="empty">Aucun article pour ce filtre.</div>';return}
+ $('grid').innerHTML=data.map(p=>`
+ <article class="card">
+  <div class="card-top"><span class="eyebrow">${esc(p.category||'FOOTBALL')} ${p.report?'· DATASCOUT':''}</span><span class="score">${esc(p.date||'')} · ${esc(p.score||0)}/100</span></div>
+  <h2 class="card-title">${esc(p.title)}</h2>
+  <div class="slides">
+   <div class="slide"><canvas id="preview-${esc(p.id)}-1" width="270" height="338"></canvas><div class="slide-label">01 · ACCROCHE</div></div>
+   <div class="slide ${imageCandidates(p).length?'':'unavailable'}"><canvas id="preview-${esc(p.id)}-2" width="270" height="338"></canvas><div class="slide-label">02 · DATASCOUT</div></div>
+   <div class="slide"><canvas id="preview-${esc(p.id)}-3" width="270" height="338"></canvas><div class="slide-label">03 · QUESTION</div></div>
+  </div>
+  <div class="card-bottom">
+   <p class="reasons">${esc((p.reasons||[]).join(' · '))}</p>
+   <div class="caption-label">LÉGENDE INSTAGRAM</div><textarea id="caption-${esc(p.id)}">${esc(p.caption||'')}</textarea>
+   <div class="actions">
+    <button class="primary" data-action="copy" data-id="${esc(p.id)}">Copier la légende</button>
+    <button data-action="1" data-id="${esc(p.id)}">↓ Slide 1</button>
+    ${imageCandidates(p).length?`<button data-action="2" data-id="${esc(p.id)}">↓ DataScout</button>`:''}
+    <button data-action="3" data-id="${esc(p.id)}">↓ Slide 3</button>
+    <button data-action="article" data-id="${esc(p.id)}">Voir l’article</button>
+   </div>
+  </div>
+ </article>`).join('');
+ for(const p of data){preview(p,1);preview(p,2);preview(p,3)}
 }
-
-document.getElementById("grid").addEventListener("click",async event=>{
-  const button=event.target.closest("button[data-action]");
-  if(!button)return;
-
-  const post=posts.find(p=>String(p.id)===button.dataset.id);
-  if(!post)return;
-
+$('grid').addEventListener('click',async event=>{
+ const button=event.target.closest('button[data-action]');if(!button)return;
+ const post=posts.find(p=>String(p.id)===button.dataset.id);if(!post)return;
+ try{
   const action=button.dataset.action;
-
-  try{
-    if(action==="copy"){
-      const value=$("caption-"+post.id).value;
-      await navigator.clipboard.writeText(value);
-
-      const old=button.textContent;
-      button.textContent="Copié !";
-
-      setTimeout(()=>{
-        button.textContent=old;
-      },1500);
-    }
-
-    if(action==="cover"){
-      await exportPng(post,1);
-    }
-
-    if(action==="report"){
-      await exportPng(post,2);
-    }
-
-    if(action==="article"){
-      window.open(post.url,"_blank","noopener,noreferrer");
-    }
-  }catch(e){
-    alert("Une erreur est survenue : "+e.message);
-  }
+  if(action==='copy'){await navigator.clipboard.writeText($('caption-'+post.id).value);const old=button.textContent;button.textContent='Copié !';setTimeout(()=>button.textContent=old,1500)}
+  else if(action==='article'){if(post.url)window.open(post.url,'_blank','noopener,noreferrer')}
+  else{button.disabled=true;try{await download(post,Number(action))}finally{button.disabled=false}}
+ }catch(e){alert('Une erreur est survenue : '+e.message)}
 });
-
-$("filter").addEventListener("change",render);
-
-fetch("posts.json?v="+Date.now())
-  .then(response=>{
-    if(!response.ok){
-      throw new Error("posts.json introuvable");
-    }
-    return response.json();
-  })
-  .then(data=>{
-    if(!Array.isArray(data)){
-      throw new Error("Format JSON invalide");
-    }
-
-    posts=data;
-    render();
-  })
-  .catch(error=>{
-    $("grid").innerHTML=
-      '<div class="empty">Impossible de charger les brouillons : '+
-      esc(error.message)+
-      '</div>';
-  });
+$('filter').addEventListener('change',render);
+fetch('posts.json?v='+Date.now()).then(r=>{if(!r.ok)throw new Error('posts.json introuvable');return r.json()}).then(data=>{if(!Array.isArray(data))throw new Error('Format JSON invalide');posts=data;render()}).catch(e=>{$('grid').innerHTML='<div class="empty">Impossible de charger les brouillons : '+esc(e.message)+'</div>'});
 </script>
 </body>
 </html>
