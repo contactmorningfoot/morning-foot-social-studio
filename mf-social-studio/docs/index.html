@@ -4,126 +4,105 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Morning Foot — Social Studio V5</title>
-
+<title>Morning Foot — Social Studio V6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07111f;
-  --panel:#101f34;
-  --panel2:#14263e;
-  --line:#2b405d;
-  --navy:#061a46;
-  --gold:#ffd200;
-  --blue:#237cff;
-  --white:#f7f9ff;
-  --muted:#a4b5cf;
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--white);
+  --bg:#050a12;
+  --panel:#0b1422;
+  --panel2:#101d2e;
+  --line:#24344a;
+  --gold:#ffc400;
+  --blue:#147aff;
+  --white:#f7f8fb;
+  --muted:#93a4bb;
+  font-family:Inter,Arial,sans-serif;
   background:var(--bg);
+  color:var(--white);
 }
 *{box-sizing:border-box}
 body{margin:0}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 header{
-  border-bottom:1px solid var(--line);
   padding:25px clamp(18px,4vw,60px);
+  border-bottom:1px solid var(--line);
+  background:#07101c;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:25px;
+  align-items:center;
+  gap:20px;
   flex-wrap:wrap;
-  background:#081628;
 }
 .brand{
   display:flex;
   align-items:center;
-  gap:17px;
+  gap:16px;
 }
-.brandmark{
-  width:58px;
-  height:58px;
-  background:#07142a;
-  border:1px solid #38537c;
+.brand img{
+  width:56px;
+  height:56px;
+  object-fit:cover;
   border-radius:10px;
-  display:grid;
-  place-items:center;
-  position:relative;
-  overflow:hidden;
-  font-size:24px;
-  font-weight:900;
-  font-style:italic;
-  letter-spacing:-4px;
 }
-.brandmark span{position:relative;z-index:1}
-.brandmark:after{
-  content:"";
-  position:absolute;
-  width:5px;
-  height:90px;
-  transform:rotate(38deg);
-  background:linear-gradient(var(--blue),var(--gold));
-  left:30px;
-}
-.brandmark b{color:var(--gold)}
-.brandname{
-  font-size:27px;
+.brand-name{
+  font-size:26px;
   font-weight:900;
   letter-spacing:-1px;
 }
-.brandname b{color:var(--gold)}
-.subtitle{
+.brand-name b{color:var(--gold)}
+.brand-sub{
+  color:var(--muted);
   font-size:11px;
   letter-spacing:2px;
-  color:var(--muted);
   margin-top:5px;
 }
-.header-right{
+.header-note{
   color:var(--muted);
   font-size:12px;
   line-height:1.6;
-  max-width:340px;
 }
 main{
-  max-width:1540px;
-  padding:30px 22px 90px;
+  max-width:1520px;
   margin:auto;
+  padding:30px 20px 80px;
 }
 .toolbar{
   display:flex;
-  gap:12px;
   align-items:center;
+  gap:14px;
   flex-wrap:wrap;
   margin-bottom:25px;
 }
 select,input,textarea{
-  background:#09192e;
-  border:1px solid #38506f;
-  border-radius:8px;
+  background:#081321;
+  border:1px solid #34445d;
   color:white;
-  padding:12px;
+  border-radius:8px;
+  padding:11px 12px;
 }
-select{min-width:190px}
 .count{color:var(--muted);font-size:13px}
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(min(100%,590px),1fr));
-  gap:25px;
+  gap:24px;
 }
 .card{
-  border:1px solid var(--line);
   background:var(--panel);
-  border-radius:15px;
+  border:1px solid var(--line);
+  border-radius:14px;
   overflow:hidden;
 }
-.card-head{padding:23px 24px 18px}
+.card-head{padding:22px 24px 18px}
 .card-meta{
   display:flex;
   justify-content:space-between;
-  flex-wrap:wrap;
   gap:10px;
-  font-size:11px;
+  flex-wrap:wrap;
   color:var(--muted);
+  font-size:11px;
   margin-bottom:12px;
 }
 .category{
@@ -132,34 +111,33 @@ select{min-width:190px}
   letter-spacing:1px;
 }
 .card-title{
+  font-size:21px;
+  line-height:1.3;
   margin:0;
-  font-size:22px;
-  line-height:1.28;
-  letter-spacing:-.5px;
 }
 .preview-area{
-  background:#091629;
+  padding:23px;
+  background:#060d18;
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
-  padding:24px;
 }
 .preview-layout{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 110px;
+  grid-template-columns:minmax(0,1fr) 105px;
   gap:18px;
   align-items:start;
 }
 .main-preview{
-  width:100%;
   max-width:385px;
   margin:auto;
+  width:100%;
 }
 .main-preview canvas{
-  width:100%;
   display:block;
+  width:100%;
   aspect-ratio:4/5;
-  background:var(--navy);
-  box-shadow:0 15px 35px #0006;
+  background:#061a46;
+  box-shadow:0 14px 40px #0008;
 }
 .thumbs{
   display:flex;
@@ -167,94 +145,86 @@ select{min-width:190px}
   gap:12px;
 }
 .thumb{
+  background:none;
   padding:0;
   border:2px solid transparent;
   border-radius:5px;
-  background:none;
   color:var(--muted);
-  text-align:center;
   font-size:10px;
+  overflow:hidden;
 }
 .thumb.active{border-color:var(--gold)}
 .thumb canvas{
+  display:block;
   width:100%;
   aspect-ratio:4/5;
-  display:block;
-  background:var(--navy);
+  background:#061a46;
 }
 .thumb span{
   display:block;
   padding:7px 0;
 }
-.slide-controls{
+.controls{
   display:flex;
-  gap:8px;
-  flex-wrap:wrap;
   justify-content:center;
-  margin-top:17px;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
 }
 button{
-  background:#192e4c;
-  border:1px solid #3a5375;
+  border:1px solid #344a67;
+  background:#17263c;
   color:white;
+  padding:10px 12px;
   border-radius:7px;
-  padding:10px 13px;
   font-size:12px;
   font-weight:700;
 }
-button:hover{filter:brightness(1.16)}
+button:hover{filter:brightness(1.15)}
 button.primary{
   background:var(--gold);
-  border-color:var(--gold);
-  color:#08182e;
-}
-button.active-button{
-  background:var(--gold);
-  color:#07162e;
+  color:#09121f;
   border-color:var(--gold);
 }
-.editor{
-  padding:22px 24px 25px;
-}
-.field{margin-bottom:17px}
+.editor{padding:22px 24px 25px}
+.field{margin-bottom:16px}
 .field label{
   display:block;
-  font-size:11px;
   color:var(--gold);
-  letter-spacing:1px;
+  font-size:11px;
   font-weight:900;
+  letter-spacing:1px;
   margin-bottom:8px;
 }
 .field input,.field textarea{
   width:100%;
   font-size:13px;
-  line-height:1.55;
+  line-height:1.5;
 }
 .field textarea{
-  min-height:135px;
+  min-height:145px;
   resize:vertical;
 }
 .hint{
-  font-size:11px;
   color:var(--muted);
+  font-size:11px;
   margin-top:6px;
 }
 .actions{
   display:flex;
   flex-wrap:wrap;
-  gap:9px;
+  gap:8px;
 }
 .reasons{
   font-size:12px;
   color:var(--muted);
-  margin:0 0 19px;
-  line-height:1.5;
+  margin:0 0 18px;
 }
 .empty{
   padding:30px;
   border:1px dashed var(--line);
-  color:var(--muted);
   border-radius:10px;
+  color:var(--muted);
 }
 .notice{
   color:var(--muted);
@@ -264,12 +234,13 @@ button.active-button{
 }
 @media(max-width:560px){
   .preview-area{padding:12px}
-  .preview-layout{grid-template-columns:minmax(0,1fr) 75px;gap:9px}
+  .preview-layout{
+    grid-template-columns:minmax(0,1fr) 75px;
+    gap:9px;
+  }
   .card-head,.editor{padding:18px}
-  .card-title{font-size:19px}
-  .brandname{font-size:22px}
-  .brandmark{width:48px;height:48px}
-  .thumbs{gap:7px}
+  .card-title{font-size:18px}
+  .brand-name{font-size:21px}
 }
 </style>
 </head>
@@ -278,17 +249,15 @@ button.active-button{
 
 <header>
   <div class="brand">
-    <div class="brandmark">
-      <span>M<b>F</b></span>
-    </div>
+    <img src="assets/logo-mf.jpg" alt="Logo Morning Foot" onerror="this.style.display='none'">
     <div>
-      <div class="brandname">MORNING <b>FOOT</b></div>
-      <div class="subtitle">SOCIAL STUDIO / ÉDITION V5</div>
+      <div class="brand-name">MORNING <b>FOOT</b></div>
+      <div class="brand-sub">SOCIAL STUDIO / BLACK EDITION V6</div>
     </div>
   </div>
-  <div class="header-right">
+  <div class="header-note">
     LE FOOTBALL, AUTREMENT.<br>
-    Création de carrousels Instagram · Édition journalistique · Export HD
+    Carrousels Instagram · Création éditoriale · Export HD
   </div>
 </header>
 
@@ -308,9 +277,9 @@ button.active-button{
   <div id="grid" class="grid"></div>
 
   <p class="notice">
-    Les contenus restent des brouillons. Vérifiez les données et les droits des images avant publication.
-    Les modifications éditoriales sont enregistrées dans ce navigateur.
     Aucun contenu n'est publié automatiquement.
+    Vérifiez les informations, les légendes et les droits des photos.
+    Les modifications sont conservées dans votre navigateur.
   </p>
 </main>
 
@@ -322,6 +291,8 @@ const imageCache=new Map();
 const slideState=new Map();
 
 const $=id=>document.getElementById(id);
+
+const LOGO_URL=new URL("assets/logo-mf.jpg",document.baseURI).href;
 
 function esc(s){
   return String(s??"").replace(/[&<>"']/g,c=>({
@@ -335,7 +306,7 @@ function esc(s){
 
 function getSaved(id){
   try{
-    return JSON.parse(localStorage.getItem("mf-v5-"+id)||"{}");
+    return JSON.parse(localStorage.getItem("mf-v6-"+id)||"{}");
   }catch(e){
     return {};
   }
@@ -348,52 +319,34 @@ function savePost(id){
   const title=$("title-"+id);
   const question=$("question-"+id);
   const caption=$("caption-"+id);
+  const photo=$("photo-"+id);
 
-  if(!title||!question||!caption)return;
+  if(!title||!question||!caption||!photo)return;
 
   post.social_title=title.value;
   post.question=question.value;
   post.caption=caption.value;
+  post.cover_image=photo.value;
 
   try{
-    localStorage.setItem("mf-v5-"+id,JSON.stringify({
+    localStorage.setItem("mf-v6-"+id,JSON.stringify({
       social_title:post.social_title,
       question:post.question,
-      caption:post.caption
+      caption:post.caption,
+      cover_image:post.cover_image
     }));
-  }catch(e){
-    console.warn("Sauvegarde locale indisponible",e);
-  }
+  }catch(e){}
 }
 
 function cleanCaption(raw,title){
-  let text=String(raw||"");
-
-  text=text
-    .replace(/Accueil\s*[›>»]\s*[^:\n]{0,90}[›>»]\s*/gi,"")
-    .replace(/Accueil\s*[›>»]\s*/gi,"")
+  let text=String(raw||"")
+    .replace(/Accueil\s*[›>»]\s*[^\n]{0,100}/gi,"")
     .replace(/\r/g,"")
     .replace(/[ \t]{2,}/g," ")
     .replace(/\n{3,}/g,"\n\n")
     .trim();
 
-  const heading=String(title||"").trim();
-
-  if(heading){
-    const escaped=heading.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-    try{
-      text=text.replace(
-        new RegExp("^(?:"+escaped+"\\s*){2,}","i"),
-        heading+"\n\n"
-      );
-    }catch(e){}
-  }
-
-  if(!text)return heading;
-
-  if(heading&&!text.toLowerCase().startsWith(heading.toLowerCase())){
-    text=heading+"\n\n"+text;
-  }
+  if(!text)return String(title||"");
 
   return text;
 }
@@ -402,34 +355,44 @@ function shortTitle(post){
   const custom=String(post.social_title||post.cover_title||"").trim();
   if(custom)return custom;
 
-  let title=String(post.title||"ACTUALITÉ FOOTBALL")
-    .replace(/\s+/g," ")
-    .trim();
+  const title=String(post.title||"ACTUALITÉ FOOTBALL").trim();
 
-  if(title.length<=67)return title;
+  if(title.length<=75)return title;
 
-  const words=title.split(" ");
+  const words=title.split(/\s+/);
   let result="";
 
   for(const word of words){
-    if((result+" "+word).trim().length>65)break;
+    if((result+" "+word).trim().length>72)break;
     result+=(result?" ":"")+word;
   }
 
-  return result.trim()+(result.length<title.length?"…":"");
+  return result+"…";
 }
 
-function imageCandidates(post){
-  const values=[
-    post.image,
-    post.image_url,
+function reportCandidates(post){
+  return [
     post.report_image,
-    post.report_url
+    post.report_url,
+    post.image,
+    post.image_url
   ].filter(v=>typeof v==="string"&&v.trim());
+}
 
+function photoCandidates(post){
+  return [
+    post.cover_image,
+    post.photo,
+    post.featured_image,
+    post.thumbnail,
+    post.hero_image
+  ].filter(v=>typeof v==="string"&&v.trim());
+}
+
+function normalizeUrls(values){
   const urls=[];
-  const add=url=>{
-    if(url&&!urls.includes(url))urls.push(url);
+  const add=u=>{
+    if(u&&!urls.includes(u))urls.push(u);
   };
 
   for(const value of values){
@@ -440,14 +403,15 @@ function imageCandidates(post){
         const u=new URL(src);
 
         if(u.pathname.includes("/assets/")){
-          const file=u.pathname.split("/assets/").pop();
-          add(new URL("assets/"+file,document.baseURI).href);
+          add(new URL(
+            "assets/"+u.pathname.split("/assets/").pop(),
+            document.baseURI
+          ).href);
         }
 
         add(u.href);
       }else{
         const clean=src.replace(/^\/+/,"");
-
         add(new URL(clean,document.baseURI).href);
 
         if(!clean.startsWith("assets/")){
@@ -488,15 +452,23 @@ function loadOne(src){
   return promise;
 }
 
-async function loadPostImage(post){
-  for(const src of imageCandidates(post)){
+async function loadFirst(values){
+  for(const src of normalizeUrls(values)){
     try{
       return await loadOne(src);
     }catch(e){
-      console.warn("Image inaccessible :",src);
+      console.warn("Image inaccessible",src);
     }
   }
   return null;
+}
+
+async function loadLogo(){
+  try{
+    return await loadOne(LOGO_URL);
+  }catch(e){
+    return null;
+  }
 }
 
 function baseCanvas(){
@@ -506,63 +478,79 @@ function baseCanvas(){
 
   const ctx=canvas.getContext("2d");
 
-  ctx.fillStyle="#061a46";
+  ctx.fillStyle="#050b15";
   ctx.fillRect(0,0,1080,1350);
 
   return {canvas,ctx};
 }
 
-function line(ctx,x1,y1,x2,y2,color,width){
-  ctx.strokeStyle=color;
-  ctx.lineWidth=width;
+function coverImage(ctx,im,x,y,w,h){
+  const scale=Math.max(
+    w/im.naturalWidth,
+    h/im.naturalHeight
+  );
+
+  const iw=im.naturalWidth*scale;
+  const ih=im.naturalHeight*scale;
+
+  ctx.drawImage(
+    im,
+    x+(w-iw)/2,
+    y+(h-ih)/2,
+    iw,ih
+  );
+}
+
+function containImage(ctx,im,x,y,w,h){
+  const scale=Math.min(
+    w/im.naturalWidth,
+    h/im.naturalHeight
+  );
+
+  const iw=im.naturalWidth*scale;
+  const ih=im.naturalHeight*scale;
+
+  ctx.drawImage(
+    im,
+    x+(w-iw)/2,
+    y+(h-ih)/2,
+    iw,ih
+  );
+}
+
+function drawFallback(ctx){
+  const g=ctx.createLinearGradient(0,0,1080,1350);
+  g.addColorStop(0,"#101c30");
+  g.addColorStop(.6,"#07111f");
+  g.addColorStop(1,"#03060b");
+
+  ctx.fillStyle=g;
+  ctx.fillRect(0,0,1080,1350);
+
+  ctx.strokeStyle="#1569db";
+  ctx.lineWidth=4;
   ctx.beginPath();
-  ctx.moveTo(x1,y1);
-  ctx.lineTo(x2,y2);
+  ctx.moveTo(900,-50);
+  ctx.lineTo(1140,270);
+  ctx.stroke();
+
+  ctx.strokeStyle="#ffc400";
+  ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.moveTo(945,-50);
+  ctx.lineTo(1185,270);
   ctx.stroke();
 }
 
-function graphicSignature(ctx){
-  ctx.save();
+function drawGradient(ctx){
+  const g=ctx.createLinearGradient(0,390,0,1350);
+  g.addColorStop(0,"rgba(0,0,0,0)");
+  g.addColorStop(.35,"rgba(0,0,0,.18)");
+  g.addColorStop(.65,"rgba(0,0,0,.82)");
+  g.addColorStop(1,"rgba(0,0,0,.99)");
 
-  line(ctx,930,-90,1120,160,"#237cff",8);
-  line(ctx,1000,-90,1190,160,"#ffd200",5);
-
-  ctx.globalAlpha=.2;
-  line(ctx,-110,1130,150,1390,"#237cff",7);
-  ctx.globalAlpha=.6;
-  line(ctx,-75,1130,185,1390,"#ffd200",4);
-
-  ctx.restore();
-}
-
-function branding(ctx,n){
-  ctx.fillStyle="#ffd200";
-  ctx.fillRect(0,0,1080,8);
-
-  ctx.font="900 italic 45px Arial";
-  ctx.fillStyle="#fff";
-  ctx.fillText("M",62,92);
-  ctx.fillStyle="#ffd200";
-  ctx.fillText("F",102,92);
-
-  line(ctx,99,48,125,97,"#237cff",5);
-
-  ctx.font="800 25px Arial";
-  ctx.fillStyle="#fff";
-  ctx.fillText("MORNING",165,73);
-  ctx.fillStyle="#ffd200";
-  ctx.fillText("FOOT",310,73);
-
-  ctx.fillStyle="#567092";
-  ctx.fillRect(62,119,956,2);
-
-  ctx.fillStyle="#8ea6c9";
-  ctx.font="700 21px Arial";
-  ctx.fillText("MORNING-FOOT.COM",62,1302);
-
-  ctx.textAlign="right";
-  ctx.fillText(String(n).padStart(2,"0")+" / 03",1018,1302);
-  ctx.textAlign="left";
+  ctx.fillStyle=g;
+  ctx.fillRect(0,390,1080,960);
 }
 
 function wrap(ctx,text,maxWidth,maxLines){
@@ -598,157 +586,153 @@ function wrap(ctx,text,maxWidth,maxLines){
   return lines;
 }
 
-function typography(ctx,text,maxWidth,maxLines,maxSize,minSize){
-  const clean=String(text||"").toUpperCase();
-
+function fitTitle(ctx,text,maxWidth,maxLines,maxSize,minSize){
   for(let size=maxSize;size>=minSize;size-=2){
-    ctx.font=`900 ${size}px Arial`;
+    ctx.font=`900 ${size}px "Barlow Condensed",Arial`;
 
-    const lines=wrap(ctx,clean,maxWidth,maxLines);
+    const lines=wrap(ctx,text,maxWidth,maxLines);
 
     if(lines.length<=maxLines&&
-       lines.length*size*1.16<=720){
+       lines.length*size*1.02<=570){
       return {size,lines};
     }
   }
 
-  ctx.font=`900 ${minSize}px Arial`;
+  ctx.font=`900 ${minSize}px "Barlow Condensed",Arial`;
 
   return {
     size:minSize,
-    lines:wrap(ctx,clean,maxWidth,maxLines)
+    lines:wrap(ctx,text,maxWidth,maxLines)
   };
 }
 
-function drawCover(post){
-  const {canvas,ctx}=baseCanvas();
+async function drawLogo(ctx){
+  const logo=await loadLogo();
 
-  graphicSignature(ctx);
-  branding(ctx,1);
+  if(logo){
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(890,30,155,130);
+    ctx.clip();
 
-  ctx.fillStyle="#ffd200";
-  ctx.font="900 25px Arial";
-  ctx.fillText(
-    String(post.category||"FOOTBALL").toUpperCase(),
-    64,235
-  );
-
-  ctx.fillRect(64,278,94,8);
-
-  const text=shortTitle(post);
-  const layout=typography(ctx,text,950,6,104,54);
-
-  const lh=layout.size*1.15;
-  const block=layout.lines.length*lh;
-  const start=Math.max(365,760-block/2);
-
-  ctx.textBaseline="top";
-
-  layout.lines.forEach((lineText,i)=>{
-    ctx.fillStyle=i===layout.lines.length-1&&layout.lines.length>1
-      ?"#ffd200"
-      :"#ffffff";
-
-    ctx.fillText(lineText,64,start+i*lh);
-  });
-
-  ctx.textBaseline="alphabetic";
-
-  ctx.fillStyle="#ffd200";
-  ctx.fillRect(64,1120,952,2);
-
-  ctx.font="700 25px Arial";
-  ctx.fillStyle="#b7c9e3";
-  ctx.fillText("LE FOOTBALL, AUTREMENT.",64,1182);
-
-  return canvas;
+    containImage(ctx,logo,890,5,155,155);
+    ctx.restore();
+  }else{
+    ctx.font="900 italic 62px Arial";
+    ctx.fillStyle="#fff";
+    ctx.fillText("M",895,115);
+    ctx.fillStyle="#ffc400";
+    ctx.fillText("F",958,115);
+  }
 }
 
-function contain(ctx,im,x,y,w,h){
-  const scale=Math.min(
-    w/im.naturalWidth,
-    h/im.naturalHeight
-  );
+async function drawCover(post){
+  const {canvas,ctx}=baseCanvas();
 
-  const iw=im.naturalWidth*scale;
-  const ih=im.naturalHeight*scale;
+  const photo=await loadFirst(photoCandidates(post));
 
-  ctx.drawImage(
-    im,
-    x+(w-iw)/2,
-    y+(h-ih)/2,
-    iw,ih
-  );
+  if(photo){
+    coverImage(ctx,photo,0,0,1080,1350);
+  }else{
+    drawFallback(ctx);
+  }
+
+  drawGradient(ctx);
+
+  await drawLogo(ctx);
+
+  const title=shortTitle(post);
+  const layout=fitTitle(ctx,title,950,6,105,54);
+
+  const lh=layout.size*1.02;
+  const block=layout.lines.length*lh;
+
+  const start=Math.max(690,1190-block);
+
+  ctx.textBaseline="top";
+  ctx.fillStyle="#fff";
+  ctx.shadowColor="rgba(0,0,0,.5)";
+  ctx.shadowBlur=10;
+
+  layout.lines.forEach((line,i)=>{
+    ctx.fillText(line,55,start+i*lh);
+  });
+
+  ctx.shadowBlur=0;
+  ctx.textBaseline="alphabetic";
+
+  ctx.fillStyle="#ffc400";
+  ctx.fillRect(55,1250,105,5);
+
+  return canvas;
 }
 
 async function drawData(post){
   const {canvas,ctx}=baseCanvas();
 
-  branding(ctx,2);
+  ctx.fillStyle="#050b15";
+  ctx.fillRect(0,0,1080,1350);
 
-  ctx.fillStyle="#fff";
-  ctx.fillRect(12,138,1056,1090);
+  const report=await loadFirst(reportCandidates(post));
 
-  const im=await loadPostImage(post);
-
-  if(im){
-    contain(ctx,im,18,144,1044,1078);
+  if(report){
+    containImage(ctx,report,12,12,1056,1326);
   }else{
-    ctx.fillStyle="#061a46";
-    ctx.font="900 48px Arial";
-    ctx.fillText("DONNÉES & ANALYSE",65,350);
-
-    ctx.fillStyle="#516078";
-    ctx.font="28px Arial";
-    ctx.fillText("Infographie indisponible",65,420);
+    drawFallback(ctx);
+    ctx.font='900 65px "Barlow Condensed",Arial';
+    ctx.fillStyle="#fff";
+    ctx.fillText("DONNÉES & ANALYSE",60,650);
   }
 
   return canvas;
 }
 
-function drawQuestion(post){
+async function drawQuestion(post){
   const {canvas,ctx}=baseCanvas();
 
-  graphicSignature(ctx);
-  branding(ctx,3);
+  drawFallback(ctx);
+  drawGradient(ctx);
+  await drawLogo(ctx);
 
-  ctx.fillStyle="#ffd200";
-  ctx.font="900 25px Arial";
-  ctx.fillText("LE DÉBAT",64,240);
-  ctx.fillRect(64,280,95,8);
+  ctx.fillStyle="#ffc400";
+  ctx.font='900 35px "Barlow Condensed",Arial';
+  ctx.fillText("LE DÉBAT",60,315);
+
+  ctx.fillRect(60,345,100,5);
 
   const question=String(
     post.question||"ET VOUS, QU'EN PENSEZ-VOUS ?"
   );
 
-  const layout=typography(ctx,question,945,6,100,55);
-
-  const lh=layout.size*1.16;
+  const layout=fitTitle(ctx,question,950,6,108,58);
+  const lh=layout.size*1.08;
   const start=Math.max(
-    400,
-    750-layout.lines.length*lh/2
+    500,
+    820-layout.lines.length*lh/2
   );
 
   ctx.textBaseline="top";
   ctx.fillStyle="#fff";
 
-  layout.lines.forEach((lineText,i)=>{
-    ctx.fillText(lineText,64,start+i*lh);
+  layout.lines.forEach((line,i)=>{
+    ctx.fillText(line,60,start+i*lh);
   });
 
   ctx.textBaseline="alphabetic";
 
-  ctx.fillStyle="#ffd200";
-  ctx.fillRect(64,1115,952,3);
+  ctx.fillStyle="#ffc400";
+  ctx.fillRect(60,1160,960,3);
 
-  ctx.fillStyle="#c4d4ea";
-  ctx.font="800 28px Arial";
-  ctx.fillText("ON ATTEND VOTRE AVIS.",64,1185);
+  ctx.fillStyle="#d5deec";
+  ctx.font='800 35px "Barlow Condensed",Arial';
+  ctx.fillText("DONNEZ VOTRE AVIS EN COMMENTAIRE",60,1225);
 
   return canvas;
 }
 
 async function makeSlide(post,n){
+  await document.fonts.ready;
+
   if(n===1)return drawCover(post);
   if(n===2)return drawData(post);
   return drawQuestion(post);
@@ -759,10 +743,12 @@ async function paint(canvas,post,n){
 
   try{
     const source=await makeSlide(post,n);
+
     if(!canvas.isConnected)return;
 
     const ctx=canvas.getContext("2d");
     ctx.clearRect(0,0,canvas.width,canvas.height);
+
     ctx.drawImage(
       source,0,0,
       canvas.width,canvas.height
@@ -776,13 +762,11 @@ async function refreshCard(post){
   const id=String(post.id);
   const active=slideState.get(id)||1;
 
-  const main=$("main-"+id);
-
   await Promise.all([
     paint($("thumb-"+id+"-1"),post,1),
     paint($("thumb-"+id+"-2"),post,2),
     paint($("thumb-"+id+"-3"),post,3),
-    paint(main,post,active)
+    paint($("main-"+id),post,active)
   ]);
 }
 
@@ -843,10 +827,6 @@ function render(){
 
   $("grid").innerHTML=data.map(p=>{
     const id=esc(p.id);
-    const title=esc(shortTitle(p));
-    const question=esc(
-      p.question||"Et vous, qu'en pensez-vous ?"
-    );
 
     return `
     <article class="card">
@@ -858,6 +838,7 @@ function render(){
           </span>
           <span>${esc(p.date||"")} · ${esc(p.score||0)}/100</span>
         </div>
+
         <h2 class="card-title">${esc(p.title)}</h2>
       </div>
 
@@ -883,14 +864,16 @@ function render(){
           </div>
         </div>
 
-        <div class="slide-controls">
+        <div class="controls">
           <button class="primary" data-action="download" data-slide="1" data-id="${id}">
             ↓ Couverture
           </button>
-          ${imageCandidates(p).length?`
+
+          ${reportCandidates(p).length?`
           <button data-action="download" data-slide="2" data-id="${id}">
             ↓ DataScout
           </button>`:""}
+
           <button data-action="download" data-slide="3" data-id="${id}">
             ↓ Débat
           </button>
@@ -902,13 +885,28 @@ function render(){
 
         <div class="field">
           <label>TITRE DE COUVERTURE</label>
-          <input id="title-${id}" value="${title}" maxlength="130">
-          <div class="hint">Idéalement 4 à 8 mots pour un impact maximal.</div>
+          <input id="title-${id}" value="${esc(shortTitle(p))}" maxlength="150">
+          <div class="hint">Privilégie un titre de 4 à 10 mots.</div>
+        </div>
+
+        <div class="field">
+          <label>PHOTO DE COUVERTURE (URL)</label>
+          <input
+            id="photo-${id}"
+            type="url"
+            placeholder="https://..."
+            value="${esc(p.cover_image||"")}"
+          >
+          <div class="hint">Photo principale de l'article. L'image DataScout reste séparée.</div>
         </div>
 
         <div class="field">
           <label>QUESTION D'INTERACTION</label>
-          <input id="question-${id}" value="${question}" maxlength="160">
+          <input
+            id="question-${id}"
+            value="${esc(p.question||"Et vous, qu'en pensez-vous ?")}"
+            maxlength="160"
+          >
         </div>
 
         <div class="field">
@@ -920,6 +918,7 @@ function render(){
           <button class="primary" data-action="copy" data-id="${id}">
             Copier la légende
           </button>
+
           <button data-action="article" data-id="${id}">
             Voir l'article
           </button>
@@ -941,17 +940,20 @@ $("grid").addEventListener("input",event=>{
   const card=field.closest(".card");
   if(!card)return;
 
-  const input=card.querySelector('input[id^="title-"]');
-  if(!input)return;
+  const title=card.querySelector('input[id^="title-"]');
+  if(!title)return;
 
-  const id=input.id.slice(6);
+  const id=title.id.slice(6);
   const post=posts.find(p=>String(p.id)===id);
+
   if(!post)return;
 
   savePost(id);
 
-  if(field.id.startsWith("title-")){
+  if(field.id.startsWith("title-")||
+     field.id.startsWith("photo-")){
     paint($("thumb-"+id+"-1"),post,1);
+
     if((slideState.get(id)||1)===1){
       paint($("main-"+id),post,1);
     }
@@ -959,6 +961,7 @@ $("grid").addEventListener("input",event=>{
 
   if(field.id.startsWith("question-")){
     paint($("thumb-"+id+"-3"),post,3);
+
     if(slideState.get(id)===3){
       paint($("main-"+id),post,3);
     }
@@ -971,6 +974,7 @@ $("grid").addEventListener("click",async event=>{
 
   const id=button.dataset.id;
   const post=posts.find(p=>String(p.id)===id);
+
   if(!post)return;
 
   try{
@@ -982,6 +986,7 @@ $("grid").addEventListener("click",async event=>{
 
     if(action==="download"){
       button.disabled=true;
+
       try{
         await download(post,Number(button.dataset.slide));
       }finally{
@@ -991,6 +996,7 @@ $("grid").addEventListener("click",async event=>{
 
     if(action==="copy"){
       const caption=$("caption-"+id).value;
+
       await navigator.clipboard.writeText(caption);
 
       const old=button.textContent;
@@ -1024,9 +1030,10 @@ fetch("posts.json?v="+Date.now())
 
       return {
         ...p,
-        social_title:saved.social_title||p.social_title||p.cover_title||"",
+        social_title:saved.social_title||p.social_title||"",
         question:saved.question??p.question??"",
-        caption:saved.caption??cleanCaption(p.caption,p.title)
+        caption:saved.caption??cleanCaption(p.caption,p.title),
+        cover_image:saved.cover_image??p.cover_image??""
       };
     });
 
