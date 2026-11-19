@@ -6,16 +6,20 @@ import io
 import re
 from pathlib import Path
 from urllib.parse import urljoin
+from zoneinfo import ZoneInfo
 
 import requests
 import feedparser
 from bs4 import BeautifulSoup
 from PIL import Image, ImageOps
 
+
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / 'docs'
 ASSETS = DOCS / 'assets'
 ASSETS.mkdir(parents=True, exist_ok=True)
+
+PARIS = ZoneInfo('Europe/Paris')
 
 FEEDS = [
     'https://morning-foot.com/feed/',
@@ -24,7 +28,7 @@ FEEDS = [
 
 S = requests.Session()
 S.headers.update({
-    'User-Agent': 'Mozilla/5.0 (compatible; MorningFootSocialStudio/7.0; +https://morning-foot.com)',
+    'User-Agent': 'Mozilla/5.0 (compatible; MorningFootSocialStudio/9.0; +https://morning-foot.com)',
     'Accept': '*/*'
 })
 
@@ -34,6 +38,7 @@ def get(url):
         r = S.get(url, timeout=25)
         r.raise_for_status()
         return r
+
     except requests.RequestException as exc:
         print('FETCH ERROR:', url, exc)
         return None
@@ -188,6 +193,7 @@ def save_image(url, stem, min_width=320):
                 if existing.width >= min_width:
                     existing.verify()
                     return 'assets/' + out.name
+
         except Exception:
             pass
 
@@ -217,6 +223,26 @@ def save_image(url, stem, min_width=320):
     except Exception as exc:
         print('IMAGE ERROR:', url, exc)
         return None
+
+
+def shorten(text, limit):
+    text = text.strip()
+
+    if len(text) <= limit:
+        return text
+
+    part = text[:limit]
+
+    end = max(
+        part.rfind('. '),
+        part.rfind('! '),
+        part.rfind('? ')
+    )
+
+    if end >= limit // 2:
+        return part[:end + 1]
+
+    return part.rsplit(' ', 1)[0] + '…'
 
 
 def extract_intro(soup, entry, title):
@@ -263,26 +289,6 @@ def extract_intro(soup, entry, title):
         return shorten(summary, 420)
 
     return ''
-
-
-def shorten(text, limit):
-    text = text.strip()
-
-    if len(text) <= limit:
-        return text
-
-    part = text[:limit]
-
-    end = max(
-        part.rfind('. '),
-        part.rfind('! '),
-        part.rfind('? ')
-    )
-
-    if end >= limit // 2:
-        return part[:end + 1]
-
-    return part.rsplit(' ', 1)[0] + '…'
 
 
 def asset_exists(value):
@@ -351,42 +357,37 @@ def parse(entry, old=None):
     # INFOGRAPHIE DATASCOUT
     # ----------------------------
 
-    image = old.get('report_image') or old.get('image')
+    image = None
+    report_source = None
+    reports = []
+    from urllib.parse import urlsplit, unquote
 
-    if not asset_exists(image):
-        image = None
-
-        report_soup = soup
-
-        reports = []
-
-        for src, tag in image_candidates(report_soup, base_url):
-            desc = src + ' ' + str(tag.get('alt', ''))
-
-            if is_report(desc):
+    def collect_reports(source):
+        for src, tag in image_candidates(source, base_url):
+            filename = unquote(urlsplit(src).path.rsplit('/', 1)[-1])
+            if is_report(filename) and src not in reports:
                 reports.append(src)
 
-        if not reports:
-            for content in entry.get('content', []):
-                rss_soup = BeautifulSoup(
-                    content.get('value', ''),
-                    'html.parser'
-                )
+    collect_reports(soup)
+    for content in entry.get('content', []):
+        collect_reports(BeautifulSoup(content.get('value', ''), 'html.parser'))
 
-                for src, tag in image_candidates(rss_soup, base_url):
-                    desc = src + ' ' + str(tag.get('alt', ''))
+    for report in reports[:5]:
+        suffix = hashlib.sha1(report.encode()).hexdigest()[:10]
+        candidate = save_image(report, ident + '-ds9-' + suffix)
+        if candidate:
+            if asset_exists(photo):
+                with Image.open(DOCS / candidate) as a, Image.open(DOCS / photo) as b:
+                    if ImageOps.fit(a.convert('RGB'), (32, 32)).tobytes() == ImageOps.fit(b.convert('RGB'), (32, 32)).tobytes():
+                        continue
+            image = candidate
+            report_source = report
+            break
 
-                    if is_report(desc):
-                        reports.append(src)
-
-        for report in reports[:5]:
-            image = save_image(
-                report,
-                ident + '-report'
-            )
-
-            if image:
-                break
+    if not image and page is None and old.get('build_version') == 9:
+        if asset_exists(old.get('report_image')):
+            image = old['report_image']
+            report_source = old.get('report_source')
 
     # ----------------------------
     # CATEGORIE ET SCORE
@@ -440,6 +441,9 @@ def parse(entry, old=None):
         score + min(10, max(0, len(text) // 350))
     )
 
+    if page is None and old.get('build_version') == 9 and old.get('score') is not None:
+        score = old['score']
+
     # ----------------------------
     # DATE DE PUBLICATION
     # ----------------------------
@@ -449,14 +453,28 @@ def parse(entry, old=None):
         or entry.get('updated_parsed')
     )
 
-    day = (
-        datetime.date(*date[:3]).isoformat()
-        if date
-        else old.get('date') or datetime.date.today().isoformat()
-    )
+    if date:
+        published = datetime.datetime(
+            *date[:6],
+            tzinfo=datetime.timezone.utc
+        ).astimezone(PARIS)
+
+        day = published.date().isoformat()
+        published_at = published.isoformat()
+
+    else:
+        day = (
+            old.get('date')
+            or datetime.datetime.now(PARIS).date().isoformat()
+        )
+
+        published_at = (
+            old.get('published_at')
+            or day + 'T00:00:00'
+        )
 
     # ----------------------------
-    # QUESTION ET LEGENDE INSTAGRAM
+    # QUESTION ET LEGENDE
     # ----------------------------
 
     question = {
@@ -494,24 +512,32 @@ def parse(entry, old=None):
     # ----------------------------
 
     return {
+        **old,
         'id': ident,
         'title': title,
         'url': url,
         'date': day,
+        'published_at': published_at,
         'category': c,
         'score': score,
         'reasons': reasons,
         'report': bool(image),
         'image': image,
         'report_image': image,
+        'report_source': report_source,
         'photo': photo,
         'cover_image': photo,
         'intro': intro,
         'caption': caption,
         'question': question,
         'status': old.get('status', 'brouillon'),
-        'build_version': 7
+        'build_version': 9
     }
+
+
+# ========================================
+# FRAICHEUR DES ARTICLES
+# ========================================
 
 
 def age_days(item):
@@ -520,9 +546,7 @@ def age_days(item):
             item.get('date', '')
         )
 
-        today = datetime.datetime.now(
-            datetime.timezone.utc
-        ).date()
+        today = datetime.datetime.now(PARIS).date()
 
         return max(0, (today - day).days)
 
@@ -535,15 +559,27 @@ def editorial_score(item):
     age = age_days(item)
 
     freshness = {
-        0: 25,
-        1: 18,
+        0: 30,
+        1: 20,
         2: 10,
-        3: 4
+        3: 5
     }.get(age, 0)
 
     penalty = max(0, age - 3) * 5
 
     return score + freshness - penalty
+
+
+def publication_key(item):
+    return (
+        item.get('published_at')
+        or item.get('date', '')
+    )
+
+
+# ========================================
+# GENERATION PRINCIPALE
+# ========================================
 
 
 def main():
@@ -572,7 +608,11 @@ def main():
         if item.get('url')
     }
 
-    # Nouveaux articles et mise a niveau des anciens
+    new_count = 0
+
+    # ----------------------------
+    # RECUPERATION DES ARTICLES
+    # ----------------------------
 
     for entry in feed.entries[:30]:
         url = entry.get('link')
@@ -584,8 +624,9 @@ def main():
 
         needs_update = (
             not old
-            or old.get('build_version') != 7
+            or old.get('build_version') != 9
             or not asset_exists(old.get('cover_image'))
+            or age_days(old) == 0
             or (
                 old.get('report')
                 and not asset_exists(old.get('image'))
@@ -596,11 +637,20 @@ def main():
             try:
                 byurl[url] = parse(entry, old)
 
+                if not old:
+                    new_count += 1
+                    print(
+                        'NOUVEL ARTICLE:',
+                        byurl[url].get('title')
+                    )
+
             except Exception as exc:
                 print('ARTICLE ERROR:', url, exc)
 
-    # Mise a niveau des anciens brouillons encore utiles
-    # mais qui ne figurent plus dans le flux RSS.
+    # ----------------------------
+    # RECUPERATION DES ANCIENNES
+    # PHOTOS MANQUANTES
+    # ----------------------------
 
     active_urls = {
         entry.get('link')
@@ -611,7 +661,7 @@ def main():
         item for item in byurl.values()
         if item.get('selected')
         and item['url'] not in active_urls
-        and age_days(item) <= 7
+        and age_days(item) <= 6
         and not asset_exists(item.get('cover_image'))
     ]
 
@@ -627,44 +677,85 @@ def main():
         except Exception as exc:
             print('BACKFILL ERROR:', old['url'], exc)
 
-    # Conservation des 120 articles les plus recents
+    # ----------------------------
+    # 120 ARTICLES LES PLUS RECENTS
+    # ----------------------------
 
     items = sorted(
         byurl.values(),
         key=lambda x: (
-            x.get('date', ''),
+            publication_key(x),
             x.get('score', 0)
         ),
         reverse=True
     )[:120]
 
-    # Priorite stricte aux articles DataScout recents.
-    # La date seule permet un tri par jour, pas une fenetre exacte de 48h.
+    # ----------------------------
+    # ARTICLES DATASCOUT ELIGIBLES
+    # ----------------------------
+
     eligible = [
         x for x in items
-        if x.get('report')
+        if x.get('build_version') == 9
+        and x.get('report')
         and asset_exists(x.get('image'))
-        and age_days(x) <= 7
+        and age_days(x) <= 6
         and x.get('score', 0) >= 35
     ]
 
-    recent = sorted(
-        (x for x in eligible if age_days(x) <= 1),
-        key=editorial_score, reverse=True
-    )
-    older = sorted(
-        (x for x in eligible if age_days(x) > 1),
-        key=editorial_score, reverse=True
+    selected = sorted(
+        eligible,
+        key=lambda x: (-age_days(x), editorial_score(x), publication_key(x)),
+        reverse=True
+    )[:7]
+
+    chosen = {
+        x['id']
+        for x in selected
+    }
+
+    ranks = {
+        x['id']: index + 1
+        for index, x in enumerate(selected)
+    }
+
+    # ----------------------------
+    # METADONNEES DE SYNCHRONISATION
+    # ----------------------------
+
+    now = datetime.datetime.now(PARIS)
+
+    sync_time = now.isoformat(
+        timespec='seconds'
     )
 
-    chosen = {x['id'] for x in (recent + older)[:7]}
-    synced_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    sync_label = now.strftime(
+        '%d/%m/%Y à %H:%M'
+    )
 
     for item in items:
+        if item.get('build_version') != 9:
+            item['report'] = False
+            item['image'] = None
+            item['report_image'] = None
         item['selected'] = item['id'] in chosen
-        item['synced_at'] = synced_at
 
-    # Ecriture atomique du fichier JSON
+        item['selection_rank'] = ranks.get(
+            item['id'],
+            None
+        )
+
+        item['editorial_score'] = editorial_score(item)
+
+        item['age_days'] = age_days(item)
+
+        item['last_sync'] = sync_time
+
+        item['last_sync_label'] = sync_label
+
+    # ----------------------------
+    # ECRITURE ATOMIQUE DU JSON
+    # ----------------------------
 
     temp = DOCS / 'posts.json.tmp'
 
@@ -679,6 +770,10 @@ def main():
 
     temp.replace(p)
 
+    # ----------------------------
+    # BILAN DE LA SYNCHRONISATION
+    # ----------------------------
+
     photo_count = sum(
         asset_exists(x.get('cover_image'))
         for x in items
@@ -689,13 +784,43 @@ def main():
         for x in items
     )
 
-    print('BUILD VERSION: V8 - classement')
-    print('Synchronisation UTC:', synced_at)
-    print('DataScout aujourd hui et hier:', len(recent))
+    today_count = sum(
+        age_days(x) == 0
+        for x in items
+    )
+
+    yesterday_count = sum(
+        age_days(x) == 1
+        for x in items
+    )
+
+    selected_fresh = sum(
+        age_days(x) <= 1
+        for x in selected
+    )
+
+    print('========================================')
+    print('BUILD VERSION: V9')
+    print('Derniere synchronisation:', sync_label)
+    print('Nouveaux articles:', new_count)
     print('Posts:', len(items))
+    print('Articles du jour:', today_count)
+    print('Articles de la veille:', yesterday_count)
     print('Photos disponibles:', photo_count)
     print('Fiches DataScout:', report_count)
     print('Selectionnes:', len(chosen))
+    print('Selection recente:', selected_fresh)
+    print('Eligibles du jour:', sum(age_days(x) == 0 for x in eligible))
+    print('Selection du jour:', sum(age_days(x) == 0 for x in selected))
+    print('========================================')
+
+    for item in selected:
+        print(
+            'SELECTION:',
+            item.get('date'),
+            item.get('score'),
+            item.get('title')
+        )
 
 
 if __name__ == '__main__':
