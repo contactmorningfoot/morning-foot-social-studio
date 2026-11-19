@@ -1,5 +1,35 @@
 [
   {
+    "id": "c3b33d9c00503f",
+    "title": "Stade Rennais : Ils reviennent en forme, il revient blessé",
+    "url": "https://morning-foot.com/ligue-1/rennes/stade-rennais-ils-reviennent-en-forme-il-revient-blesse/",
+    "date": "2026-11-19",
+    "published_at": "2026-11-19T11:07:05+01:00",
+    "category": "MATCH",
+    "score": 58,
+    "reasons": [
+      "Fiche statistique",
+      "Photo disponible"
+    ],
+    "report": true,
+    "image": "assets/c3b33d9c00503f-ds9-04576918a0.jpg",
+    "report_image": "assets/c3b33d9c00503f-ds9-04576918a0.jpg",
+    "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/fiche-p-frankowski-2026-11-19-871x1024.png",
+    "photo": "assets/c3b33d9c00503f-photo.jpg",
+    "cover_image": "assets/c3b33d9c00503f-photo.jpg",
+    "intro": "Trois buteurs, des joueurs en confiance et une alerte musculaire : le bilan des internationaux du Stade Rennais avant Lorient.",
+    "caption": "Stade Rennais : Ils reviennent en forme, il revient blessé\n\nTrois buteurs, des joueurs en confiance et une alerte musculaire : le bilan des internationaux du Stade Rennais avant Lorient.\n\n📊 Décryptage et statistiques avec les données DataScout.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Quel est votre avis ?",
+    "status": "brouillon",
+    "build_version": 9,
+    "selected": true,
+    "selection_rank": 2,
+    "editorial_score": 88,
+    "age_days": 0,
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
+  },
+  {
     "id": "bf94b3ad77c392",
     "title": "FC Metz : Grégory Proment lance un sérieux avertissement à ses joueurs",
     "url": "https://morning-foot.com/ligue-2/fc-metz-proment-avertissement-saint-die/",
@@ -26,8 +56,8 @@
     "selection_rank": null,
     "editorial_score": 65,
     "age_days": 0,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "ebb0752ca9bd63",
@@ -58,16 +88,16 @@
     "selection_rank": 1,
     "editorial_score": 115,
     "age_days": 0,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "f1ce4282e4aa3a",
     "title": "ASSE : Dernières indiscrétions avant le déplacement à Reims",
     "url": "https://morning-foot.com/ligue-2/asse-reims-indiscretions-composition-probable/",
     "date": "2026-11-19",
-    "category": "MATCH",
-    "score": 30,
+    "category": "DÉBAT",
+    "score": 20,
     "reasons": [
       "Sujet populaire",
       "Photo disponible"
@@ -77,9 +107,9 @@
     "report_image": null,
     "photo": "assets/f1ce4282e4aa3a-photo.jpg",
     "cover_image": "assets/f1ce4282e4aa3a-photo.jpg",
-    "intro": "Retour de Tamar Svetlina, internationaux, point médical et composition probable : les dernières indiscrétions avant Reims-ASSE.",
-    "caption": "ASSE : Dernières indiscrétions avant le déplacement à Reims\n\nRetour de Tamar Svetlina, internationaux, point médical et composition probable : les dernières indiscrétions avant Reims-ASSE.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
-    "question": "Quel est votre avis ?",
+    "intro": "L’ASSE s’apprête à retrouver le championnat avec un déplacement particulièrement attendu sur la pelouse du Stade de Reims, ce samedi à 20 heures. Après une trêve internationale marquée par de nombreuses absences à L’Étrat, Ian Cathro retrouve progressivement ses forces vives. Point médical, retour des internationaux et composition probable : voici les dernières indiscrétions avant ... Lire la suite",
+    "caption": "ASSE : Dernières indiscrétions avant le déplacement à Reims\n\nL’ASSE s’apprête à retrouver le championnat avec un déplacement particulièrement attendu sur la pelouse du Stade de Reims, ce samedi à 20 heures. Après une trêve internationale marquée par de nombreuses absences à L’Étrat, Ian Cathro retrouve progressivement ses forces vives. Point médical, retour des internationaux et composition probable : voici les dernières indiscrétions avant ... Lire la suite\n\n💬 Qu’en pensez-vous ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Qu’en pensez-vous ?",
     "status": "brouillon",
     "build_version": 9,
     "selected": false,
@@ -87,10 +117,10 @@
     "published_at": "2026-11-19T07:47:21+01:00",
     "report_source": null,
     "selection_rank": null,
-    "editorial_score": 60,
+    "editorial_score": 50,
     "age_days": 0,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "464dda1d3d8a03",
@@ -119,8 +149,8 @@
     "selection_rank": null,
     "editorial_score": 45,
     "age_days": 0,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "9f975ecba3107a",
@@ -151,8 +181,8 @@
     "selection_rank": null,
     "editorial_score": 74,
     "age_days": 0,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "2581aa327b6d01",
@@ -180,11 +210,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T21:00:35+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-eliezer-mayenda-2026-11-18-871x1024.png",
-    "selection_rank": 6,
+    "selection_rank": 7,
     "editorial_score": 92,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "a4681ed57f75a9",
@@ -212,11 +242,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T19:32:05+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/fiche-m-mesloub-soares-2026-11-18-871x1024.png",
-    "selection_rank": 3,
+    "selection_rank": 4,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "82815328c7d3d1",
@@ -246,8 +276,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "cc76b901ca79fc",
@@ -275,11 +305,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T16:30:35+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-a-saint-maximin-2026-11-18-871x1024.png",
-    "selection_rank": 4,
+    "selection_rank": 5,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "722948fae98ff3",
@@ -303,15 +333,15 @@
     "question": "Que pensez-vous de cette actualité mercato ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": true,
+    "selected": false,
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T15:00:04+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-i-housni-2026-11-18-871x1024.png",
-    "selection_rank": 7,
+    "selection_rank": null,
     "editorial_score": 92,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "be090c2a4cc515",
@@ -340,11 +370,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T13:25:27+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-y-zabiri-2026-11-18-871x1024.png",
-    "selection_rank": 2,
+    "selection_rank": 3,
     "editorial_score": 104,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "7ee2bca95f3c42",
@@ -374,8 +404,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "8d04486dcdc98f",
@@ -406,8 +436,8 @@
     "selection_rank": null,
     "editorial_score": 69,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "790defeec38b46",
@@ -437,8 +467,8 @@
     "selection_rank": null,
     "editorial_score": 49,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "79d7417ad6b7f2",
@@ -466,11 +496,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T07:51:33+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-aimen-moueffek-2026-11-18-871x1024.png",
-    "selection_rank": 5,
+    "selection_rank": 6,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "4b3c2cc616d949",
@@ -500,8 +530,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "7af8ffaf754c03",
@@ -531,8 +561,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "dd1f3f531cdf17",
@@ -562,8 +592,8 @@
     "selection_rank": null,
     "editorial_score": 67,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "b3f4ad01564f58",
@@ -593,8 +623,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "34feefe1789274",
@@ -625,8 +655,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "0ae43ad0544876",
@@ -658,8 +688,8 @@
     "selection_rank": null,
     "editorial_score": 97,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "23b408b92ada5c",
@@ -689,8 +719,8 @@
     "selection_rank": null,
     "editorial_score": 43,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "5409f8cde6586e",
@@ -720,8 +750,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "86f1af7c811c8d",
@@ -750,8 +780,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "5872b6792e1469",
@@ -781,8 +811,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "fbc390ea2a6a66",
@@ -814,8 +844,8 @@
     "selection_rank": null,
     "editorial_score": 97,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "c3ea7219923ec0",
@@ -846,8 +876,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "4a25aa58fbd568",
@@ -877,8 +907,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "aecd1db356740a",
@@ -910,8 +940,8 @@
     "selection_rank": null,
     "editorial_score": 103,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "f537f4c2af94ba",
@@ -942,8 +972,8 @@
     "selection_rank": null,
     "editorial_score": 80,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "457404c8e51c9a",
@@ -975,8 +1005,8 @@
     "selection_rank": null,
     "editorial_score": 97,
     "age_days": 2,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "d43963d5935ad2",
@@ -1006,8 +1036,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56"
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55"
   },
   {
     "id": "f6988f5edba44b",
@@ -1036,8 +1066,8 @@
     "selection_rank": null,
     "editorial_score": 98,
     "age_days": 3,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56",
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55",
     "synced_at": "2026-11-19T07:49:31.098238+00:00"
   },
   {
@@ -1059,8 +1089,8 @@
     "selection_rank": null,
     "editorial_score": 38,
     "age_days": 3,
-    "last_sync": "2026-11-19T10:56:26+01:00",
-    "last_sync_label": "19/11/2026 à 10:56",
+    "last_sync": "2026-11-19T11:55:28+01:00",
+    "last_sync_label": "19/11/2026 à 11:55",
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "report_image": null
   }
