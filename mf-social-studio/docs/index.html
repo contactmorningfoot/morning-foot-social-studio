@@ -248,7 +248,7 @@ button.primary{
 
 <header>
   <div class="brand">
-    <img src="assets/logo-mf.png.png" alt="Logo Morning Foot" onerror="this.style.display='none'">
+    <img src="assets/logo-mf.png" alt="Logo Morning Foot" onerror="this.style.display='none'">
     <div>
       <div class="brand-name">MORNING <b>FOOT</b></div>
       <div class="brand-sub">SOCIAL STUDIO / BLACK EDITION V6</div>
@@ -291,7 +291,7 @@ const slideState=new Map();
 
 const $=id=>document.getElementById(id);
 
-const LOGO_URL=new URL("assets/logo-mf.png.png",document.baseURI).href;
+const LOGO_URL=new URL("assets/logo-mf.png",document.baseURI).href;
 
 function esc(s){
   return String(s??"").replace(/[&<>"']/g,c=>({
@@ -610,21 +610,10 @@ async function drawLogo(ctx){
 
   if(logo){
     ctx.save();
-    ctx.beginPath();
-    ctx.rect(890,30,155,130);
-    ctx.clip();
-
-    containImage(ctx,logo,890,5,155,155);
+    containImage(ctx,logo,950,12,110,85);
     ctx.restore();
-  }else{
-    ctx.font="900 italic 62px Arial";
-    ctx.fillStyle="#fff";
-    ctx.fillText("M",895,115);
-    ctx.fillStyle="#ffc400";
-    ctx.fillText("F",958,115);
   }
 }
-
 async function drawCover(post){
   const {canvas,ctx}=baseCanvas();
 
