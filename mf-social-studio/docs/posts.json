@@ -1,5 +1,67 @@
 [
   {
+    "id": "bf94b3ad77c392",
+    "title": "FC Metz : Grégory Proment lance un sérieux avertissement à ses joueurs",
+    "url": "https://morning-foot.com/ligue-2/fc-metz-proment-avertissement-saint-die/",
+    "date": "2026-11-19",
+    "published_at": "2026-11-19T10:45:10+01:00",
+    "category": "STATS",
+    "score": 35,
+    "reasons": [
+      "Statistiques",
+      "Photo disponible"
+    ],
+    "report": false,
+    "image": null,
+    "report_image": null,
+    "report_source": null,
+    "photo": "assets/bf94b3ad77c392-photo.jpg",
+    "cover_image": "assets/bf94b3ad77c392-photo.jpg",
+    "intro": "Après le fiasco en Coupe de France, Grégory Proment prévient ses joueurs. Le FC Metz doit impérativement réagir contre Boulogne.",
+    "caption": "FC Metz : Grégory Proment lance un sérieux avertissement à ses joueurs\n\nAprès le fiasco en Coupe de France, Grégory Proment prévient ses joueurs. Le FC Metz doit impérativement réagir contre Boulogne.\n\n💬 Que vous inspirent ces chiffres ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Que vous inspirent ces chiffres ?",
+    "status": "brouillon",
+    "build_version": 9,
+    "selected": false,
+    "selection_rank": null,
+    "editorial_score": 65,
+    "age_days": 0,
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
+  },
+  {
+    "id": "ebb0752ca9bd63",
+    "title": "Monaco : snobé par l’ASM, lâché par Strasbourg, il explose en Belgique",
+    "url": "https://morning-foot.com/ligue-1/monaco/monaco-felix-lemarechal-strasbourg-club-bruges/",
+    "date": "2026-11-19",
+    "published_at": "2026-11-19T09:30:52+01:00",
+    "category": "MATCH",
+    "score": 85,
+    "reasons": [
+      "Fiche statistique",
+      "Sujet populaire",
+      "Angle de discussion",
+      "Photo disponible"
+    ],
+    "report": true,
+    "image": "assets/ebb0752ca9bd63-ds9-30f12776f9.jpg",
+    "report_image": "assets/ebb0752ca9bd63-ds9-30f12776f9.jpg",
+    "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/fiche-f-lemarechal-2026-11-18-871x1024.png",
+    "photo": "assets/ebb0752ca9bd63-photo.jpg",
+    "cover_image": "assets/ebb0752ca9bd63-photo.jpg",
+    "intro": "Passé par Monaco et Strasbourg, Félix Lemaréchal impressionne en Belgique. Ses statistiques au Club Bruges interpellent.",
+    "caption": "Monaco : snobé par l’ASM, lâché par Strasbourg, il explose en Belgique\n\nPassé par Monaco et Strasbourg, Félix Lemaréchal impressionne en Belgique. Ses statistiques au Club Bruges interpellent.\n\n📊 Décryptage et statistiques avec les données DataScout.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Quel est votre avis ?",
+    "status": "brouillon",
+    "build_version": 9,
+    "selected": true,
+    "selection_rank": 1,
+    "editorial_score": 115,
+    "age_days": 0,
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
+  },
+  {
     "id": "f1ce4282e4aa3a",
     "title": "ASSE : Dernières indiscrétions avant le déplacement à Reims",
     "url": "https://morning-foot.com/ligue-2/asse-reims-indiscretions-composition-probable/",
@@ -27,16 +89,16 @@
     "selection_rank": null,
     "editorial_score": 60,
     "age_days": 0,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "464dda1d3d8a03",
     "title": "FC Metz : Grégory Proment dévoile les contours de son projet",
     "url": "https://morning-foot.com/ligue-2/fc-metz-proment-projet-jeu-analyse-data/",
     "date": "2026-11-19",
-    "category": "MATCH",
-    "score": 15,
+    "category": "DÉBAT",
+    "score": 5,
     "reasons": [
       "Photo disponible"
     ],
@@ -45,9 +107,9 @@
     "report_image": null,
     "photo": "assets/464dda1d3d8a03-photo.jpg",
     "cover_image": "assets/464dda1d3d8a03-photo.jpg",
-    "intro": "Grégory Proment a détaillé ses ambitions tactiques au FC Metz. Les données de Data'Scout révèlent les forces et les limites des Grenats.",
-    "caption": "FC Metz : Grégory Proment dévoile les contours de son projet\n\nGrégory Proment a détaillé ses ambitions tactiques au FC Metz. Les données de Data'Scout révèlent les forces et les limites des Grenats.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
-    "question": "Quel est votre avis ?",
+    "intro": "Septième de Ligue 2 après douze journées, le FC Metz peine encore à trouver la régularité nécessaire pour se mêler pleinement à la course à la montée. Avant la réception de Boulogne-sur-Mer, Grégory Proment a détaillé les principes de jeu qu’il souhaite instaurer chez les Grenats. Un discours intéressant à mettre en perspective avec les ... Lire la suite",
+    "caption": "FC Metz : Grégory Proment dévoile les contours de son projet\n\nSeptième de Ligue 2 après douze journées, le FC Metz peine encore à trouver la régularité nécessaire pour se mêler pleinement à la course à la montée. Avant la réception de Boulogne-sur-Mer, Grégory Proment a détaillé les principes de jeu qu’il souhaite instaurer chez les Grenats. Un discours intéressant à mettre en perspective avec les ... Lire la suite\n\n💬 Qu’en pensez-vous ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Qu’en pensez-vous ?",
     "status": "brouillon",
     "build_version": 9,
     "selected": false,
@@ -55,10 +117,10 @@
     "published_at": "2026-11-19T07:30:15+01:00",
     "report_source": null,
     "selection_rank": null,
-    "editorial_score": 45,
+    "editorial_score": 35,
     "age_days": 0,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "9f975ecba3107a",
@@ -89,8 +151,8 @@
     "selection_rank": null,
     "editorial_score": 74,
     "age_days": 0,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "2581aa327b6d01",
@@ -118,11 +180,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T21:00:35+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-eliezer-mayenda-2026-11-18-871x1024.png",
-    "selection_rank": 5,
+    "selection_rank": 6,
     "editorial_score": 92,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "a4681ed57f75a9",
@@ -150,11 +212,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T19:32:05+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/fiche-m-mesloub-soares-2026-11-18-871x1024.png",
-    "selection_rank": 2,
+    "selection_rank": 3,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "82815328c7d3d1",
@@ -184,8 +246,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "cc76b901ca79fc",
@@ -213,11 +275,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T16:30:35+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-a-saint-maximin-2026-11-18-871x1024.png",
-    "selection_rank": 3,
+    "selection_rank": 4,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "722948fae98ff3",
@@ -245,11 +307,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T15:00:04+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-i-housni-2026-11-18-871x1024.png",
-    "selection_rank": 6,
+    "selection_rank": 7,
     "editorial_score": 92,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "be090c2a4cc515",
@@ -278,11 +340,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T13:25:27+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-y-zabiri-2026-11-18-871x1024.png",
-    "selection_rank": 1,
+    "selection_rank": 2,
     "editorial_score": 104,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "7ee2bca95f3c42",
@@ -312,8 +374,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "8d04486dcdc98f",
@@ -344,8 +406,8 @@
     "selection_rank": null,
     "editorial_score": 69,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "790defeec38b46",
@@ -375,8 +437,8 @@
     "selection_rank": null,
     "editorial_score": 49,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "79d7417ad6b7f2",
@@ -404,11 +466,11 @@
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-18T07:51:33+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-aimen-moueffek-2026-11-18-871x1024.png",
-    "selection_rank": 4,
+    "selection_rank": 5,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "4b3c2cc616d949",
@@ -438,8 +500,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "7af8ffaf754c03",
@@ -469,8 +531,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "dd1f3f531cdf17",
@@ -500,8 +562,8 @@
     "selection_rank": null,
     "editorial_score": 67,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "b3f4ad01564f58",
@@ -531,8 +593,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "34feefe1789274",
@@ -563,8 +625,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "0ae43ad0544876",
@@ -596,8 +658,8 @@
     "selection_rank": null,
     "editorial_score": 97,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "23b408b92ada5c",
@@ -627,8 +689,8 @@
     "selection_rank": null,
     "editorial_score": 43,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "5409f8cde6586e",
@@ -658,8 +720,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "86f1af7c811c8d",
@@ -688,8 +750,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "5872b6792e1469",
@@ -719,8 +781,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "fbc390ea2a6a66",
@@ -752,8 +814,8 @@
     "selection_rank": null,
     "editorial_score": 97,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "c3ea7219923ec0",
@@ -784,8 +846,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "4a25aa58fbd568",
@@ -815,8 +877,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "aecd1db356740a",
@@ -841,15 +903,15 @@
     "question": "Que vous inspirent ces chiffres ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": true,
+    "selected": false,
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "published_at": "2026-11-17T08:33:27+01:00",
     "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-t-robinet-2026-11-17-873x1024.png",
-    "selection_rank": 7,
+    "selection_rank": null,
     "editorial_score": 103,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "f537f4c2af94ba",
@@ -880,8 +942,8 @@
     "selection_rank": null,
     "editorial_score": 80,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "457404c8e51c9a",
@@ -913,8 +975,8 @@
     "selection_rank": null,
     "editorial_score": 97,
     "age_days": 2,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "d43963d5935ad2",
@@ -944,8 +1006,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54"
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55"
   },
   {
     "id": "f6988f5edba44b",
@@ -974,8 +1036,8 @@
     "selection_rank": null,
     "editorial_score": 98,
     "age_days": 3,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54",
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55",
     "synced_at": "2026-11-19T07:49:31.098238+00:00"
   },
   {
@@ -997,8 +1059,8 @@
     "selection_rank": null,
     "editorial_score": 38,
     "age_days": 3,
-    "last_sync": "2026-11-19T08:54:31+01:00",
-    "last_sync_label": "19/11/2026 à 08:54",
+    "last_sync": "2026-11-19T10:55:47+01:00",
+    "last_sync_label": "19/11/2026 à 10:55",
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "report_image": null
   }
