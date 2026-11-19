@@ -4,17 +4,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Morning Foot — Social Studio V6</title>
+<title>Morning Foot — Social Studio V8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 :root{
-  --bg:#050a12;
-  --panel:#0b1422;
+  --bg:#05070b;
+  --panel:#0c121c;
   --panel2:#101d2e;
-  --line:#24344a;
-  --gold:#ffc400;
+  --line:#222e40;
+  --gold:#ffd200;
   --blue:#147aff;
   --white:#f7f8fb;
   --muted:#93a4bb;
@@ -82,7 +83,10 @@ select,input,textarea{
   border-radius:8px;
   padding:11px 12px;
 }
-.count{color:var(--muted);font-size:13px}
+.count{
+  color:var(--muted);
+  font-size:13px;
+}
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(min(100%,590px),1fr));
@@ -91,7 +95,7 @@ select,input,textarea{
 .card{
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:14px;
+  border-radius:10px;
   overflow:hidden;
 }
 .card-head{padding:22px 24px 18px}
@@ -111,12 +115,13 @@ select,input,textarea{
 }
 .card-title{
   font-size:21px;
+  font-weight:800;
   line-height:1.3;
   margin:0;
 }
 .preview-area{
   padding:23px;
-  background:#060d18;
+  background:#05080e;
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
 }
@@ -127,7 +132,7 @@ select,input,textarea{
   align-items:start;
 }
 .main-preview{
-  max-width:385px;
+  max-width:440px;
   margin:auto;
   width:100%;
 }
@@ -180,10 +185,20 @@ button{
   font-weight:700;
 }
 button:hover{filter:brightness(1.15)}
+button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
 button.primary{
   background:var(--gold);
   color:#09121f;
   border-color:var(--gold);
+}
+button.instagram{
+  background:linear-gradient(110deg,#833ab4,#c13584,#e1306c);
+  border:0;
+  color:white;
+  font-weight:800;
 }
 .editor{padding:22px 24px 25px}
 .field{margin-bottom:16px}
@@ -231,821 +246,6 @@ button.primary{
   margin-top:30px;
   line-height:1.7;
 }
-@media(max-width:560px){
-  .preview-area{padding:12px}
-  .preview-layout{
-    grid-template-columns:minmax(0,1fr) 75px;
-    gap:9px;
-  }
-  .card-head,.editor{padding:18px}
-  .card-title{font-size:18px}
-  .brand-name{font-size:21px}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <div class="brand">
-    <img src="assets/logo-mf.png" alt="Logo Morning Foot" onerror="this.style.display='none'">
-    <div>
-      <div class="brand-name">MORNING <b>FOOT</b></div>
-      <div class="brand-sub">SOCIAL STUDIO / BLACK EDITION V6</div>
-    </div>
-  </div>
-  <div class="header-note">
-    LE FOOTBALL, AUTREMENT.
-    <div>Carrousels Instagram · Création éditoriale · Export HD</div>
-  </div>
-</header>
-
-<main>
-  <div class="toolbar">
-    <select id="filter">
-      <option value="selected">Sélection du studio</option>
-      <option value="all">Tous les articles</option>
-      <option value="STATS">Statistiques</option>
-      <option value="MERCATO">Mercato</option>
-      <option value="MATCH">Matchs</option>
-      <option value="DÉBAT">Débats</option>
-    </select>
-    <span class="count" id="count"></span>
-  </div>
-
-  <div id="grid" class="grid"></div>
-
-  <p class="notice">
-    Aucun contenu n'est publié automatiquement.
-    Vérifiez les informations, les légendes et les droits des photos.
-    Les modifications sont conservées dans votre navigateur.
-  </p>
-</main>
-
-<script>
-"use strict";
-
-let posts=[];
-const imageCache=new Map();
-const slideState=new Map();
-
-const $=id=>document.getElementById(id);
-
-const LOGO_URL=new URL("assets/logo-mf.png",document.baseURI).href;
-
-function esc(s){
-  return String(s??"").replace(/[&<>"']/g,c=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  }[c]));
-}
-
-function getSaved(id){
-  try{
-    return JSON.parse(localStorage.getItem("mf-v6-"+id)||"{}");
-  }catch(e){
-    return {};
-  }
-}
-
-function savePost(id){
-  const post=posts.find(p=>String(p.id)===String(id));
-  if(!post)return;
-
-  const title=$("title-"+id);
-  const question=$("question-"+id);
-  const caption=$("caption-"+id);
-  const photo=$("photo-"+id);
-
-  if(!title||!question||!caption||!photo)return;
-
-  post.social_title=title.value;
-  post.question=question.value;
-  post.caption=caption.value;
-  post.cover_image=photo.value;
-
-  try{
-    localStorage.setItem("mf-v6-"+id,JSON.stringify({
-      social_title:post.social_title,
-      question:post.question,
-      caption:post.caption,
-      cover_image:post.cover_image
-    }));
-  }catch(e){}
-}
-
-function cleanCaption(raw,title){
-  let text=String(raw||"")
-    .replace(/Accueil\s*[›>»]\s*[^\n]{0,100}/gi,"")
-    .replace(/\r/g,"")
-    .replace(/[ \t]{2,}/g," ")
-    .replace(/\n{3,}/g,"\n\n")
-    .trim();
-
-  if(!text)return String(title||"");
-
-  return text;
-}
-
-function shortTitle(post){
-  const custom=String(post.social_title||post.cover_title||"").trim();
-  if(custom)return custom;
-
-  const title=String(post.title||"ACTUALITÉ FOOTBALL").trim();
-
-  if(title.length<=75)return title;
-
-  const words=title.split(/\s+/);
-  let result="";
-
-  for(const word of words){
-    if((result+" "+word).trim().length>72)break;
-    result+=(result?" ":"")+word;
-  }
-
-  return result+"…";
-}
-
-function reportCandidates(post){
-  return [
-    post.report_image,
-    post.report_url,
-    post.image,
-    post.image_url
-  ].filter(v=>typeof v==="string"&&v.trim());
-}
-
-function photoCandidates(post){
-  return [
-    post.cover_image,
-    post.photo,
-    post.featured_image,
-    post.thumbnail,
-    post.hero_image
-  ].filter(v=>typeof v==="string"&&v.trim());
-}
-
-function normalizeUrls(values){
-  const urls=[];
-  const add=u=>{
-    if(u&&!urls.includes(u))urls.push(u);
-  };
-
-  for(const value of values){
-    const src=value.trim();
-
-    try{
-      if(/^https?:\/\//i.test(src)){
-        const u=new URL(src);
-
-        if(u.pathname.includes("/assets/")){
-          add(new URL(
-            "assets/"+u.pathname.split("/assets/").pop(),
-            document.baseURI
-          ).href);
-        }
-
-        add(u.href);
-      }else{
-        const clean=src.replace(/^\/+/,"");
-        add(new URL(clean,document.baseURI).href);
-
-        if(!clean.startsWith("assets/")){
-          add(new URL(
-            "assets/"+clean.split("/").pop(),
-            document.baseURI
-          ).href);
-        }
-      }
-    }catch(e){}
-  }
-
-  return urls;
-}
-
-function loadOne(src){
-  if(imageCache.has(src))return imageCache.get(src);
-
-  const promise=new Promise((resolve,reject)=>{
-    const im=new Image();
-
-    try{
-      if(new URL(src,document.baseURI).origin!==location.origin){
-        im.crossOrigin="anonymous";
-      }
-    }catch(e){}
-
-    im.onload=()=>{
-      if(im.naturalWidth>0)resolve(im);
-      else reject(new Error("Image vide"));
-    };
-
-    im.onerror=()=>reject(new Error("Image indisponible"));
-    im.src=src;
-  });
-
-  imageCache.set(src,promise);
-  return promise;
-}
-
-async function loadFirst(values){
-  for(const src of normalizeUrls(values)){
-    try{
-      return await loadOne(src);
-    }catch(e){
-      console.warn("Image inaccessible",src);
-    }
-  }
-  return null;
-}
-
-async function loadLogo(){
-  try{
-    return await loadOne(LOGO_URL);
-  }catch(e){
-    return null;
-  }
-}
-
-function baseCanvas(){
-  const canvas=document.createElement("canvas");
-  canvas.width=1080;
-  canvas.height=1350;
-
-  const ctx=canvas.getContext("2d");
-
-  ctx.fillStyle="#050b15";
-  ctx.fillRect(0,0,1080,1350);
-
-  return {canvas,ctx};
-}
-
-function coverImage(ctx,im,x,y,w,h){
-  const scale=Math.max(
-    w/im.naturalWidth,
-    h/im.naturalHeight
-  );
-
-  const iw=im.naturalWidth*scale;
-  const ih=im.naturalHeight*scale;
-
-  ctx.drawImage(
-    im,
-    x+(w-iw)/2,
-    y+(h-ih)/2,
-    iw,ih
-  );
-}
-
-function containImage(ctx,im,x,y,w,h){
-  const scale=Math.min(
-    w/im.naturalWidth,
-    h/im.naturalHeight
-  );
-
-  const iw=im.naturalWidth*scale;
-  const ih=im.naturalHeight*scale;
-
-  ctx.drawImage(
-    im,
-    x+(w-iw)/2,
-    y+(h-ih)/2,
-    iw,ih
-  );
-}
-
-function drawFallback(ctx){
-  const g=ctx.createLinearGradient(0,0,1080,1350);
-  g.addColorStop(0,"#101c30");
-  g.addColorStop(.6,"#07111f");
-  g.addColorStop(1,"#03060b");
-
-  ctx.fillStyle=g;
-  ctx.fillRect(0,0,1080,1350);
-
-  ctx.strokeStyle="#1569db";
-  ctx.lineWidth=4;
-  ctx.beginPath();
-  ctx.moveTo(900,-50);
-  ctx.lineTo(1140,270);
-  ctx.stroke();
-
-  ctx.strokeStyle="#ffc400";
-  ctx.lineWidth=3;
-  ctx.beginPath();
-  ctx.moveTo(945,-50);
-  ctx.lineTo(1185,270);
-  ctx.stroke();
-}
-
-function drawGradient(ctx){
-  const g=ctx.createLinearGradient(0,390,0,1350);
-  g.addColorStop(0,"rgba(0,0,0,0)");
-  g.addColorStop(.35,"rgba(0,0,0,.18)");
-  g.addColorStop(.65,"rgba(0,0,0,.82)");
-  g.addColorStop(1,"rgba(0,0,0,.99)");
-
-  ctx.fillStyle=g;
-  ctx.fillRect(0,390,1080,960);
-}
-
-function wrap(ctx,text,maxWidth,maxLines){
-  const words=String(text||"").split(/\s+/).filter(Boolean);
-  const lines=[];
-  let current="";
-
-  for(const word of words){
-    const next=current?current+" "+word:word;
-
-    if(ctx.measureText(next).width>maxWidth&&current){
-      lines.push(current);
-      current=word;
-    }else{
-      current=next;
-    }
-  }
-
-  if(current)lines.push(current);
-
-  if(lines.length>maxLines){
-    const output=lines.slice(0,maxLines);
-    let last=output[maxLines-1];
-
-    while(last&&ctx.measureText(last+"…").width>maxWidth){
-      last=last.slice(0,-1);
-    }
-
-    output[maxLines-1]=last.trimEnd()+"…";
-    return output;
-  }
-
-  return lines;
-}
-
-function fitTitle(ctx,text,maxWidth,maxLines,maxSize,minSize){
-  for(let size=maxSize;size>=minSize;size-=2){
-    ctx.font=`900 ${size}px "Barlow Condensed",Arial`;
-
-    const lines=wrap(ctx,text,maxWidth,maxLines);
-
-    if(lines.length<=maxLines&&
-       lines.length*size*1.02<=570){
-      return {size,lines};
-    }
-  }
-
-  ctx.font=`900 ${minSize}px "Barlow Condensed",Arial`;
-
-  return {
-    size:minSize,
-    lines:wrap(ctx,text,maxWidth,maxLines)
-  };
-}
-
-async function drawLogo(ctx){
-  const logo=await loadLogo();
-
-  if(logo){
-    ctx.save();
-    containImage(ctx,logo,930,12,150,120);
-    ctx.restore();
-  }
-}
-async function drawCover(post){
-  const {canvas,ctx}=baseCanvas();
-
-  const photo=await loadFirst(photoCandidates(post));
-
-  if(photo){
-    coverImage(ctx,photo,0,0,1080,1350);
-  }else{
-    drawFallback(ctx);
-  }
-
-  drawGradient(ctx);
-
-  await drawLogo(ctx);
-
-  const title=shortTitle(post);
-  const layout=fitTitle(ctx,title,950,6,105,54);
-
-  const lh=layout.size*1.02;
-  const block=layout.lines.length*lh;
-
-  const start=Math.max(690,1190-block);
-
-  ctx.textBaseline="top";
-  ctx.fillStyle="#fff";
-  ctx.shadowColor="rgba(0,0,0,.5)";
-  ctx.shadowBlur=10;
-
-  layout.lines.forEach((line,i)=>{
-    ctx.fillText(line,55,start+i*lh);
-  });
-
-  ctx.shadowBlur=0;
-  ctx.textBaseline="alphabetic";
-
-  ctx.fillStyle="#ffc400";
-  ctx.fillRect(55,1250,105,5);
-
-  return canvas;
-}
-
-async function drawData(post){
-  const {canvas,ctx}=baseCanvas();
-
-  ctx.fillStyle="#050b15";
-  ctx.fillRect(0,0,1080,1350);
-
-  const report=await loadFirst(reportCandidates(post));
-
-  if(report){
-    containImage(ctx,report,12,12,1056,1326);
-  }else{
-    drawFallback(ctx);
-    ctx.font='900 65px "Barlow Condensed",Arial';
-    ctx.fillStyle="#fff";
-    ctx.fillText("DONNÉES & ANALYSE",60,650);
-  }
-
-  return canvas;
-}
-
-async function drawQuestion(post){
-  const {canvas,ctx}=baseCanvas();
-
-  drawFallback(ctx);
-  drawGradient(ctx);
-  await drawLogo(ctx);
-
-  ctx.fillStyle="#ffc400";
-  ctx.font='900 35px "Barlow Condensed",Arial';
-  ctx.fillText("LE DÉBAT",60,315);
-
-  ctx.fillRect(60,345,100,5);
-
-  const question=String(
-    post.question||"ET VOUS, QU'EN PENSEZ-VOUS ?"
-  );
-
-  const layout=fitTitle(ctx,question,950,6,108,58);
-  const lh=layout.size*1.08;
-  const start=Math.max(
-    500,
-    820-layout.lines.length*lh/2
-  );
-
-  ctx.textBaseline="top";
-  ctx.fillStyle="#fff";
-
-  layout.lines.forEach((line,i)=>{
-    ctx.fillText(line,60,start+i*lh);
-  });
-
-  ctx.textBaseline="alphabetic";
-
-  ctx.fillStyle="#ffc400";
-  ctx.fillRect(60,1160,960,3);
-
-  ctx.fillStyle="#d5deec";
-  ctx.font='800 35px "Barlow Condensed",Arial';
-  ctx.fillText("DONNEZ VOTRE AVIS EN COMMENTAIRE",60,1225);
-
-  return canvas;
-}
-
-async function makeSlide(post,n){
-  await document.fonts.ready;
-
-  if(n===1)return drawCover(post);
-  if(n===2)return drawData(post);
-  return drawQuestion(post);
-}
-
-async function paint(canvas,post,n){
-  if(!canvas)return;
-
-  try{
-    const source=await makeSlide(post,n);
-
-    if(!canvas.isConnected)return;
-
-    const ctx=canvas.getContext("2d");
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    ctx.drawImage(
-      source,0,0,
-      canvas.width,canvas.height
-    );
-  }catch(e){
-    console.warn("Aperçu impossible",e);
-  }
-}
-
-async function refreshCard(post){
-  const id=String(post.id);
-  const active=slideState.get(id)||1;
-
-  await Promise.all([
-    paint($("thumb-"+id+"-1"),post,1),
-    paint($("thumb-"+id+"-2"),post,2),
-    paint($("thumb-"+id+"-3"),post,3),
-    paint($("main-"+id),post,active)
-  ]);
-}
-
-async function selectSlide(id,n){
-  slideState.set(String(id),n);
-
-  const post=posts.find(p=>String(p.id)===String(id));
-  if(!post)return;
-
-  for(let i=1;i<=3;i++){
-    const button=$("select-"+id+"-"+i);
-    if(button)button.classList.toggle("active",i===n);
-  }
-
-  await paint($("main-"+id),post,n);
-}
-
-async function download(post,n){
-  const canvas=await makeSlide(post,n);
-
-  const blob=await new Promise(resolve=>{
-    canvas.toBlob(resolve,"image/png");
-  });
-
-  if(!blob)throw new Error("Export impossible");
-
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-
-  a.href=url;
-  a.download=`morning-foot-${post.id}-slide-${n}.png`;
-
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  setTimeout(()=>URL.revokeObjectURL(url),3000);
-}
-
-function render(){
-  const filter=$("filter").value;
-
-  const data=posts.filter(p=>{
-    if(filter==="all")return true;
-    if(filter==="selected")return !!p.selected;
-    return p.category===filter;
-  }).sort((a,b)=>
-    (Number(b.score)||0)-(Number(a.score)||0)
-  );
-
-  $("count").textContent=data.length+" brouillon(s)";
-
-  if(!data.length){
-    $("grid").innerHTML=
-      '<div class="empty">Aucun article dans cette sélection.</div>';
-    return;
-  }
-
-  $("grid").innerHTML=data.map(p=>{
-    const id=esc(p.id);
-
-    return `
-    <article class="card">
-      <div class="card-head">
-        <div class="card-meta">
-          <span class="category">
-            ${esc(p.category||"FOOTBALL")}
-            ${p.report?" · DATASCOUT":""}
-          </span>
-          <span>${esc(p.date||"")} · ${esc(p.score||0)}/100</span>
-        </div>
-
-        <h2 class="card-title">${esc(p.title)}</h2>
-      </div>
-
-      <div class="preview-area">
-        <div class="preview-layout">
-          <div class="main-preview">
-            <canvas id="main-${id}" width="540" height="675"></canvas>
-          </div>
-
-          <div class="thumbs">
-            ${[1,2,3].map(n=>`
-              <button
-                class="thumb ${n===1?"active":""}"
-                id="select-${id}-${n}"
-                data-action="select"
-                data-slide="${n}"
-                data-id="${id}"
-              >
-                <canvas id="thumb-${id}-${n}" width="216" height="270"></canvas>
-                <span>${n===1?"TITRE":n===2?"DATA":"DÉBAT"}</span>
-              </button>
-            `).join("")}
-          </div>
-        </div>
-
-        <div class="controls">
-          <button class="primary" data-action="download" data-slide="1" data-id="${id}">
-            ↓ Couverture
-          </button>
-
-          ${reportCandidates(p).length?`
-          <button data-action="download" data-slide="2" data-id="${id}">
-            ↓ DataScout
-          </button>`:""}
-
-          <button data-action="download" data-slide="3" data-id="${id}">
-            ↓ Débat
-          </button>
-        </div>
-      </div>
-
-      <div class="editor">
-        <p class="reasons">${esc((p.reasons||[]).join(" · "))}</p>
-
-        <div class="field">
-          <label>TITRE DE COUVERTURE</label>
-          <input id="title-${id}" value="${esc(shortTitle(p))}" maxlength="150">
-          <div class="hint">Privilégie un titre de 4 à 10 mots.</div>
-        </div>
-
-        <div class="field">
-          <label>PHOTO DE COUVERTURE (URL)</label>
-          <input
-            id="photo-${id}"
-            type="url"
-            placeholder="https://..."
-            value="${esc(p.cover_image||"")}"
-          >
-          <div class="hint">Photo principale de l'article. L'image DataScout reste séparée.</div>
-        </div>
-
-        <div class="field">
-          <label>QUESTION D'INTERACTION</label>
-          <input
-            id="question-${id}"
-            value="${esc(p.question||"Et vous, qu'en pensez-vous ?")}"
-            maxlength="160"
-          >
-        </div>
-
-        <div class="field">
-          <label>LÉGENDE INSTAGRAM</label>
-          <textarea id="caption-${id}">${esc(p.caption||"")}</textarea>
-        </div>
-
-        <div class="actions">
-          <button class="primary" data-action="copy" data-id="${id}">
-            Copier la légende
-          </button>
-
-          <button data-action="article" data-id="${id}">
-            Voir l'article
-          </button>
-        </div>
-      </div>
-    </article>`;
-  }).join("");
-
-  for(const post of data){
-    refreshCard(post);
-  }
-}
-
-$("grid").addEventListener("input",event=>{
-  const field=event.target;
-
-  if(!field.matches("input[id],textarea[id]"))return;
-
-  const card=field.closest(".card");
-  if(!card)return;
-
-  const title=card.querySelector('input[id^="title-"]');
-  if(!title)return;
-
-  const id=title.id.slice(6);
-  const post=posts.find(p=>String(p.id)===id);
-
-  if(!post)return;
-
-  savePost(id);
-
-  if(field.id.startsWith("title-")||
-     field.id.startsWith("photo-")){
-    paint($("thumb-"+id+"-1"),post,1);
-
-    if((slideState.get(id)||1)===1){
-      paint($("main-"+id),post,1);
-    }
-  }
-
-  if(field.id.startsWith("question-")){
-    paint($("thumb-"+id+"-3"),post,3);
-
-    if(slideState.get(id)===3){
-      paint($("main-"+id),post,3);
-    }
-  }
-});
-
-$("grid").addEventListener("click",async event=>{
-  const button=event.target.closest("button[data-action]");
-  if(!button)return;
-
-  const id=button.dataset.id;
-  const post=posts.find(p=>String(p.id)===id);
-
-  if(!post)return;
-
-  try{
-    const action=button.dataset.action;
-
-    if(action==="select"){
-      await selectSlide(id,Number(button.dataset.slide));
-    }
-
-    if(action==="download"){
-      button.disabled=true;
-
-      try{
-        await download(post,Number(button.dataset.slide));
-      }finally{
-        button.disabled=false;
-      }
-    }
-
-    if(action==="copy"){
-      const caption=$("caption-"+id).value;
-
-      await navigator.clipboard.writeText(caption);
-
-      const old=button.textContent;
-      button.textContent="Copié !";
-
-      setTimeout(()=>button.textContent=old,1500);
-    }
-
-    if(action==="article"&&post.url){
-      window.open(post.url,"_blank","noopener,noreferrer");
-    }
-  }catch(e){
-    alert("Une erreur est survenue : "+e.message);
-  }
-});
-
-$("filter").addEventListener("change",render);
-
-fetch("posts.json?v="+Date.now())
-  .then(response=>{
-    if(!response.ok)throw new Error("posts.json introuvable");
-    return response.json();
-  })
-  .then(data=>{
-    if(!Array.isArray(data)){
-      throw new Error("Format JSON invalide");
-    }
-
-    posts=data.map(p=>{
-      const saved=getSaved(p.id);
-
-      return {
-        ...p,
-        social_title:saved.social_title||p.social_title||"",
-        question:saved.question??p.question??"",
-        caption:saved.caption??cleanCaption(p.caption,p.title),
-        cover_image:saved.cover_image??p.cover_image??""
-      };
-    });
-
-    render();
-  })
-  .catch(error=>{
-    $("grid").innerHTML=
-      '<div class="empty">Impossible de charger les brouillons : '+
-      esc(error.message)+
-      '</div>';
-  });
-</script>
-
-<style>
-:root{
-  --bg:#05070b;
-  --panel:#0c121c;
-  --line:#222e40;
-  --gold:#ffd200;
-}
-.card{border-radius:10px}
-.preview-area{background:#05080e}
-.main-preview{max-width:440px}
-.card-title{font-weight:800}
 .v8-settings{
   padding:16px;
   margin-bottom:18px;
@@ -1071,45 +271,501 @@ fetch("posts.json?v="+Date.now())
   font-size:12px;
   font-weight:700;
 }
+.ig-status{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-top:12px;
+  text-align:center;
+}
+.ig-status.success{color:#83c9a2}
+.ig-status.error{color:#ff8585}
+@media(max-width:560px){
+  .preview-area{padding:12px}
+  .preview-layout{
+    grid-template-columns:minmax(0,1fr) 75px;
+    gap:9px;
+  }
+  .card-head,.editor{padding:18px}
+  .card-title{font-size:18px}
+  .brand-name{font-size:21px}
+}
 </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <img src="assets/logo-mf.png" alt="Logo Morning Foot" onerror="this.style.display='none'">
+    <div>
+      <div class="brand-name">MORNING <b>FOOT</b></div>
+      <div class="brand-sub">SOCIAL STUDIO / EDITORIAL EDITION V8</div>
+    </div>
+  </div>
+  <div class="header-note">
+    LE FOOTBALL, AUTREMENT.
+    <div>Carrousels Instagram · Création éditoriale · Export HD</div>
+  </div>
+</header>
+
+<main>
+
+<div class="toolbar">
+  <select id="filter">
+    <option value="selected">Sélection du studio</option>
+    <option value="all">Tous les articles</option>
+    <option value="STATS">Statistiques</option>
+    <option value="MERCATO">Mercato</option>
+    <option value="MATCH">Matchs</option>
+    <option value="DÉBAT">Débats</option>
+    <option value="v8-new">Dernières 48 heures</option>
+    <option value="v8-drafts">À publier</option>
+    <option value="v8-published">Déjà publiés</option>
+  </select>
+
+  <span class="count" id="count"></span>
+</div>
+
+<div id="grid" class="grid">
+  <div class="empty">Chargement des articles...</div>
+</div>
+
+<p class="notice">
+  Aucun contenu n'est publié automatiquement.
+  Vérifiez les informations, les légendes et les droits des photos.
+  Les modifications sont conservées dans votre navigateur.
+  Instagram : mode test actif.
+</p>
+
+</main>
 
 <script>
-document.title="Morning Foot — Editorial Studio V8";
-document.querySelector(".brand-sub").textContent=
-"SOCIAL STUDIO / EDITORIAL EDITION V8";
+"use strict";
+
+let posts=[];
+let instagramSecret="";
+let instagramBusy=false;
+
+const imageCache=new Map();
+const slideState=new Map();
+
+const $=id=>document.getElementById(id);
+
+const LOGO_URL=new URL(
+  "assets/logo-mf.png",
+  document.baseURI
+).href;
+
+const IG_API=
+  "https://morning-foot-social-api.contact-morningfoot.workers.dev";
+
+function esc(s){
+  return String(s??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
+}
+
+function getSaved(id){
+  try{
+    return JSON.parse(
+      localStorage.getItem("mf-v6-"+id)||"{}"
+    );
+  }catch(e){
+    return {};
+  }
+}
 
 function v8Save(p){
   try{
-    localStorage.setItem("mf-v8-"+p.id,JSON.stringify({
-      zoom:p.zoom,
-      posX:p.posX,
-      posY:p.posY,
-      published:!!p.published
-    }));
+    localStorage.setItem(
+      "mf-v8-"+p.id,
+      JSON.stringify({
+        zoom:p.zoom,
+        posX:p.posX,
+        posY:p.posY,
+        published:!!p.published
+      })
+    );
   }catch(e){}
 }
 
 function v8Restore(p){
   try{
-    Object.assign(p,JSON.parse(
-      localStorage.getItem("mf-v8-"+p.id)||"{}"
-    ));
+    Object.assign(
+      p,
+      JSON.parse(
+        localStorage.getItem("mf-v8-"+p.id)||"{}"
+      )
+    );
   }catch(e){}
 }
 
-fitTitle=function(ctx,text,maxWidth,maxLines,maxSize,minSize){
+function savePost(id){
+
+  const post=posts.find(
+    p=>String(p.id)===String(id)
+  );
+
+  if(!post)return;
+
+  const title=$("title-"+id);
+  const question=$("question-"+id);
+  const caption=$("caption-"+id);
+  const photo=$("photo-"+id);
+
+  if(!title||!question||!caption||!photo)return;
+
+  post.social_title=title.value;
+  post.question=question.value;
+  post.caption=caption.value;
+  post.cover_image=photo.value;
+
+  try{
+    localStorage.setItem(
+      "mf-v6-"+id,
+      JSON.stringify({
+        social_title:post.social_title,
+        question:post.question,
+        caption:post.caption,
+        cover_image:post.cover_image
+      })
+    );
+  }catch(e){}
+}
+
+function cleanCaption(raw,title){
+
+  let text=String(raw||"")
+    .replace(/Accueil\s*[›>»]\s*[^\n]{0,100}/gi,"")
+    .replace(/\r/g,"")
+    .replace(/[ \t]{2,}/g," ")
+    .replace(/\n{3,}/g,"\n\n")
+    .trim();
+
+  if(!text)return String(title||"");
+
+  return text;
+}
+
+function shortTitle(post){
+
+  const custom=String(
+    post.social_title||post.cover_title||""
+  ).trim();
+
+  if(custom)return custom;
+
+  const title=String(
+    post.title||"ACTUALITÉ FOOTBALL"
+  ).trim();
+
+  if(title.length<=75)return title;
+
+  const words=title.split(/\s+/);
+  let result="";
+
+  for(const word of words){
+
+    if((result+" "+word).trim().length>72)break;
+
+    result+=(result?" ":"")+word;
+  }
+
+  return result+"…";
+}
+
+function reportCandidates(post){
+
+  return [
+    post.report_image,
+    post.report_url,
+    post.image,
+    post.image_url
+  ].filter(v=>typeof v==="string"&&v.trim());
+}
+
+function photoCandidates(post){
+
+  return [
+    post.cover_image,
+    post.photo,
+    post.featured_image,
+    post.thumbnail,
+    post.hero_image
+  ].filter(v=>typeof v==="string"&&v.trim());
+}
+
+function normalizeUrls(values){
+
+  const urls=[];
+
+  const add=u=>{
+    if(u&&!urls.includes(u))urls.push(u);
+  };
+
+  for(const value of values){
+
+    const src=value.trim();
+
+    try{
+
+      if(/^https?:\/\//i.test(src)){
+
+        const u=new URL(src);
+
+        if(u.pathname.includes("/assets/")){
+
+          add(new URL(
+            "assets/"+u.pathname.split("/assets/").pop(),
+            document.baseURI
+          ).href);
+        }
+
+        add(u.href);
+
+      }else{
+
+        const clean=src.replace(/^\/+/,"");
+
+        add(new URL(
+          clean,
+          document.baseURI
+        ).href);
+
+        if(!clean.startsWith("assets/")){
+
+          add(new URL(
+            "assets/"+clean.split("/").pop(),
+            document.baseURI
+          ).href);
+        }
+      }
+
+    }catch(e){}
+  }
+
+  return urls;
+}
+
+function loadOne(src){
+
+  if(imageCache.has(src)){
+    return imageCache.get(src);
+  }
+
+  const promise=new Promise((resolve,reject)=>{
+
+    const im=new Image();
+
+    try{
+
+      if(
+        new URL(src,document.baseURI).origin!==location.origin
+      ){
+        im.crossOrigin="anonymous";
+      }
+
+    }catch(e){}
+
+    im.onload=()=>{
+
+      if(im.naturalWidth>0)resolve(im);
+
+      else reject(new Error("Image vide"));
+    };
+
+    im.onerror=()=>reject(
+      new Error("Image indisponible")
+    );
+
+    im.src=src;
+  });
+
+  imageCache.set(src,promise);
+
+  promise.catch(()=>{
+    imageCache.delete(src);
+  });
+
+  return promise;
+}
+
+async function loadFirst(values){
+
+  for(const src of normalizeUrls(values)){
+
+    try{
+
+      return await loadOne(src);
+
+    }catch(e){
+
+      console.warn("Image inaccessible",src);
+    }
+  }
+
+  return null;
+}
+
+async function loadLogo(){
+
+  try{
+    return await loadOne(LOGO_URL);
+  }catch(e){
+    return null;
+  }
+}
+
+function baseCanvas(){
+
+  const canvas=document.createElement("canvas");
+
+  canvas.width=1080;
+  canvas.height=1350;
+
+  const ctx=canvas.getContext("2d");
+
+  ctx.fillStyle="#050b15";
+  ctx.fillRect(0,0,1080,1350);
+
+  return {canvas,ctx};
+}
+
+function containImage(ctx,im,x,y,w,h){
+
+  const scale=Math.min(
+    w/im.naturalWidth,
+    h/im.naturalHeight
+  );
+
+  const iw=im.naturalWidth*scale;
+  const ih=im.naturalHeight*scale;
+
+  ctx.drawImage(
+    im,
+    x+(w-iw)/2,
+    y+(h-ih)/2,
+    iw,ih
+  );
+}
+
+function drawFallback(ctx){
+
+  const g=ctx.createLinearGradient(0,0,1080,1350);
+
+  g.addColorStop(0,"#101c30");
+  g.addColorStop(.6,"#07111f");
+  g.addColorStop(1,"#03060b");
+
+  ctx.fillStyle=g;
+  ctx.fillRect(0,0,1080,1350);
+
+  ctx.strokeStyle="#1569db";
+  ctx.lineWidth=4;
+
+  ctx.beginPath();
+  ctx.moveTo(900,-50);
+  ctx.lineTo(1140,270);
+  ctx.stroke();
+
+  ctx.strokeStyle="#ffc400";
+  ctx.lineWidth=3;
+
+  ctx.beginPath();
+  ctx.moveTo(945,-50);
+  ctx.lineTo(1185,270);
+  ctx.stroke();
+}
+
+function drawGradient(ctx){
+
+  const g=ctx.createLinearGradient(0,390,0,1350);
+
+  g.addColorStop(0,"rgba(0,0,0,0)");
+  g.addColorStop(.35,"rgba(0,0,0,.18)");
+  g.addColorStop(.65,"rgba(0,0,0,.82)");
+  g.addColorStop(1,"rgba(0,0,0,.99)");
+
+  ctx.fillStyle=g;
+  ctx.fillRect(0,390,1080,960);
+}
+
+function wrap(ctx,text,maxWidth,maxLines){
+
+  const words=String(text||"")
+    .split(/\s+/)
+    .filter(Boolean);
+
+  const lines=[];
+
+  let current="";
+
+  for(const word of words){
+
+    const next=current?current+" "+word:word;
+
+    if(ctx.measureText(next).width>maxWidth&&current){
+
+      lines.push(current);
+      current=word;
+
+    }else{
+
+      current=next;
+    }
+  }
+
+  if(current)lines.push(current);
+
+  if(lines.length>maxLines){
+
+    const output=lines.slice(0,maxLines);
+
+    let last=output[maxLines-1];
+
+    while(last&&ctx.measureText(last+"…").width>maxWidth){
+
+      last=last.slice(0,-1);
+    }
+
+    output[maxLines-1]=last.trimEnd()+"…";
+
+    return output;
+  }
+
+  return lines;
+}
+
+function fitTitle(
+  ctx,text,maxWidth,maxLines,maxSize,minSize
+){
+
   for(let size=maxSize;size>=18;size-=2){
+
     ctx.font=`900 ${size}px "Barlow Condensed",Arial`;
+
     const words=String(text||"").trim().split(/\s+/);
+
     const lines=[];
+
     let line="";
 
     for(const word of words){
+
       const next=line?line+" "+word:word;
-      if(line && ctx.measureText(next).width>maxWidth){
+
+      if(line&&ctx.measureText(next).width>maxWidth){
+
         lines.push(line);
         line=word;
+
       }else{
+
         line=next;
       }
     }
@@ -1121,22 +777,49 @@ fitTitle=function(ctx,text,maxWidth,maxLines,maxSize,minSize){
       lines.length*size*1.07<=550 &&
       lines.every(l=>ctx.measureText(l).width<=maxWidth)
     ){
+
       return {size,lines};
     }
   }
 
   ctx.font='900 18px "Barlow Condensed",Arial';
-  return {size:18,lines:wrap(ctx,text,maxWidth,maxLines)};
-};
 
-drawCover=async function(post){
-  await document.fonts.load('900 100px "Barlow Condensed"');
+  return {
+    size:18,
+    lines:wrap(ctx,text,maxWidth,maxLines)
+  };
+}
+
+async function drawLogo(ctx){
+
+  const logo=await loadLogo();
+
+  if(logo){
+
+    ctx.save();
+
+    containImage(ctx,logo,930,12,150,120);
+
+    ctx.restore();
+  }
+}
+
+async function drawCover(post){
+
+  await document.fonts.load(
+    '900 100px "Barlow Condensed"'
+  );
 
   const {canvas,ctx}=baseCanvas();
-  const photo=await loadFirst(photoCandidates(post));
+
+  const photo=await loadFirst(
+    photoCandidates(post)
+  );
 
   if(photo){
+
     const zoom=Number(post.zoom??100)/100;
+
     const scale=Math.max(
       1080/photo.naturalWidth,
       1350/photo.naturalHeight
@@ -1149,11 +832,14 @@ drawCover=async function(post){
     const y=(1350-h)*Number(post.posY??50)/100;
 
     ctx.drawImage(photo,x,y,w,h);
+
   }else{
+
     drawFallback(ctx);
   }
 
   const g=ctx.createLinearGradient(0,420,0,1350);
+
   g.addColorStop(0,"rgba(0,0,0,0)");
   g.addColorStop(.35,"rgba(0,0,0,.22)");
   g.addColorStop(.7,"rgba(0,0,0,.85)");
@@ -1162,12 +848,16 @@ drawCover=async function(post){
   ctx.fillStyle=g;
   ctx.fillRect(0,420,1080,930);
 
-  const corner=ctx.createLinearGradient(850,0,1080,240);
+  const corner=ctx.createLinearGradient(
+    850,0,1080,240
+  );
+
   corner.addColorStop(0,"#02050a");
   corner.addColorStop(.65,"#071b3d");
   corner.addColorStop(1,"#147aff");
 
   ctx.fillStyle=corner;
+
   ctx.beginPath();
   ctx.moveTo(780,0);
   ctx.lineTo(1080,0);
@@ -1178,22 +868,34 @@ drawCover=async function(post){
   await drawLogo(ctx);
 
   const title=shortTitle(post);
-  const layout=fitTitle(ctx,title,960,6,125,55);
+
+  const layout=fitTitle(
+    ctx,title,960,6,125,55
+  );
+
   const lh=layout.size*1.07;
+
   const start=1210-layout.lines.length*lh;
 
   ctx.textBaseline="top";
+
   ctx.fillStyle="#ffd200";
+
   ctx.font='800 32px "Barlow Condensed",Arial';
+
   ctx.fillText(
-    post.report?"ACTUALITÉ · DATA":post.category||"FOOTBALL",
+    post.report?
+      "ACTUALITÉ · DATA":
+      post.category||"FOOTBALL",
     55,start-65
   );
 
   ctx.font=`900 ${layout.size}px "Barlow Condensed",Arial`;
+
   ctx.fillStyle="#ffffff";
 
   layout.lines.forEach((line,i)=>{
+
     ctx.fillText(line,55,start+i*lh);
   });
 
@@ -1202,173 +904,1196 @@ drawCover=async function(post){
 
   ctx.fillStyle="#c4cad4";
   ctx.font="700 21px Inter,Arial";
-  ctx.fillText("MORNING-FOOT.COM",55,1280);
+
+  ctx.fillText(
+    "MORNING-FOOT.COM",55,1280
+  );
 
   return canvas;
-};
+}
 
-drawData=async function(post){
+async function drawData(post){
+
   const {canvas,ctx}=baseCanvas();
+
   ctx.fillStyle="#080c13";
   ctx.fillRect(0,0,1080,1350);
 
-  const report=await loadFirst(reportCandidates(post));
+  const report=await loadFirst(
+    reportCandidates(post)
+  );
 
   if(report){
+
     containImage(ctx,report,0,0,1080,1350);
+
   }else{
+
     ctx.fillStyle="#ffffff";
+
     ctx.font='800 52px "Barlow Condensed",Arial';
+
     ctx.textAlign="center";
-    ctx.fillText("FICHE NON DISPONIBLE",540,675);
+
+    ctx.fillText(
+      "FICHE NON DISPONIBLE",540,675
+    );
   }
 
   return canvas;
-};
+}
 
-const filterV8=document.getElementById("filter");
+async function drawQuestion(post){
 
-[
-  ["v8-new","Dernières 48 heures"],
-  ["v8-drafts","À publier"],
-  ["v8-published","Déjà publiés"]
-].forEach(([value,label])=>{
-  filterV8.add(new Option(label,value));
-});
+  const {canvas,ctx}=baseCanvas();
 
-const originalRenderV8=render;
+  drawFallback(ctx);
+  drawGradient(ctx);
 
-render=function(){
-  posts.forEach(v8Restore);
+  await drawLogo(ctx);
 
-  const filter=filterV8.value;
+  ctx.fillStyle="#ffc400";
+  ctx.font='900 35px "Barlow Condensed",Arial';
 
-  if(filter.startsWith("v8-")){
-    const allPosts=posts;
+  ctx.fillText("LE DÉBAT",60,315);
+
+  ctx.fillRect(60,345,100,5);
+
+  const question=String(
+    post.question||"ET VOUS, QU'EN PENSEZ-VOUS ?"
+  );
+
+  const layout=fitTitle(
+    ctx,question,950,6,108,58
+  );
+
+  const lh=layout.size*1.08;
+
+  const start=Math.max(
+    500,
+    820-layout.lines.length*lh/2
+  );
+
+  ctx.textBaseline="top";
+  ctx.fillStyle="#fff";
+
+  layout.lines.forEach((line,i)=>{
+
+    ctx.fillText(line,60,start+i*lh);
+  });
+
+  ctx.textBaseline="alphabetic";
+
+  ctx.fillStyle="#ffc400";
+  ctx.fillRect(60,1160,960,3);
+
+  ctx.fillStyle="#d5deec";
+
+  ctx.font='800 35px "Barlow Condensed",Arial';
+
+  ctx.fillText(
+    "DONNEZ VOTRE AVIS EN COMMENTAIRE",
+    60,1225
+  );
+
+  return canvas;
+}
+
+async function makeSlide(post,n){
+
+  await document.fonts.ready;
+
+  if(n===1)return drawCover(post);
+
+  if(n===2)return drawData(post);
+
+  return drawQuestion(post);
+}
+
+async function paint(canvas,post,n){
+
+  if(!canvas)return;
+
+  try{
+
+    const source=await makeSlide(post,n);
+
+    if(!canvas.isConnected)return;
+
+    const ctx=canvas.getContext("2d");
+
+    ctx.clearRect(
+      0,0,canvas.width,canvas.height
+    );
+
+    ctx.drawImage(
+      source,
+      0,0,
+      canvas.width,
+      canvas.height
+    );
+
+  }catch(e){
+
+    console.warn("Aperçu impossible",e);
+  }
+}
+
+async function refreshCard(post){
+
+  const id=String(post.id);
+
+  const active=slideState.get(id)||1;
+
+  await Promise.all([
+
+    paint($("thumb-"+id+"-1"),post,1),
+
+    paint($("thumb-"+id+"-2"),post,2),
+
+    paint($("thumb-"+id+"-3"),post,3),
+
+    paint($("main-"+id),post,active)
+
+  ]);
+}
+
+async function selectSlide(id,n){
+
+  slideState.set(String(id),n);
+
+  const post=posts.find(
+    p=>String(p.id)===String(id)
+  );
+
+  if(!post)return;
+
+  for(let i=1;i<=3;i++){
+
+    const button=$("select-"+id+"-"+i);
+
+    if(button){
+
+      button.classList.toggle("active",i===n);
+    }
+  }
+
+  await paint($("main-"+id),post,n);
+}
+
+async function download(post,n){
+
+  const canvas=await makeSlide(post,n);
+
+  const blob=await new Promise(resolve=>{
+
+    canvas.toBlob(resolve,"image/png");
+  });
+
+  if(!blob){
+
+    throw new Error("Export impossible");
+  }
+
+  const url=URL.createObjectURL(blob);
+
+  const a=document.createElement("a");
+
+  a.href=url;
+
+  a.download=
+    `morning-foot-${post.id}-slide-${n}.png`;
+
+  document.body.appendChild(a);
+
+  a.click();
+  a.remove();
+
+  setTimeout(
+    ()=>URL.revokeObjectURL(url),
+    3000
+  );
+}
+
+/* ==========================================
+   CONNEXION INSTAGRAM / CLOUDFLARE R2
+   ========================================== */
+
+async function instagramRequest(path,body,type){
+
+  const response=await fetch(IG_API+path,{
+
+    method:"POST",
+
+    headers:{
+
+      "Content-Type":type,
+
+      "Authorization":"Bearer "+instagramSecret
+
+    },
+
+    credentials:"omit",
+
+    cache:"no-store",
+
+    body:body
+
+  });
+
+  let result;
+
+  try{
+
+    result=await response.json();
+
+  }catch(e){
+
+    throw new Error(
+      "Réponse Cloudflare invalide"
+    );
+  }
+
+  if(!response.ok||!result.success){
+
+    if(response.status===401){
+
+      instagramSecret="";
+    }
+
+    throw new Error(
+      (result.error||"Erreur API")+
+      " (HTTP "+response.status+")"
+    );
+  }
+
+  return result;
+}
+
+async function instagramJPEG(post,n){
+
+  const canvas=await makeSlide(post,n);
+
+  const blob=await new Promise(resolve=>{
+
+    canvas.toBlob(
+      resolve,
+      "image/jpeg",
+      0.94
+    );
+  });
+
+  if(!blob){
+
+    throw new Error(
+      "Impossible de générer la slide "+n
+    );
+  }
+
+  if(
+    blob.type!=="image/jpeg"||
+    blob.size>8*1024*1024
+  ){
+
+    throw new Error(
+      "Image JPEG invalide ou trop volumineuse"
+    );
+  }
+
+  return blob;
+}
+
+async function instagramUpload(blob){
+
+  const result=await instagramRequest(
+
+    "/upload",
+
+    blob,
+
+    "image/jpeg"
+
+  );
+
+  if(!result.url){
+
+    throw new Error(
+      "URL de l'image manquante"
+    );
+  }
+
+  return result.url;
+}
+
+async function instagramTest(post,button){
+
+  if(instagramBusy){
+
+    alert("Un transfert est déjà en cours.");
+
+    return;
+  }
+
+  const id=String(post.id);
+
+  savePost(id);
+
+  const snapshot={...post};
+
+  const caption=String(
+    snapshot.caption||""
+  ).trim();
+
+  if(!caption){
+
+    alert("La légende Instagram est vide.");
+
+    return;
+  }
+
+  if(caption.length>2200){
+
+    alert("La légende dépasse 2200 caractères.");
+
+    return;
+  }
+
+  if(!confirm(
+
+    "Tester ce carrousel Instagram ?\n\n"+
+
+    snapshot.title+
+
+    "\n\nLes images seront accessibles via des liens publics temporaires."+
+
+    "\n\nMODE TEST : aucune publication réelle."
+
+  )){
+
+    return;
+  }
+
+  if(!instagramSecret){
+
+    instagramSecret=String(
+
+      prompt("Saisis ton API_SECRET Cloudflare :")||""
+
+    ).trim();
+
+    if(!instagramSecret)return;
+  }
+
+  instagramBusy=true;
+
+  button.disabled=true;
+
+  const status=$("ig-status-"+id);
+
+  function show(message,type=""){
+
+    if(status){
+
+      status.className="ig-status "+type;
+
+      status.textContent=message;
+    }
+  }
+
+  try{
+
+    show("Vérification des visuels...");
+
+    button.textContent="Préparation...";
+
+    const photo=await loadFirst(
+      photoCandidates(snapshot)
+    );
+
+    if(!photo){
+
+      throw new Error(
+        "Photo de couverture indisponible"
+      );
+    }
+
+    const logo=await loadLogo();
+
+    if(!logo){
+
+      throw new Error(
+        "Logo Morning Foot indisponible"
+      );
+    }
+
+    let report=null;
+
+    if(snapshot.report){
+
+      report=await loadFirst(
+        reportCandidates(snapshot)
+      );
+
+      if(!report){
+
+        throw new Error(
+          "Fiche DataScout indisponible"
+        );
+      }
+    }
+
+    const slides=report?[1,2,3]:[1,3];
+
+    const blobs=[];
+
+    for(let i=0;i<slides.length;i++){
+
+      const n=slides[i];
+
+      show(
+        "Génération du visuel "+
+        (i+1)+"/"+slides.length+"..."
+      );
+
+      const blob=await instagramJPEG(
+        snapshot,n
+      );
+
+      blobs.push({n,blob});
+    }
+
+    const payload={
+
+      slide_1:"",
+
+      slide_2:"",
+
+      slide_3:"",
+
+      caption:caption
+
+    };
+
+    for(let i=0;i<blobs.length;i++){
+
+      const item=blobs[i];
+
+      button.textContent=
+        "Transfert "+(i+1)+"/"+blobs.length;
+
+      show(
+        "Envoi du visuel "+
+        (i+1)+"/"+blobs.length+
+        " vers Cloudflare..."
+      );
+
+      payload["slide_"+item.n]=
+        await instagramUpload(item.blob);
+    }
+
+    button.textContent="Connexion Instagram...";
+
+    show(
+      "Déclenchement de GitHub Actions..."
+    );
+
+    await instagramRequest(
+
+      "/publish",
+
+      JSON.stringify(payload),
+
+      "application/json"
+
+    );
+
+    button.textContent="✓ Test lancé";
+
+    show(
+
+      "✓ "+slides.length+
+      " visuels envoyés. Workflow GitHub déclenché. "+
+      "Aucune publication réelle.",
+
+      "success"
+
+    );
+
+    alert(
+
+      "CARROUSEL TRANSMIS AVEC SUCCÈS\n\n"+
+
+      slides.length+" visuels envoyés.\n\n"+
+
+      "Vérifie le résultat dans GitHub Actions.\n\n"+
+
+      "MODE TEST : aucune publication réelle."
+
+    );
+
+  }catch(error){
+
+    button.textContent="Tester Instagram";
+
+    show(
+      "Erreur : "+error.message,
+      "error"
+    );
+
+    alert(
+      "Erreur Instagram : "+error.message
+    );
+
+  }finally{
+
+    instagramBusy=false;
+
+    button.disabled=false;
+  }
+}
+
+/* ==========================================
+   AFFICHAGE DU SOCIAL STUDIO
+   ========================================== */
+
+function render(){
+
+  const filter=$("filter").value;
+
+  const data=posts.filter(p=>{
+
+    if(filter==="all")return true;
+
+    if(filter==="selected")return !!p.selected;
 
     if(filter==="v8-new"){
-      posts=allPosts.filter(p=>{
-        const date=Date.parse(p.date);
-        return Number.isFinite(date)&&
-          Date.now()-date<=48*3600000;
-      });
+
+      const date=Date.parse(p.date);
+
+      return Number.isFinite(date)&&
+        Date.now()-date<=48*3600000;
     }
 
     if(filter==="v8-drafts"){
-      posts=allPosts.filter(p=>p.selected&&!p.published);
+
+      return p.selected&&!p.published;
     }
 
     if(filter==="v8-published"){
-      posts=allPosts.filter(p=>p.published);
+
+      return !!p.published;
     }
 
-    filterV8.value="all";
-    originalRenderV8();
-    filterV8.value=filter;
-    posts=allPosts;
-  }else{
-    originalRenderV8();
+    return p.category===filter;
+
+  }).sort((a,b)=>
+
+    (Number(b.score)||0)-
+    (Number(a.score)||0)
+
+  );
+
+  $("count").textContent=
+    data.length+" brouillon(s)";
+
+  if(!data.length){
+
+    $("grid").innerHTML=
+      '<div class="empty">Aucun article dans cette sélection.</div>';
+
+    return;
   }
 
-  document.querySelectorAll(".card").forEach(card=>{
-    const title=card.querySelector('input[id^="title-"]');
-    if(!title)return;
+  $("grid").innerHTML=data.map(p=>{
 
-    const id=title.id.slice(6);
-    const p=posts.find(x=>String(x.id)===id);
-    if(!p)return;
+    const id=esc(p.id);
 
-    const editor=card.querySelector(".editor");
-    const settings=document.createElement("div");
+    const active=slideState.get(String(p.id))||1;
 
-    settings.className="v8-settings";
-    settings.innerHTML=`
-      <label>ZOOM DE LA PHOTO</label>
-      <input type="range" min="100" max="220"
-        value="${Number(p.zoom??100)}" data-key="zoom">
+    return `
 
-      <label>CADRAGE HORIZONTAL</label>
-      <input type="range" min="0" max="100"
-        value="${Number(p.posX??50)}" data-key="posX">
+    <article class="card">
 
-      <label>CADRAGE VERTICAL</label>
-      <input type="range" min="0" max="100"
-        value="${Number(p.posY??50)}" data-key="posY">
+      <div class="card-head">
 
-      <button type="button" class="v8-reset">
-        Réinitialiser le cadrage
-      </button>
+        <div class="card-meta">
+
+          <span class="category">
+
+            ${esc(p.category||"FOOTBALL")}
+
+            ${p.report?" · DATASCOUT":""}
+
+          </span>
+
+          <span>
+            ${esc(p.date||"")} · ${esc(p.score||0)}/100
+          </span>
+
+        </div>
+
+        <h2 class="card-title">
+          ${esc(p.title)}
+        </h2>
+
+      </div>
+
+      <div class="preview-area">
+
+        <div class="preview-layout">
+
+          <div class="main-preview">
+
+            <canvas
+              id="main-${id}"
+              width="540"
+              height="675">
+            </canvas>
+
+          </div>
+
+          <div class="thumbs">
+
+            ${[1,2,3].map(n=>`
+
+              <button
+                class="thumb ${n===active?"active":""}"
+                id="select-${id}-${n}"
+                data-action="select"
+                data-slide="${n}"
+                data-id="${id}">
+
+                <canvas
+                  id="thumb-${id}-${n}"
+                  width="216"
+                  height="270">
+                </canvas>
+
+                <span>
+                  ${n===1?"TITRE":n===2?"DATA":"DÉBAT"}
+                </span>
+
+              </button>
+
+            `).join("")}
+
+          </div>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="primary"
+            data-action="download"
+            data-slide="1"
+            data-id="${id}">
+
+            ↓ Couverture
+
+          </button>
+
+          ${reportCandidates(p).length?`
+
+          <button
+            data-action="download"
+            data-slide="2"
+            data-id="${id}">
+
+            ↓ DataScout
+
+          </button>
+
+          `:""}
+
+          <button
+            data-action="download"
+            data-slide="3"
+            data-id="${id}">
+
+            ↓ Débat
+
+          </button>
+
+          <button
+            class="primary"
+            data-action="export-all"
+            data-id="${id}">
+
+            ↓ Carrousel complet
+
+          </button>
+
+          <button
+            class="instagram"
+            data-action="instagram"
+            data-id="${id}">
+
+            Tester Instagram
+
+          </button>
+
+        </div>
+
+        <div
+          class="ig-status"
+          id="ig-status-${id}">
+
+          Instagram : mode test
+
+        </div>
+
+      </div>
+
+      <div class="editor">
+
+        <div class="v8-settings">
+
+          <label>ZOOM DE LA PHOTO</label>
+
+          <input
+            type="range"
+            min="100"
+            max="220"
+            value="${Number(p.zoom??100)}"
+            data-setting="zoom"
+            data-id="${id}">
+
+          <label>CADRAGE HORIZONTAL</label>
+
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="${Number(p.posX??50)}"
+            data-setting="posX"
+            data-id="${id}">
+
+          <label>CADRAGE VERTICAL</label>
+
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="${Number(p.posY??50)}"
+            data-setting="posY"
+            data-id="${id}">
+
+          <button
+            type="button"
+            data-action="reset"
+            data-id="${id}">
+
+            Réinitialiser le cadrage
+
+          </button>
+
+        </div>
+
+        <p class="reasons">
+          ${esc((p.reasons||[]).join(" · "))}
+        </p>
+
+        <div class="field">
+
+          <label>TITRE DE COUVERTURE</label>
+
+          <input
+            id="title-${id}"
+            value="${esc(shortTitle(p))}"
+            maxlength="150">
+
+          <div class="hint">
+            Privilégie un titre de 4 à 10 mots.
+          </div>
+
+        </div>
+
+        <div class="field">
+
+          <label>PHOTO DE COUVERTURE (URL)</label>
+
+          <input
+            id="photo-${id}"
+            type="url"
+            placeholder="https://..."
+            value="${esc(p.cover_image||"")}">
+
+          <div class="hint">
+            Photo principale de l'article.
+            L'image DataScout reste séparée.
+          </div>
+
+        </div>
+
+        <div class="field">
+
+          <label>QUESTION D'INTERACTION</label>
+
+          <input
+            id="question-${id}"
+            value="${esc(
+              p.question||"Et vous, qu'en pensez-vous ?"
+            )}"
+            maxlength="160">
+
+        </div>
+
+        <div class="field">
+
+          <label>LÉGENDE INSTAGRAM</label>
+
+          <textarea id="caption-${id}">${esc(
+            p.caption||""
+          )}</textarea>
+
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="primary"
+            data-action="copy"
+            data-id="${id}">
+
+            Copier la légende
+
+          </button>
+
+          <button
+            data-action="article"
+            data-id="${id}">
+
+            Voir l'article
+
+          </button>
+
+          <button
+            class="${p.published?"v8-published":""}"
+            data-action="published"
+            data-id="${id}">
+
+            ${p.published?
+              "✓ Publié — annuler":
+              "Marquer comme publié"}
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
     `;
 
-    editor.prepend(settings);
+  }).join("");
 
-    settings.querySelectorAll("input").forEach(input=>{
-      input.addEventListener("input",()=>{
-        p[input.dataset.key]=Number(input.value);
-        v8Save(p);
-        refreshCard(p);
-      });
-    });
+  for(const post of data){
 
-    settings.querySelector(".v8-reset").onclick=()=>{
-      p.zoom=100;
-      p.posX=50;
-      p.posY=50;
+    refreshCard(post);
+  }
+}
 
-      settings.querySelector('[data-key="zoom"]').value=100;
-      settings.querySelector('[data-key="posX"]').value=50;
-      settings.querySelector('[data-key="posY"]').value=50;
+/* ==========================================
+   GESTION DES MODIFICATIONS
+   ========================================== */
 
-      v8Save(p);
-      refreshCard(p);
-    };
+$("grid").addEventListener("input",event=>{
 
-    const controls=card.querySelector(".controls");
-    const exportButton=document.createElement("button");
+  const field=event.target;
 
-    exportButton.className="primary";
-    exportButton.textContent="↓ Carrousel complet";
+  if(field.dataset.setting){
 
-    exportButton.onclick=async()=>{
-      exportButton.disabled=true;
-      exportButton.textContent="Export en cours...";
+    const post=posts.find(
+      p=>String(p.id)===field.dataset.id
+    );
+
+    if(!post)return;
+
+    post[field.dataset.setting]=Number(field.value);
+
+    v8Save(post);
+
+    refreshCard(post);
+
+    return;
+  }
+
+  if(!field.matches("input[id],textarea[id]")){
+
+    return;
+  }
+
+  const card=field.closest(".card");
+
+  if(!card)return;
+
+  const title=card.querySelector(
+    'input[id^="title-"]'
+  );
+
+  if(!title)return;
+
+  const id=title.id.slice(6);
+
+  const post=posts.find(
+    p=>String(p.id)===id
+  );
+
+  if(!post)return;
+
+  savePost(id);
+
+  if(
+    field.id.startsWith("title-")||
+    field.id.startsWith("photo-")
+  ){
+
+    paint($("thumb-"+id+"-1"),post,1);
+
+    if((slideState.get(id)||1)===1){
+
+      paint($("main-"+id),post,1);
+    }
+  }
+
+  if(field.id.startsWith("question-")){
+
+    paint($("thumb-"+id+"-3"),post,3);
+
+    if(slideState.get(id)===3){
+
+      paint($("main-"+id),post,3);
+    }
+  }
+});
+
+/* ==========================================
+   GESTION DES BOUTONS
+   ========================================== */
+
+$("grid").addEventListener("click",async event=>{
+
+  const button=event.target.closest(
+    "button[data-action]"
+  );
+
+  if(!button)return;
+
+  const id=button.dataset.id;
+
+  const post=posts.find(
+    p=>String(p.id)===id
+  );
+
+  if(!post)return;
+
+  try{
+
+    const action=button.dataset.action;
+
+    if(action==="select"){
+
+      await selectSlide(
+        id,
+        Number(button.dataset.slide)
+      );
+    }
+
+    if(action==="download"){
+
+      savePost(id);
+
+      button.disabled=true;
 
       try{
-        await download(p,1);
-        if(reportCandidates(p).length)await download(p,2);
-        await download(p,3);
-      }catch(e){
-        alert("Erreur d'export : "+e.message);
+
+        await download(
+          post,
+          Number(button.dataset.slide)
+        );
+
       }finally{
-        exportButton.disabled=false;
-        exportButton.textContent="↓ Carrousel complet";
+
+        button.disabled=false;
       }
-    };
+    }
 
-    controls.appendChild(exportButton);
+    if(action==="export-all"){
 
-    const actions=card.querySelector(".actions");
-    const published=document.createElement("button");
+      savePost(id);
 
-    published.textContent=p.published?
-      "✓ Publié — annuler":"Marquer comme publié";
+      const snapshot={...post};
 
-    if(p.published)published.className="v8-published";
+      button.disabled=true;
 
-    published.onclick=()=>{
-      p.published=!p.published;
-      v8Save(p);
+      button.textContent="Export en cours...";
+
+      try{
+
+        await download(snapshot,1);
+
+        if(reportCandidates(snapshot).length){
+
+          await download(snapshot,2);
+        }
+
+        await download(snapshot,3);
+
+      }finally{
+
+        button.disabled=false;
+
+        button.textContent="↓ Carrousel complet";
+      }
+    }
+
+    if(action==="instagram"){
+
+      await instagramTest(post,button);
+    }
+
+    if(action==="copy"){
+
+      const caption=$("caption-"+id).value;
+
+      await navigator.clipboard.writeText(caption);
+
+      const old=button.textContent;
+
+      button.textContent="Copié !";
+
+      setTimeout(
+        ()=>button.textContent=old,
+        1500
+      );
+    }
+
+    if(action==="article"&&post.url){
+
+      window.open(
+        post.url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+    }
+
+    if(action==="published"){
+
+      post.published=!post.published;
+
+      v8Save(post);
+
       render();
-    };
+    }
 
-    actions.appendChild(published);
+    if(action==="reset"){
+
+      post.zoom=100;
+      post.posX=50;
+      post.posY=50;
+
+      const settings=button.closest(".v8-settings");
+
+      settings.querySelector(
+        '[data-setting="zoom"]'
+      ).value=100;
+
+      settings.querySelector(
+        '[data-setting="posX"]'
+      ).value=50;
+
+      settings.querySelector(
+        '[data-setting="posY"]'
+      ).value=50;
+
+      v8Save(post);
+
+      refreshCard(post);
+    }
+
+  }catch(e){
+
+    alert(
+      "Une erreur est survenue : "+e.message
+    );
+  }
+});
+
+$("filter").addEventListener("change",render);
+
+/* ==========================================
+   CHARGEMENT DES ARTICLES
+   ========================================== */
+
+fetch("posts.json?v="+Date.now())
+
+  .then(response=>{
+
+    if(!response.ok){
+
+      throw new Error(
+        "posts.json introuvable"
+      );
+    }
+
+    return response.json();
+  })
+
+  .then(data=>{
+
+    if(!Array.isArray(data)){
+
+      throw new Error(
+        "Format JSON invalide"
+      );
+    }
+
+    posts=data.map(p=>{
+
+      const saved=getSaved(p.id);
+
+      const post={
+
+        ...p,
+
+        social_title:
+          saved.social_title||p.social_title||"",
+
+        question:
+          saved.question??p.question??"",
+
+        caption:
+          saved.caption??cleanCaption(p.caption,p.title),
+
+        cover_image:
+          saved.cover_image??p.cover_image??""
+
+      };
+
+      v8Restore(post);
+
+      return post;
+    });
+
+    render();
+
+  })
+
+  .catch(error=>{
+
+    $("grid").innerHTML=
+
+      '<div class="empty">'+
+
+      'Impossible de charger les brouillons : '+
+
+      esc(error.message)+
+
+      '</div>';
   });
-};
 
-filterV8.removeEventListener("change",originalRenderV8);
-filterV8.addEventListener("change",render);
-
-if(posts.length)render();
 </script>
 
 </body>
