@@ -335,7 +335,7 @@ button.instagram{
   Aucun contenu n'est publié automatiquement.
   Vérifiez les informations, les légendes et les droits des photos.
   Les modifications sont conservées dans votre navigateur.
-  Instagram : mode test actif.
+  Instagram : publication réelle sur confirmation uniquement.
 </p>
 
 </main>
@@ -349,6 +349,7 @@ let instagramBusy=false;
 
 const imageCache=new Map();
 const slideState=new Map();
+const instagramPending=new Set();
 
 const $=id=>document.getElementById(id);
 
@@ -702,7 +703,6 @@ function wrap(ctx,text,maxWidth,maxLines){
     .filter(Boolean);
 
   const lines=[];
-
   let current="";
 
   for(const word of words){
@@ -752,7 +752,6 @@ function fitTitle(
     const words=String(text||"").trim().split(/\s+/);
 
     const lines=[];
-
     let line="";
 
     for(const word of words){
@@ -1225,7 +1224,11 @@ async function instagramUpload(blob){
   return result.url;
 }
 
-async function instagramTest(post,button){
+/* ==========================================
+   PUBLICATION REELLE INSTAGRAM
+   ========================================== */
+
+async function instagramPublish(post,button){
 
   if(instagramBusy){
 
@@ -1235,6 +1238,15 @@ async function instagramTest(post,button){
   }
 
   const id=String(post.id);
+
+  if(post.published||instagramPending.has(id)){
+
+    alert(
+      "Cet article est déjà publié ou une publication a été demandée. Vérifie Instagram et GitHub Actions."
+    );
+
+    return;
+  }
 
   savePost(id);
 
@@ -1260,13 +1272,15 @@ async function instagramTest(post,button){
 
   if(!confirm(
 
-    "Tester ce carrousel Instagram ?\n\n"+
+    "PUBLIER SUR INSTAGRAM ?\n\n"+
 
     snapshot.title+
 
+    "\n\nCompte : @morningfoot.fr"+
+
     "\n\nLes images seront accessibles via des liens publics temporaires."+
 
-    "\n\nMODE TEST : aucune publication réelle."
+    "\n\nATTENTION : publication réelle et publique."
 
   )){
 
@@ -1288,9 +1302,11 @@ async function instagramTest(post,button){
 
   button.disabled=true;
 
-  const status=$("ig-status-"+id);
+  let dispatchAttempted=false;
 
   function show(message,type=""){
+
+    const status=$("ig-status-"+id);
 
     if(status){
 
@@ -1300,11 +1316,46 @@ async function instagramTest(post,button){
     }
   }
 
+  function setButton(message){
+
+    button.textContent=message;
+
+    const current=$("instagram-"+id);
+
+    if(current&&current!==button){
+
+      current.textContent=message;
+    }
+  }
+
   try{
+
+    show("Vérification du service...");
+
+    setButton("Connexion...");
+
+    const check=await fetch(
+      IG_API+"/",
+      {cache:"no-store"}
+    );
+
+    const service=await check.json();
+
+    if(
+      !check.ok||
+      !service.success||
+      service.storage!=="connected"||
+      service.live_available!==true
+    ){
+
+      throw new Error(
+        "Cloudflare n'est pas prêt pour la publication réelle."
+      );
+    }
 
     show("Vérification des visuels...");
 
-    button.textContent="Préparation...";
+    setButton("Préparation...");
 
     const photo=await loadFirst(
       photoCandidates(snapshot)
@@ -1370,7 +1421,9 @@ async function instagramTest(post,button){
 
       slide_3:"",
 
-      caption:caption
+      caption:caption,
+
+      publish:true
 
     };
 
@@ -1378,8 +1431,9 @@ async function instagramTest(post,button){
 
       const item=blobs[i];
 
-      button.textContent=
-        "Transfert "+(i+1)+"/"+blobs.length;
+      setButton(
+        "Transfert "+(i+1)+"/"+blobs.length
+      );
 
       show(
         "Envoi du visuel "+
@@ -1391,13 +1445,17 @@ async function instagramTest(post,button){
         await instagramUpload(item.blob);
     }
 
-    button.textContent="Connexion Instagram...";
+    setButton("Publication en cours...");
 
     show(
-      "Déclenchement de GitHub Actions..."
+      "Déclenchement de la publication Instagram..."
     );
 
-    await instagramRequest(
+    dispatchAttempted=true;
+
+    instagramPending.add(id);
+
+    const result=await instagramRequest(
 
       "/publish",
 
@@ -1407,13 +1465,23 @@ async function instagramTest(post,button){
 
     );
 
-    button.textContent="✓ Test lancé";
+    if(
+      result.mode!=="live"||
+      result.workflow_triggered!==true
+    ){
+
+      throw new Error(
+        "Publication réelle non confirmée par le serveur."
+      );
+    }
+
+    setButton("✓ Publication demandée");
 
     show(
 
       "✓ "+slides.length+
-      " visuels envoyés. Workflow GitHub déclenché. "+
-      "Aucune publication réelle.",
+      " visuels envoyés. Publication demandée. "+
+      "Vérifie le résultat sur Instagram.",
 
       "success"
 
@@ -1421,34 +1489,61 @@ async function instagramTest(post,button){
 
     alert(
 
-      "CARROUSEL TRANSMIS AVEC SUCCÈS\n\n"+
+      "PUBLICATION INSTAGRAM DEMANDÉE\n\n"+
 
-      slides.length+" visuels envoyés.\n\n"+
+      slides.length+" visuels transmis.\n\n"+
 
-      "Vérifie le résultat dans GitHub Actions.\n\n"+
+      "GitHub Actions traite maintenant ton carrousel.\n\n"+
 
-      "MODE TEST : aucune publication réelle."
+      "Vérifie sa présence sur @morningfoot.fr avant de le marquer comme publié."
 
     );
 
   }catch(error){
 
-    button.textContent="Tester Instagram";
+    if(dispatchAttempted){
 
-    show(
-      "Erreur : "+error.message,
-      "error"
-    );
+      setButton("Vérification nécessaire");
 
-    alert(
-      "Erreur Instagram : "+error.message
-    );
+      show(
+        "Publication à vérifier : "+error.message,
+        "error"
+      );
+
+      alert(
+        "Impossible de confirmer le résultat.\n\n"+
+        error.message+
+        "\n\nVérifie GitHub Actions et Instagram avant de relancer."
+      );
+
+    }else{
+
+      setButton("Publier sur Instagram");
+
+      show(
+        "Erreur : "+error.message,
+        "error"
+      );
+
+      alert(
+        "Erreur Instagram : "+error.message
+      );
+    }
 
   }finally{
 
     instagramBusy=false;
 
-    button.disabled=false;
+    button.disabled=
+      instagramPending.has(id)||post.published;
+
+    const current=$("instagram-"+id);
+
+    if(current){
+
+      current.disabled=
+        instagramPending.has(id)||post.published;
+    }
   }
 }
 
@@ -1509,6 +1604,8 @@ function render(){
     const id=esc(p.id);
 
     const active=slideState.get(String(p.id))||1;
+
+    const pending=instagramPending.has(String(p.id));
 
     return `
 
@@ -1626,10 +1723,16 @@ function render(){
 
           <button
             class="instagram"
+            id="instagram-${id}"
             data-action="instagram"
-            data-id="${id}">
+            data-id="${id}"
+            ${p.published||pending?"disabled":""}>
 
-            Tester Instagram
+            ${p.published?
+              "✓ Déjà publié":
+              pending?
+              "Vérifier la publication":
+              "Publier sur Instagram"}
 
           </button>
 
@@ -1639,7 +1742,11 @@ function render(){
           class="ig-status"
           id="ig-status-${id}">
 
-          Instagram : mode test
+          ${p.published?
+            "Instagram · Article marqué comme publié":
+            pending?
+            "Instagram · Publication à vérifier":
+            "Instagram · Publication sur confirmation"}
 
         </div>
 
@@ -1951,7 +2058,7 @@ $("grid").addEventListener("click",async event=>{
 
     if(action==="instagram"){
 
-      await instagramTest(post,button);
+      await instagramPublish(post,button);
     }
 
     if(action==="copy"){
@@ -1981,7 +2088,26 @@ $("grid").addEventListener("click",async event=>{
 
     if(action==="published"){
 
+      if(instagramBusy){
+
+        alert("Attends la fin du transfert Instagram.");
+
+        return;
+      }
+
+      if(!post.published){
+
+        if(!confirm(
+          "Confirmer que cet article a bien été publié ?"
+        )){
+
+          return;
+        }
+      }
+
       post.published=!post.published;
+
+      instagramPending.delete(id);
 
       v8Save(post);
 
