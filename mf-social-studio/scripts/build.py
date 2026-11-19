@@ -10,7 +10,7 @@ from urllib.parse import urljoin
 import requests
 import feedparser
 from bs4 import BeautifulSoup
-from PIL import Image
+from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / 'docs'
@@ -24,8 +24,8 @@ FEEDS = [
 
 S = requests.Session()
 S.headers.update({
-    'User-Agent': 'Mozilla/5.0 (compatible; MorningFootSocialStudio/2.0; +https://morning-foot.com)',
-    'Accept': 'application/rss+xml, application/xml, text/xml, */*'
+    'User-Agent': 'Mozilla/5.0 (compatible; MorningFootSocialStudio/7.0; +https://morning-foot.com)',
+    'Accept': '*/*'
 })
 
 
@@ -42,6 +42,7 @@ def get(url):
 def get_feed():
     for url in FEEDS:
         r = get(url)
+
         if r is None:
             continue
 
@@ -51,15 +52,10 @@ def get_feed():
             print('RSS OK:', r.url, 'entries:', len(feed.entries))
             return feed
 
-        print(
-            'RSS invalid:', r.url,
-            'type:', r.headers.get('Content-Type'),
-            'preview:', r.text[:120]
-        )
+        print('RSS invalid:', r.url)
 
     raise SystemExit(
-        'Aucun flux RSS exploitable. Verifier la protection '
-        'du site pour GitHub Actions; anciens brouillons conserves.'
+        'Aucun flux RSS exploitable. Anciens brouillons conserves.'
     )
 
 
@@ -93,7 +89,15 @@ def category(t):
     return 'DÉBAT'
 
 
-def image_candidates(soup):
+def is_report(value):
+    return bool(re.search(
+        r'(report[-_]|datascout|fiche[-_])',
+        str(value or ''),
+        re.I
+    ))
+
+
+def image_candidates(soup, base_url):
     body = soup.select_one(
         '.entry-content, .post-content, article .content, '
         '.et_pb_post .entry-content, article'
@@ -108,10 +112,85 @@ def image_candidates(soup):
         )
 
         if src and not src.startswith('data:'):
-            yield urljoin('https://morning-foot.com', src), img
+            yield urljoin(base_url, src), img
 
 
-def save_image(url, stem):
+def photo_candidates(soup, entry, base_url):
+    candidates = []
+
+    def add(value):
+        if not isinstance(value, str):
+            return
+
+        value = value.strip()
+
+        if not value or value.startswith('data:'):
+            return
+
+        value = urljoin(base_url, value)
+
+        if not value.startswith(('https://', 'http://')):
+            return
+
+        if re.search(
+            r'(datascout|report[-_]|fiche[-_]|logo|avatar|favicon|placeholder|gravatar)',
+            value,
+            re.I
+        ):
+            return
+
+        if value not in candidates:
+            candidates.append(value)
+
+    for selector in [
+        'meta[property="og:image"]',
+        'meta[property="og:image:secure_url"]',
+        'meta[name="twitter:image"]',
+        'meta[property="twitter:image"]'
+    ]:
+        for tag in soup.select(selector):
+            add(tag.get('content'))
+
+    for tag in soup.select('link[rel="image_src"]'):
+        add(tag.get('href'))
+
+    for media in entry.get('media_content', []):
+        add(media.get('url'))
+
+    for media in entry.get('media_thumbnail', []):
+        add(media.get('url'))
+
+    for enclosure in entry.get('enclosures', []):
+        if enclosure.get('type', '').startswith('image/'):
+            add(enclosure.get('href') or enclosure.get('url'))
+
+    for img in soup.select(
+        'img.wp-post-image, '
+        '.post-thumbnail img, '
+        '.featured-image img, '
+        '.et_post_meta_wrapper img'
+    ):
+        add(
+            img.get('data-src')
+            or img.get('data-lazy-src')
+            or img.get('src')
+        )
+
+    return candidates
+
+
+def save_image(url, stem, min_width=320):
+    out = ASSETS / (stem + '.jpg')
+
+    if out.exists():
+        try:
+            with Image.open(out) as existing:
+                if existing.width >= min_width:
+                    existing.verify()
+                    return 'assets/' + out.name
+        except Exception:
+            pass
+
     r = get(url)
 
     if r is None:
@@ -119,18 +198,17 @@ def save_image(url, stem):
 
     try:
         im = Image.open(io.BytesIO(r.content))
+        im = ImageOps.exif_transpose(im)
         im.load()
 
-        if im.width < 320 or im.height < 240:
+        if im.width < min_width or im.height < 240:
             return None
 
-        im.thumbnail((1500, 1900))
-
-        out = ASSETS / (stem + '.jpg')
+        im.thumbnail((1600, 1900))
 
         im.convert('RGB').save(
             out,
-            quality=86,
+            quality=88,
             optimize=True
         )
 
@@ -141,10 +219,90 @@ def save_image(url, stem):
         return None
 
 
-def parse(entry):
+def extract_intro(soup, entry, title):
+    for selector in [
+        '.entry-content',
+        '.post-content',
+        'article .content',
+        '.et_pb_post .entry-content'
+    ]:
+        body = soup.select_one(selector)
+
+        if body is None:
+            continue
+
+        for tag in body.select('p'):
+            text = txt(str(tag))
+
+            if len(text) >= 100:
+                if text.lower().startswith((
+                    'à lire aussi',
+                    'a lire aussi',
+                    'retrouvez-nous',
+                    'abonnez-vous'
+                )):
+                    continue
+
+                return shorten(text, 420)
+
+    for selector in [
+        'meta[property="og:description"]',
+        'meta[name="description"]'
+    ]:
+        tag = soup.select_one(selector)
+
+        if tag:
+            text = txt(tag.get('content', ''))
+
+            if len(text) >= 70:
+                return shorten(text, 420)
+
+    summary = txt(entry.get('summary', ''))
+
+    if summary and summary != title:
+        return shorten(summary, 420)
+
+    return ''
+
+
+def shorten(text, limit):
+    text = text.strip()
+
+    if len(text) <= limit:
+        return text
+
+    part = text[:limit]
+
+    end = max(
+        part.rfind('. '),
+        part.rfind('! '),
+        part.rfind('? ')
+    )
+
+    if end >= limit // 2:
+        return part[:end + 1]
+
+    return part.rsplit(' ', 1)[0] + '…'
+
+
+def asset_exists(value):
+    if not isinstance(value, str):
+        return False
+
+    if not value.startswith('assets/'):
+        return False
+
+    path = ASSETS / Path(value).name
+
+    return path.is_file()
+
+
+def parse(entry, old=None):
+    old = old or {}
+
     url = entry.get('link', '')
     ident = hashlib.sha1(url.encode()).hexdigest()[:14]
-    title = txt(entry.get('title', ''))
+    title = txt(entry.get('title', '')) or old.get('title', '')
 
     page = get(url)
 
@@ -154,6 +312,8 @@ def parse(entry):
         else BeautifulSoup('', 'html.parser')
     )
 
+    base_url = page.url if page is not None else url
+
     article = soup.select_one(
         '.entry-content, .post-content, article .content, '
         '.et_pb_post .entry-content, article'
@@ -161,25 +321,81 @@ def parse(entry):
 
     text = txt(str(article))[:5000]
 
-    reports = []
+    # ----------------------------
+    # PHOTO PRINCIPALE
+    # ----------------------------
 
-    for src, tag in image_candidates(soup):
-        desc = (src + ' ' + tag.get('alt', '')).lower()
-
-        if re.search(
-            r'(report[-_]|datascout|fiche[-_])',
-            desc
-        ):
-            reports.append(src)
-
-    report = reports[0] if reports else None
-
-    image = (
-        save_image(report, ident + '-report')
-        if report else None
+    photo = (
+        old.get('cover_image')
+        or old.get('photo')
     )
 
+    if not asset_exists(photo):
+        photo = None
+
+        for src in photo_candidates(soup, entry, base_url):
+            photo = save_image(
+                src,
+                ident + '-photo',
+                min_width=500
+            )
+
+            if photo:
+                print('PHOTO OK:', title, photo)
+                break
+
+    if not photo:
+        print('PHOTO ABSENTE:', title)
+
+    # ----------------------------
+    # INFOGRAPHIE DATASCOUT
+    # ----------------------------
+
+    image = old.get('report_image') or old.get('image')
+
+    if not asset_exists(image):
+        image = None
+
+        report_soup = soup
+
+        reports = []
+
+        for src, tag in image_candidates(report_soup, base_url):
+            desc = src + ' ' + str(tag.get('alt', ''))
+
+            if is_report(desc):
+                reports.append(src)
+
+        if not reports:
+            for content in entry.get('content', []):
+                rss_soup = BeautifulSoup(
+                    content.get('value', ''),
+                    'html.parser'
+                )
+
+                for src, tag in image_candidates(rss_soup, base_url):
+                    desc = src + ' ' + str(tag.get('alt', ''))
+
+                    if is_report(desc):
+                        reports.append(src)
+
+        for report in reports[:5]:
+            image = save_image(
+                report,
+                ident + '-report'
+            )
+
+            if image:
+                break
+
+    # ----------------------------
+    # CATEGORIE ET SCORE
+    # ----------------------------
+
     c = category(title + ' ' + text[:450])
+
+    if page is None and old.get('category'):
+        c = old['category']
 
     score = 0
     reasons = []
@@ -215,10 +431,18 @@ def parse(entry):
     if image:
         score += 8
 
+    if photo:
+        score += 5
+        reasons.append('Photo disponible')
+
     score = min(
         100,
         score + min(10, max(0, len(text) // 350))
     )
+
+    # ----------------------------
+    # DATE DE PUBLICATION
+    # ----------------------------
 
     date = (
         entry.get('published_parsed')
@@ -228,22 +452,46 @@ def parse(entry):
     day = (
         datetime.date(*date[:3]).isoformat()
         if date
-        else datetime.date.today().isoformat()
+        else old.get('date') or datetime.date.today().isoformat()
     )
+
+    # ----------------------------
+    # QUESTION ET LEGENDE INSTAGRAM
+    # ----------------------------
 
     question = {
-        'STATS': 'Quel chiffre vous impressionne le plus ?',
-        'MERCATO': 'Ce serait une bonne opération selon vous ?',
-        'MATCH': 'Vous partagez cette analyse ?',
-        'DÉBAT': 'Vous êtes d’accord ?'
+        'STATS': 'Que vous inspirent ces chiffres ?',
+        'MERCATO': 'Que pensez-vous de cette actualité mercato ?',
+        'MATCH': 'Quel est votre avis ?',
+        'DÉBAT': 'Qu’en pensez-vous ?'
     }[c]
 
-    caption = (
-        f'{title.rstrip(" .!?")}\n\n'
-        'Une analyse à découvrir sur Morning Foot.\n\n'
-        f'💬 {question}\n\n'
-        'Article complet sur Morning-Foot.com — lien en bio.'
+    intro = extract_intro(soup, entry, title)
+
+    if not intro:
+        intro = old.get('intro', '')
+
+    parts = [title]
+
+    if intro:
+        parts.append(intro)
+
+    if image:
+        parts.append(
+            '📊 Décryptage et statistiques avec les données DataScout.'
+        )
+
+    parts.append(f'💬 {question}')
+
+    parts.append(
+        '🔗 Article complet sur morning-foot.com — lien en bio.'
     )
+
+    caption = '\n\n'.join(parts)
+
+    # ----------------------------
+    # DONNEES DU SOCIAL STUDIO
+    # ----------------------------
 
     return {
         'id': ident,
@@ -255,10 +503,47 @@ def parse(entry):
         'reasons': reasons,
         'report': bool(image),
         'image': image,
+        'report_image': image,
+        'photo': photo,
+        'cover_image': photo,
+        'intro': intro,
         'caption': caption,
         'question': question,
-        'status': 'brouillon'
+        'status': old.get('status', 'brouillon'),
+        'build_version': 7
     }
+
+
+def age_days(item):
+    try:
+        day = datetime.date.fromisoformat(
+            item.get('date', '')
+        )
+
+        today = datetime.datetime.now(
+            datetime.timezone.utc
+        ).date()
+
+        return max(0, (today - day).days)
+
+    except (ValueError, TypeError):
+        return 999
+
+
+def editorial_score(item):
+    score = item.get('score', 0)
+    age = age_days(item)
+
+    freshness = {
+        0: 25,
+        1: 18,
+        2: 10,
+        3: 4
+    }.get(age, 0)
+
+    penalty = max(0, age - 3) * 5
+
+    return score + freshness - penalty
 
 
 def main():
@@ -272,9 +557,13 @@ def main():
             previous = json.loads(
                 p.read_text(encoding='utf8')
             )
+
+            if not isinstance(previous, list):
+                raise ValueError('Format JSON invalide')
+
         except (ValueError, OSError) as exc:
             raise SystemExit(
-                f'posts.json illisible, conservation du fichier: {exc}'
+                f'posts.json illisible: {exc}'
             )
 
     byurl = {
@@ -283,49 +572,99 @@ def main():
         if item.get('url')
     }
 
-    for entry in feed.entries[:25]:
+    # Nouveaux articles et mise a niveau des anciens
+
+    for entry in feed.entries[:30]:
         url = entry.get('link')
 
-        if url and url not in byurl:
+        if not url:
+            continue
+
+        old = byurl.get(url, {})
+
+        needs_update = (
+            not old
+            or old.get('build_version') != 7
+            or not asset_exists(old.get('cover_image'))
+            or (
+                old.get('report')
+                and not asset_exists(old.get('image'))
+            )
+        )
+
+        if needs_update:
             try:
-                byurl[url] = parse(entry)
+                byurl[url] = parse(entry, old)
+
             except Exception as exc:
                 print('ARTICLE ERROR:', url, exc)
+
+    # Mise a niveau des anciens brouillons encore utiles
+    # mais qui ne figurent plus dans le flux RSS.
+
+    active_urls = {
+        entry.get('link')
+        for entry in feed.entries[:30]
+    }
+
+    old_selected = [
+        item for item in byurl.values()
+        if item.get('selected')
+        and item['url'] not in active_urls
+        and age_days(item) <= 7
+        and not asset_exists(item.get('cover_image'))
+    ]
+
+    for old in old_selected[:7]:
+        try:
+            entry = {
+                'link': old['url'],
+                'title': old['title']
+            }
+
+            byurl[old['url']] = parse(entry, old)
+
+        except Exception as exc:
+            print('BACKFILL ERROR:', old['url'], exc)
+
+    # Conservation des 120 articles les plus recents
 
     items = sorted(
         byurl.values(),
         key=lambda x: (
-            x.get('score', 0),
-            x.get('date', '')
+            x.get('date', ''),
+            x.get('score', 0)
         ),
         reverse=True
     )[:120]
 
-    recent = sorted(
-        items,
-        key=lambda x: x.get('date', ''),
-        reverse=True
-    )[:35]
+    # Priorite aux articles DataScout recents
 
     eligible = sorted(
         (
-            x for x in recent
-            if x.get('report') and x.get('image')
+            x for x in items
+            if x.get('report')
+            and asset_exists(x.get('image'))
+            and age_days(x) <= 7
+            and x.get('score', 0) >= 35
         ),
-        key=lambda x: x.get('score', 0),
+        key=editorial_score,
         reverse=True
     )
 
     chosen = {
         x['id']
         for x in eligible[:7]
-        if x.get('score', 0) >= 35
     }
 
     for item in items:
         item['selected'] = item['id'] in chosen
 
-    p.write_text(
+    # Ecriture atomique du fichier JSON
+
+    temp = DOCS / 'posts.json.tmp'
+
+    temp.write_text(
         json.dumps(
             items,
             ensure_ascii=False,
@@ -334,10 +673,23 @@ def main():
         encoding='utf8'
     )
 
-    print(
-        'Posts:', len(items),
-        'Selectionnes:', len(chosen)
+    temp.replace(p)
+
+    photo_count = sum(
+        asset_exists(x.get('cover_image'))
+        for x in items
     )
+
+    report_count = sum(
+        asset_exists(x.get('image'))
+        for x in items
+    )
+
+    print('BUILD VERSION: V7')
+    print('Posts:', len(items))
+    print('Photos disponibles:', photo_count)
+    print('Fiches DataScout:', report_count)
+    print('Selectionnes:', len(chosen))
 
 
 if __name__ == '__main__':
