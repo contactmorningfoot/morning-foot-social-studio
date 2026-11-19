@@ -1,0 +1,174 @@
+
+name: Instagram - Publication
+
+on:
+  workflow_dispatch:
+    inputs:
+      slide_1:
+        description: "URL de la couverture"
+        required: true
+        type: string
+      slide_2:
+        description: "URL de la fiche DataScout"
+        required: false
+        type: string
+      slide_3:
+        description: "URL de la slide débat"
+        required: true
+        type: string
+      caption:
+        description: "Légende Instagram"
+        required: true
+        type: string
+      publish:
+        description: "Confirmer la publication réelle"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: instagram-publication
+  cancel-in-progress: false
+
+jobs:
+  publish-instagram:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Preparer et publier le carousel
+        env:
+          IG_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          SLIDE_1: ${{ inputs.slide_1 }}
+          SLIDE_2: ${{ inputs.slide_2 }}
+          SLIDE_3: ${{ inputs.slide_3 }}
+          CAPTION: ${{ inputs.caption }}
+          PUBLISH: ${{ inputs.publish }}
+        run: |
+          python - <<'PY'
+          import os
+          import json
+          import time
+          import urllib.request
+          import urllib.parse
+          import urllib.error
+
+          token = os.environ["IG_TOKEN"]
+          user_id = os.environ["IG_USER_ID"]
+          base = "https://graph.facebook.com/v24.0"
+
+          if not token or not user_id:
+              raise SystemExit("Secrets Instagram manquants")
+
+          def api(path, params=None):
+              data = None
+              if params is not None:
+                  data = urllib.parse.urlencode(params).encode()
+
+              req = urllib.request.Request(
+                  base + path,
+                  data=data,
+                  headers={
+                      "Authorization": f"Bearer {token}"
+                  }
+              )
+
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as res:
+                      return json.load(res)
+              except urllib.error.HTTPError as e:
+                  error = json.loads(e.read()).get("error", {})
+                  print("ERREUR META")
+                  print("Code :", error.get("code"))
+                  print("Sous-code :", error.get("error_subcode"))
+                  raise SystemExit(1)
+
+          def wait_ready(container_id):
+              for attempt in range(60):
+                  result = api(
+                      f"/{container_id}?fields=status_code"
+                  )
+                  status = result.get("status_code")
+                  print("Statut :", status)
+
+                  if status == "FINISHED":
+                      return
+
+                  if status in ("ERROR", "EXPIRED"):
+                      raise SystemExit("Conteneur invalide")
+
+                  time.sleep(5)
+
+              raise SystemExit("Delai de traitement depasse")
+
+          images = [
+              os.environ["SLIDE_1"].strip(),
+              os.environ.get("SLIDE_2", "").strip(),
+              os.environ["SLIDE_3"].strip()
+          ]
+
+          images = [url for url in images if url]
+
+          if len(images) < 2:
+              raise SystemExit("Deux images minimum")
+
+          for url in images:
+              if not url.startswith("https://"):
+                  raise SystemExit("URL HTTPS obligatoire")
+
+          caption = os.environ["CAPTION"].strip()
+
+          if not caption or len(caption) > 2200:
+              raise SystemExit("Legende invalide")
+
+          children = []
+
+          for index, image in enumerate(images, 1):
+              result = api(
+                  f"/{user_id}/media",
+                  {
+                      "image_url": image,
+                      "is_carousel_item": "true"
+                  }
+              )
+
+              container = result["id"]
+              wait_ready(container)
+              children.append(container)
+              print(f"SLIDE {index} : OK")
+
+          carousel = api(
+              f"/{user_id}/media",
+              {
+                  "media_type": "CAROUSEL",
+                  "children": ",".join(children),
+                  "caption": caption
+              }
+          )
+
+          carousel_id = carousel["id"]
+
+          wait_ready(carousel_id)
+
+          print("CAROUSEL PREPARE AVEC SUCCES")
+
+          if os.environ.get("PUBLISH", "").lower() != "true":
+              print("MODE TEST")
+              print("AUCUNE PUBLICATION EFFECTUEE")
+              raise SystemExit(0)
+
+          published = api(
+              f"/{user_id}/media_publish",
+              {
+                  "creation_id": carousel_id
+              }
+          )
+
+          print("==============================")
+          print("PUBLICATION INSTAGRAM REUSSIE")
+          print("ID publication :", published["id"])
+          print("==============================")
+          PY
