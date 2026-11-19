@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: social-studio
@@ -16,9 +17,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Recuperer les fichiers
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Installer Python
         uses: actions/setup-python@v5
@@ -28,6 +33,9 @@ jobs:
       - name: Installer les dependances
         run: pip install -r mf-social-studio/requirements.txt
 
+      - name: Synchroniser le depot
+        run: git pull --rebase origin main
+
       - name: Generer les publications Instagram
         run: python mf-social-studio/scripts/build.py
 
@@ -35,5 +43,31 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add mf-social-studio/docs/posts.json mf-social-studio/docs/assets/
-          git diff --cached --quiet || (git commit -m "Actualisation des posts Morning Foot" && git push)
+
+          if git diff --cached --quiet; then
+            echo "Aucune modification a sauvegarder"
+          else
+            git commit -m "Actualisation des posts Morning Foot"
+
+            for attempt in 1 2 3; do
+              git pull --rebase origin main || exit 1
+
+              if git push origin main; then
+                echo "Sauvegarde reussie"
+                exit 0
+              fi
+
+              sleep 5
+            done
+
+            echo "Impossible de sauvegarder apres trois tentatives"
+            exit 1
+          fi
+
+      - name: Actualiser le site Social Studio
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run "Deploy static content to Pages" --ref main
