@@ -1,0 +1,108 @@
+name: Instagram - Test Carousel
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-carousel:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Tester la preparation du carousel
+        env:
+          IG_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+        run: |
+          python - <<'PY'
+          import os
+          import json
+          import time
+          import urllib.request
+          import urllib.parse
+          import urllib.error
+
+          token = os.environ["IG_TOKEN"]
+          user_id = os.environ["IG_USER_ID"]
+          base = "https://graph.facebook.com/v24.0"
+
+          def api(path, params=None):
+              data = None
+              if params is not None:
+                  data = urllib.parse.urlencode(params).encode()
+
+              req = urllib.request.Request(
+                  base + path,
+                  data=data,
+                  headers={
+                      "Authorization": f"Bearer {token}"
+                  }
+              )
+
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as res:
+                      return json.load(res)
+              except urllib.error.HTTPError as e:
+                  error = json.loads(e.read()).get("error", {})
+                  print("ERREUR META")
+                  print("Code :", error.get("code"))
+                  print("Sous-code :", error.get("error_subcode"))
+                  raise SystemExit(1)
+
+          def wait_ready(container_id):
+              for attempt in range(24):
+                  result = api(
+                      f"/{container_id}?fields=status_code"
+                  )
+                  status = result.get("status_code")
+                  print("Statut :", status)
+
+                  if status == "FINISHED":
+                      return
+
+                  if status in ("ERROR", "EXPIRED"):
+                      raise SystemExit("Conteneur invalide")
+
+                  time.sleep(5)
+
+              raise SystemExit("Delai de traitement depasse")
+
+          images = [
+              "https://picsum.photos/id/10/1080/1350.jpg",
+              "https://picsum.photos/id/20/1080/1350.jpg"
+          ]
+
+          children = []
+
+          for index, image in enumerate(images, 1):
+              result = api(
+                  f"/{user_id}/media",
+                  {
+                      "image_url": image,
+                      "is_carousel_item": "true"
+                  }
+              )
+
+              container = result["id"]
+              wait_ready(container)
+              children.append(container)
+              print(f"SLIDE {index} : OK")
+
+          carousel = api(
+              f"/{user_id}/media",
+              {
+                  "media_type": "CAROUSEL",
+                  "children": ",".join(children),
+                  "caption": "Morning Foot - Test technique"
+              }
+          )
+
+          wait_ready(carousel["id"])
+
+          print("==============================")
+          print("CAROUSEL PREPARE AVEC SUCCES")
+          print("AUCUNE PUBLICATION EFFECTUEE")
+          print("==============================")
+          PY
