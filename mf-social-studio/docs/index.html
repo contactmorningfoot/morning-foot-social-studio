@@ -21,6 +21,8 @@ instagramTest = async function(post,button){
 
   const status=$("ig-status-"+id);
 
+  let submitted=false;
+
   function show(message,type=""){
     if(status){
       status.className="ig-status "+type;
@@ -60,7 +62,7 @@ instagramTest = async function(post,button){
     if(!instagramSecret){
 
       instagramSecret=String(
-        prompt("Saisis ton nouveau mot de passe Cloudflare :")||""
+        prompt("Saisis ton mot de passe Cloudflare :")||""
       ).trim();
 
       if(!instagramSecret){
@@ -131,10 +133,21 @@ instagramTest = async function(post,button){
       "application/json"
     );
 
+    submitted=true;
+
     if(result.mode!=="live"){
-      throw new Error(
-        "Le serveur est toujours en mode test."
+      show(
+        "Workflow déclenché, mais mode réel non confirmé.",
+        "error"
       );
+
+      button.textContent="Vérifier dans GitHub";
+
+      alert(
+        "Vérifie GitHub Actions avant toute nouvelle tentative."
+      );
+
+      return;
     }
 
     button.textContent="✓ Publication lancée";
@@ -158,12 +171,16 @@ instagramTest = async function(post,button){
 
     show("Erreur : "+error.message,"error");
 
-    alert("Erreur Instagram : "+error.message);
+    alert(
+      "Erreur Instagram : "+error.message+
+      "\n\nVérifie GitHub Actions avant de relancer."
+    );
 
   }finally{
 
     instagramBusy=false;
-    button.disabled=false;
+
+    button.disabled=submitted;
   }
 };
 
@@ -191,23 +208,32 @@ function activateInstagramButton(){
 
   if(notice){
 
-    notice.textContent=
+    const message=
       "Publication Instagram sur confirmation uniquement. "+
       "Vérifiez les informations, les légendes et les droits des photos.";
+
+    if(notice.textContent!==message){
+      notice.textContent=message;
+    }
   }
 }
 
-const liveInstagramObserver=new MutationObserver(
-  activateInstagramButton
-);
+const originalInstagramRender=render;
 
-liveInstagramObserver.observe(
-  document.getElementById("grid"),
-  {
-    childList:true,
-    subtree:true
-  }
-);
+render=function(...args){
+
+  const result=originalInstagramRender.apply(this,args);
+
+  activateInstagramButton();
+
+  return result;
+};
+
+document.getElementById("filter")
+  .removeEventListener("change",originalInstagramRender);
+
+document.getElementById("filter")
+  .addEventListener("change",render);
 
 activateInstagramButton();
 </script>
