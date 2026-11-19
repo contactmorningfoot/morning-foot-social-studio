@@ -1045,5 +1045,342 @@ fetch("posts.json?v="+Date.now())
       '</div>';
   });
 </script>
+
+<style>
+:root{
+  --bg:#05070b;
+  --panel:#0c121c;
+  --line:#222e40;
+  --gold:#ffd200;
+}
+.card{border-radius:10px}
+.preview-area{background:#05080e}
+.main-preview{max-width:440px}
+.card-title{font-weight:800}
+.v8-settings{
+  padding:16px;
+  margin-bottom:18px;
+  border:1px solid #263246;
+  border-radius:8px;
+  background:#080d15;
+}
+.v8-settings label{
+  display:block;
+  font-size:11px;
+  font-weight:700;
+  color:#aebdd0;
+  margin-bottom:8px;
+}
+.v8-settings input[type=range]{
+  width:100%;
+  padding:0;
+  accent-color:#ffd200;
+  margin-bottom:14px;
+}
+.v8-published{
+  color:#83c9a2;
+  font-size:12px;
+  font-weight:700;
+}
+</style>
+
+<script>
+document.title="Morning Foot — Editorial Studio V8";
+document.querySelector(".brand-sub").textContent=
+"SOCIAL STUDIO / EDITORIAL EDITION V8";
+
+function v8Save(p){
+  try{
+    localStorage.setItem("mf-v8-"+p.id,JSON.stringify({
+      zoom:p.zoom,
+      posX:p.posX,
+      posY:p.posY,
+      published:!!p.published
+    }));
+  }catch(e){}
+}
+
+function v8Restore(p){
+  try{
+    Object.assign(p,JSON.parse(
+      localStorage.getItem("mf-v8-"+p.id)||"{}"
+    ));
+  }catch(e){}
+}
+
+fitTitle=function(ctx,text,maxWidth,maxLines,maxSize,minSize){
+  for(let size=maxSize;size>=18;size-=2){
+    ctx.font=`900 ${size}px "Barlow Condensed",Arial`;
+    const words=String(text||"").trim().split(/\s+/);
+    const lines=[];
+    let line="";
+
+    for(const word of words){
+      const next=line?line+" "+word:word;
+      if(line && ctx.measureText(next).width>maxWidth){
+        lines.push(line);
+        line=word;
+      }else{
+        line=next;
+      }
+    }
+
+    if(line)lines.push(line);
+
+    if(
+      lines.length<=maxLines &&
+      lines.length*size*1.07<=550 &&
+      lines.every(l=>ctx.measureText(l).width<=maxWidth)
+    ){
+      return {size,lines};
+    }
+  }
+
+  ctx.font='900 18px "Barlow Condensed",Arial';
+  return {size:18,lines:wrap(ctx,text,maxWidth,maxLines)};
+};
+
+drawCover=async function(post){
+  await document.fonts.load('900 100px "Barlow Condensed"');
+
+  const {canvas,ctx}=baseCanvas();
+  const photo=await loadFirst(photoCandidates(post));
+
+  if(photo){
+    const zoom=Number(post.zoom??100)/100;
+    const scale=Math.max(
+      1080/photo.naturalWidth,
+      1350/photo.naturalHeight
+    )*zoom;
+
+    const w=photo.naturalWidth*scale;
+    const h=photo.naturalHeight*scale;
+
+    const x=(1080-w)*Number(post.posX??50)/100;
+    const y=(1350-h)*Number(post.posY??50)/100;
+
+    ctx.drawImage(photo,x,y,w,h);
+  }else{
+    drawFallback(ctx);
+  }
+
+  const g=ctx.createLinearGradient(0,420,0,1350);
+  g.addColorStop(0,"rgba(0,0,0,0)");
+  g.addColorStop(.35,"rgba(0,0,0,.22)");
+  g.addColorStop(.7,"rgba(0,0,0,.85)");
+  g.addColorStop(1,"#000000");
+
+  ctx.fillStyle=g;
+  ctx.fillRect(0,420,1080,930);
+
+  const corner=ctx.createLinearGradient(850,0,1080,240);
+  corner.addColorStop(0,"#02050a");
+  corner.addColorStop(.65,"#071b3d");
+  corner.addColorStop(1,"#147aff");
+
+  ctx.fillStyle=corner;
+  ctx.beginPath();
+  ctx.moveTo(780,0);
+  ctx.lineTo(1080,0);
+  ctx.lineTo(1080,260);
+  ctx.quadraticCurveTo(990,95,780,0);
+  ctx.fill();
+
+  await drawLogo(ctx);
+
+  const title=shortTitle(post);
+  const layout=fitTitle(ctx,title,960,6,125,55);
+  const lh=layout.size*1.07;
+  const start=1210-layout.lines.length*lh;
+
+  ctx.textBaseline="top";
+  ctx.fillStyle="#ffd200";
+  ctx.font='800 32px "Barlow Condensed",Arial';
+  ctx.fillText(
+    post.report?"ACTUALITÉ · DATA":post.category||"FOOTBALL",
+    55,start-65
+  );
+
+  ctx.font=`900 ${layout.size}px "Barlow Condensed",Arial`;
+  ctx.fillStyle="#ffffff";
+
+  layout.lines.forEach((line,i)=>{
+    ctx.fillText(line,55,start+i*lh);
+  });
+
+  ctx.fillStyle="#ffd200";
+  ctx.fillRect(55,1250,100,5);
+
+  ctx.fillStyle="#c4cad4";
+  ctx.font="700 21px Inter,Arial";
+  ctx.fillText("MORNING-FOOT.COM",55,1280);
+
+  return canvas;
+};
+
+drawData=async function(post){
+  const {canvas,ctx}=baseCanvas();
+  ctx.fillStyle="#080c13";
+  ctx.fillRect(0,0,1080,1350);
+
+  const report=await loadFirst(reportCandidates(post));
+
+  if(report){
+    containImage(ctx,report,0,0,1080,1350);
+  }else{
+    ctx.fillStyle="#ffffff";
+    ctx.font='800 52px "Barlow Condensed",Arial';
+    ctx.textAlign="center";
+    ctx.fillText("FICHE NON DISPONIBLE",540,675);
+  }
+
+  return canvas;
+};
+
+const filterV8=document.getElementById("filter");
+
+[
+  ["v8-new","Dernières 48 heures"],
+  ["v8-drafts","À publier"],
+  ["v8-published","Déjà publiés"]
+].forEach(([value,label])=>{
+  filterV8.add(new Option(label,value));
+});
+
+const originalRenderV8=render;
+
+render=function(){
+  posts.forEach(v8Restore);
+
+  const filter=filterV8.value;
+
+  if(filter.startsWith("v8-")){
+    const allPosts=posts;
+
+    if(filter==="v8-new"){
+      posts=allPosts.filter(p=>{
+        const date=Date.parse(p.date);
+        return Number.isFinite(date)&&
+          Date.now()-date<=48*3600000;
+      });
+    }
+
+    if(filter==="v8-drafts"){
+      posts=allPosts.filter(p=>p.selected&&!p.published);
+    }
+
+    if(filter==="v8-published"){
+      posts=allPosts.filter(p=>p.published);
+    }
+
+    filterV8.value="all";
+    originalRenderV8();
+    filterV8.value=filter;
+    posts=allPosts;
+  }else{
+    originalRenderV8();
+  }
+
+  document.querySelectorAll(".card").forEach(card=>{
+    const title=card.querySelector('input[id^="title-"]');
+    if(!title)return;
+
+    const id=title.id.slice(6);
+    const p=posts.find(x=>String(x.id)===id);
+    if(!p)return;
+
+    const editor=card.querySelector(".editor");
+    const settings=document.createElement("div");
+
+    settings.className="v8-settings";
+    settings.innerHTML=`
+      <label>ZOOM DE LA PHOTO</label>
+      <input type="range" min="100" max="220"
+        value="${Number(p.zoom??100)}" data-key="zoom">
+
+      <label>CADRAGE HORIZONTAL</label>
+      <input type="range" min="0" max="100"
+        value="${Number(p.posX??50)}" data-key="posX">
+
+      <label>CADRAGE VERTICAL</label>
+      <input type="range" min="0" max="100"
+        value="${Number(p.posY??50)}" data-key="posY">
+
+      <button type="button" class="v8-reset">
+        Réinitialiser le cadrage
+      </button>
+    `;
+
+    editor.prepend(settings);
+
+    settings.querySelectorAll("input").forEach(input=>{
+      input.addEventListener("input",()=>{
+        p[input.dataset.key]=Number(input.value);
+        v8Save(p);
+        refreshCard(p);
+      });
+    });
+
+    settings.querySelector(".v8-reset").onclick=()=>{
+      p.zoom=100;
+      p.posX=50;
+      p.posY=50;
+
+      settings.querySelector('[data-key="zoom"]').value=100;
+      settings.querySelector('[data-key="posX"]').value=50;
+      settings.querySelector('[data-key="posY"]').value=50;
+
+      v8Save(p);
+      refreshCard(p);
+    };
+
+    const controls=card.querySelector(".controls");
+    const exportButton=document.createElement("button");
+
+    exportButton.className="primary";
+    exportButton.textContent="↓ Carrousel complet";
+
+    exportButton.onclick=async()=>{
+      exportButton.disabled=true;
+      exportButton.textContent="Export en cours...";
+
+      try{
+        await download(p,1);
+        if(reportCandidates(p).length)await download(p,2);
+        await download(p,3);
+      }catch(e){
+        alert("Erreur d'export : "+e.message);
+      }finally{
+        exportButton.disabled=false;
+        exportButton.textContent="↓ Carrousel complet";
+      }
+    };
+
+    controls.appendChild(exportButton);
+
+    const actions=card.querySelector(".actions");
+    const published=document.createElement("button");
+
+    published.textContent=p.published?
+      "✓ Publié — annuler":"Marquer comme publié";
+
+    if(p.published)published.className="v8-published";
+
+    published.onclick=()=>{
+      p.published=!p.published;
+      v8Save(p);
+      render();
+    };
+
+    actions.appendChild(published);
+  });
+};
+
+filterV8.removeEventListener("change",originalRenderV8);
+filterV8.addEventListener("change",render);
+
+if(posts.length)render();
+</script>
+
 </body>
 </html>
