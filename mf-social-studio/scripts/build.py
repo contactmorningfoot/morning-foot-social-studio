@@ -45,22 +45,151 @@ def get(url):
 
 
 def get_feed():
-    for url in FEEDS:
-        r = get(url)
+    import time
+    from types import SimpleNamespace
 
-        if r is None:
-            continue
+    # Tentatives RSS classiques
+    for attempt in range(2):
+        for url in FEEDS:
+            r = get(url)
 
-        feed = feedparser.parse(r.content)
+            if r is None:
+                continue
 
-        if feed.entries:
-            print('RSS OK:', r.url, 'entries:', len(feed.entries))
-            return feed
+            feed = feedparser.parse(r.content)
 
-        print('RSS invalid:', r.url)
+            if feed.entries:
+                print(
+                    'RSS OK:',
+                    r.url,
+                    'entries:',
+                    len(feed.entries)
+                )
+                return feed
+
+            print(
+                'RSS INVALID:',
+                r.url,
+                'HTTP:', r.status_code,
+                'TYPE:', r.headers.get('Content-Type'),
+                'SIZE:', len(r.content),
+                'PARSE ERROR:',
+                str(feed.get('bozo_exception', '')),
+                'BODY:', repr(r.text[:200])
+            )
+
+        if attempt == 0:
+            time.sleep(3)
+
+    # Secours via API REST WordPress
+    print('RSS indisponible. Tentative API WordPress.')
+
+    endpoints = [
+        'https://morning-foot.com/wp-json/wp/v2/posts',
+        'https://morning-foot.com/?rest_route=/wp/v2/posts',
+        'https://www.morning-foot.com/wp-json/wp/v2/posts'
+    ]
+
+    for endpoint in endpoints:
+        try:
+            r = S.get(
+                endpoint,
+                params={
+                    'per_page': 30,
+                    'status': 'publish',
+                    '_embed': 'wp:featuredmedia'
+                },
+                headers={
+                    'Accept': 'application/json'
+                },
+                timeout=30
+            )
+
+            r.raise_for_status()
+            posts = r.json()
+
+            if not isinstance(posts, list):
+                continue
+
+            entries = []
+
+            for post in posts:
+                url = post.get('link')
+
+                if not url:
+                    continue
+
+                entry = {
+                    'link': url,
+                    'title': post.get(
+                        'title', {}
+                    ).get('rendered', ''),
+                    'summary': post.get(
+                        'excerpt', {}
+                    ).get('rendered', ''),
+                    'content': [{
+                        'value': post.get(
+                            'content', {}
+                        ).get('rendered', '')
+                    }],
+                    'media_content': []
+                }
+
+                date = post.get('date_gmt')
+
+                if date:
+                    try:
+                        dt = datetime.datetime.fromisoformat(
+                            date
+                        )
+
+                        if dt.tzinfo is None:
+                            dt = dt.replace(
+                                tzinfo=datetime.timezone.utc
+                            )
+
+                        entry['published_parsed'] = (
+                            dt.utctimetuple()
+                        )
+
+                    except (ValueError, TypeError):
+                        pass
+
+                media = post.get(
+                    '_embedded', {}
+                ).get('wp:featuredmedia', [])
+
+                for item in media:
+                    src = item.get('source_url')
+
+                    if src:
+                        entry['media_content'].append({
+                            'url': src
+                        })
+
+                entries.append(entry)
+
+            if entries:
+                print(
+                    'WORDPRESS API OK:',
+                    len(entries),
+                    'articles'
+                )
+
+                return SimpleNamespace(
+                    entries=entries
+                )
+
+        except (requests.RequestException, ValueError) as exc:
+            print(
+                'WORDPRESS API ERROR:',
+                endpoint,
+                str(exc)
+            )
 
     raise SystemExit(
-        'Aucun flux RSS exploitable. Anciens brouillons conserves.'
+        'RSS et API WordPress indisponibles. '
+        'Anciens brouillons conserves.'
     )
 
 
