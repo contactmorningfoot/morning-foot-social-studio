@@ -1,33 +1,95 @@
 [
   {
+    "id": "e2ecc5188b6bba",
+    "title": "Stade Brestois : les nouvelles attentes de Lachuer envers Pathé Mboup",
+    "url": "https://morning-foot.com/ligue-1/brest/stade-brestois-les-nouvelles-attentes-de-lachuer-envers-pathe-mboup/",
+    "date": "2026-11-21",
+    "published_at": "2026-11-21T18:30:56+01:00",
+    "category": "MATCH",
+    "score": 58,
+    "reasons": [
+      "Fiche statistique",
+      "Photo disponible"
+    ],
+    "report": true,
+    "image": "assets/e2ecc5188b6bba-ds9-6079330a46.jpg",
+    "report_image": "assets/e2ecc5188b6bba-ds9-6079330a46.jpg",
+    "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/fiche-p-mboup-2026-11-20-871x1024.png",
+    "photo": "assets/e2ecc5188b6bba-photo.jpg",
+    "cover_image": "assets/e2ecc5188b6bba-photo.jpg",
+    "intro": "Brillant avec le Sénégal, Pathé Mboup revient à Brest avec de nouvelles ambitions. Julien Lachuer attend désormais une confirmation.",
+    "caption": "Stade Brestois : les nouvelles attentes de Lachuer envers Pathé Mboup\n\nBrillant avec le Sénégal, Pathé Mboup revient à Brest avec de nouvelles ambitions. Julien Lachuer attend désormais une confirmation.\n\n📊 Décryptage et statistiques avec les données DataScout.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Quel est votre avis ?",
+    "status": "brouillon",
+    "build_version": 9,
+    "selected": true,
+    "selection_rank": 7,
+    "editorial_score": 88,
+    "age_days": 0,
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
+  },
+  {
+    "id": "f4d6f3d810b4e9",
+    "title": "LOSC : les secrets de la renaissance de Tanguy Nianzou (ex-PSG)",
+    "url": "https://morning-foot.com/ligue-1/lille/losc-les-secrets-de-la-renaissance-de-tanguy-nianzou-ex-psg/",
+    "date": "2026-11-21",
+    "published_at": "2026-11-21T18:00:42+01:00",
+    "category": "MATCH",
+    "score": 73,
+    "reasons": [
+      "Fiche statistique",
+      "Sujet populaire",
+      "Photo disponible"
+    ],
+    "report": true,
+    "image": "assets/f4d6f3d810b4e9-ds9-1bbffe27b8.jpg",
+    "report_image": "assets/f4d6f3d810b4e9-ds9-1bbffe27b8.jpg",
+    "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/fiche-t-nianzou-2026-11-20-871x1024.png",
+    "photo": "assets/f4d6f3d810b4e9-photo.jpg",
+    "cover_image": "assets/f4d6f3d810b4e9-photo.jpg",
+    "intro": "Après plusieurs saisons marquées par les blessures, Tanguy Nianzou retrouve des couleurs au LOSC et dévoile les secrets de son retour.",
+    "caption": "LOSC : les secrets de la renaissance de Tanguy Nianzou (ex-PSG)\n\nAprès plusieurs saisons marquées par les blessures, Tanguy Nianzou retrouve des couleurs au LOSC et dévoile les secrets de son retour.\n\n📊 Décryptage et statistiques avec les données DataScout.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Quel est votre avis ?",
+    "status": "brouillon",
+    "build_version": 9,
+    "selected": true,
+    "selection_rank": 3,
+    "editorial_score": 103,
+    "age_days": 0,
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
+  },
+  {
     "id": "57a0896659cbbf",
     "title": "PSG : Luis Enrique prend position pour Warren Zaïre-Emery",
     "url": "https://morning-foot.com/ligue-1/psg/psg-luis-enrique-warren-zaire-emery-prise-position/",
     "date": "2026-11-21",
     "published_at": "2026-11-21T17:00:53+01:00",
-    "category": "DÉBAT",
-    "score": 20,
+    "category": "MATCH",
+    "score": 73,
     "reasons": [
+      "Fiche statistique",
       "Sujet populaire",
       "Photo disponible"
     ],
-    "report": false,
-    "image": null,
-    "report_image": null,
-    "report_source": null,
+    "report": true,
+    "image": "assets/57a0896659cbbf-ds9-3ab43bee55.jpg",
+    "report_image": "assets/57a0896659cbbf-ds9-3ab43bee55.jpg",
+    "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/fiche-w-zaire-emery-2026-11-20-871x1024.png",
     "photo": "assets/57a0896659cbbf-photo.jpg",
     "cover_image": "assets/57a0896659cbbf-photo.jpg",
-    "intro": "Très peu utilisé par Zinédine Zidane en équipe de France lors de la dernière trêve internationale, Warren Zaïre-Emery conserve la confiance de Luis Enrique au PSG. L’entraîneur espagnol a rappelé l’importance de son joueur ce vendredi en conférence de presse. Les données de notre partenaire Data’Scout permettent de mieux comprendre cet attachement. PSG : Luis ... Lire la suite",
-    "caption": "PSG : Luis Enrique prend position pour Warren Zaïre-Emery\n\nTrès peu utilisé par Zinédine Zidane en équipe de France lors de la dernière trêve internationale, Warren Zaïre-Emery conserve la confiance de Luis Enrique au PSG. L’entraîneur espagnol a rappelé l’importance de son joueur ce vendredi en conférence de presse. Les données de notre partenaire Data’Scout permettent de mieux comprendre cet attachement. PSG : Luis ... Lire la suite\n\n💬 Qu’en pensez-vous ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
-    "question": "Qu’en pensez-vous ?",
+    "intro": "Peu utilisé en équipe de France, Warren Zaïre-Emery conserve la confiance de Luis Enrique au PSG. Notre analyse avec Data'Scout.",
+    "caption": "PSG : Luis Enrique prend position pour Warren Zaïre-Emery\n\nPeu utilisé en équipe de France, Warren Zaïre-Emery conserve la confiance de Luis Enrique au PSG. Notre analyse avec Data'Scout.\n\n📊 Décryptage et statistiques avec les données DataScout.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Quel est votre avis ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": false,
-    "selection_rank": null,
-    "editorial_score": 50,
+    "selected": true,
+    "selection_rank": 4,
+    "editorial_score": 103,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "060c21b99c7caf",
@@ -35,30 +97,31 @@
     "url": "https://morning-foot.com/ligue-1/monaco/as-monaco-les-revelations-qui-expliquent-un-malaise-persistant/",
     "date": "2026-11-21",
     "published_at": "2026-11-21T16:00:50+01:00",
-    "category": "DÉBAT",
-    "score": 32,
+    "category": "MATCH",
+    "score": 85,
     "reasons": [
+      "Fiche statistique",
       "Sujet populaire",
       "Angle de discussion",
       "Photo disponible"
     ],
-    "report": false,
-    "image": null,
-    "report_image": null,
-    "report_source": null,
+    "report": true,
+    "image": "assets/060c21b99c7caf-ds9-b04a3f9c06.jpg",
+    "report_image": "assets/060c21b99c7caf-ds9-b04a3f9c06.jpg",
+    "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/report-monaco-2026-11-20-608x1024.png",
     "photo": "assets/060c21b99c7caf-photo.jpg",
     "cover_image": "assets/060c21b99c7caf-photo.jpg",
-    "intro": "Septième de Ligue 1 après dix journées, l’AS Monaco peine à répondre aux attentes placées en elle. Malgré l’arrivée de Filipe Luis cet été, le club de la Principauté retombe dans ses travers. Des difficultés structurelles auxquelles s’ajoutent de véritables limites sur le terrain. AS Monaco : un éternel recommencement Un début de saison prometteur ... Lire la suite",
-    "caption": "AS Monaco : les révélations qui expliquent un malaise persistant\n\nSeptième de Ligue 1 après dix journées, l’AS Monaco peine à répondre aux attentes placées en elle. Malgré l’arrivée de Filipe Luis cet été, le club de la Principauté retombe dans ses travers. Des difficultés structurelles auxquelles s’ajoutent de véritables limites sur le terrain. AS Monaco : un éternel recommencement Un début de saison prometteur ... Lire la suite\n\n💬 Qu’en pensez-vous ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
-    "question": "Qu’en pensez-vous ?",
+    "intro": "L'AS Monaco peine à retrouver de la régularité. Entre instabilité interne et limites sportives, le malaise semble profond.",
+    "caption": "AS Monaco : les révélations qui expliquent un malaise persistant\n\nL'AS Monaco peine à retrouver de la régularité. Entre instabilité interne et limites sportives, le malaise semble profond.\n\n📊 Décryptage et statistiques avec les données DataScout.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Quel est votre avis ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": false,
-    "selection_rank": null,
-    "editorial_score": 62,
+    "selected": true,
+    "selection_rank": 2,
+    "editorial_score": 115,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "07fea8cc031121",
@@ -87,8 +150,8 @@
     "selection_rank": null,
     "editorial_score": 65,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "4ec715518ae43f",
@@ -116,8 +179,8 @@
     "selection_rank": null,
     "editorial_score": 45,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "17c7492a33f5ee",
@@ -146,8 +209,8 @@
     "selection_rank": null,
     "editorial_score": 60,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "3bd02f20f0fcc7",
@@ -175,8 +238,8 @@
     "selection_rank": null,
     "editorial_score": 45,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "e941dddeb6cbfb",
@@ -205,8 +268,8 @@
     "selection_rank": null,
     "editorial_score": 59,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "9f6ad8617a4802",
@@ -237,8 +300,8 @@
     "selection_rank": 1,
     "editorial_score": 117,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "31c06fc41e39ce",
@@ -265,11 +328,11 @@
     "status": "brouillon",
     "build_version": 9,
     "selected": true,
-    "selection_rank": 2,
+    "selection_rank": 5,
     "editorial_score": 103,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "699afcc489a0ac",
@@ -297,8 +360,8 @@
     "selection_rank": null,
     "editorial_score": 45,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "840888f21710d1",
@@ -323,12 +386,12 @@
     "question": "Quel est votre avis ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": true,
-    "selection_rank": 4,
+    "selected": false,
+    "selection_rank": null,
     "editorial_score": 88,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "2a031e6784f801",
@@ -355,11 +418,11 @@
     "status": "brouillon",
     "build_version": 9,
     "selected": true,
-    "selection_rank": 3,
+    "selection_rank": 6,
     "editorial_score": 103,
     "age_days": 0,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "82c59cdf4adf8d",
@@ -388,8 +451,8 @@
     "selection_rank": null,
     "editorial_score": 55,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "e9113a7b018389",
@@ -419,8 +482,8 @@
     "selection_rank": null,
     "editorial_score": 70,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "067c4413b65685",
@@ -450,8 +513,8 @@
     "selection_rank": null,
     "editorial_score": 91,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "461b8ca69e82f8",
@@ -480,8 +543,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "eb8cf0e5f57e7c",
@@ -507,12 +570,12 @@
     "question": "Quel est votre avis ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": true,
-    "selection_rank": 5,
+    "selected": false,
+    "selection_rank": null,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "361323211d445e",
@@ -538,12 +601,12 @@
     "question": "Quel est votre avis ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": true,
-    "selection_rank": 6,
+    "selected": false,
+    "selection_rank": null,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "6e5f3c136feeb2",
@@ -572,8 +635,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "cd1796ebe305ea",
@@ -599,12 +662,12 @@
     "question": "Quel est votre avis ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": true,
-    "selection_rank": 7,
+    "selected": false,
+    "selection_rank": null,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "541577983ed7e0",
@@ -633,8 +696,8 @@
     "selection_rank": null,
     "editorial_score": 55,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "106100d612d29f",
@@ -663,8 +726,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "2ebb3b5ea8f6d6",
@@ -693,8 +756,8 @@
     "selection_rank": null,
     "editorial_score": 53,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "5b786239c9537a",
@@ -723,8 +786,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "9e4d10054ad666",
@@ -754,8 +817,8 @@
     "selection_rank": null,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "53abb93e9e7ef3",
@@ -785,8 +848,8 @@
     "selection_rank": null,
     "editorial_score": 70,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "6269db046bf4ed",
@@ -815,8 +878,8 @@
     "selection_rank": null,
     "editorial_score": 78,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "69d0dedc17ebd8",
@@ -846,8 +909,8 @@
     "selection_rank": null,
     "editorial_score": 63,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "f8b736eb93c2ca",
@@ -876,8 +939,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "566adba756ffe7",
@@ -906,8 +969,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "7d62ad7da9d3aa",
@@ -936,8 +999,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "83668439b1ef9e",
@@ -966,8 +1029,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "028cf7b967b264",
@@ -996,8 +1059,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "5b7cdee9bac575",
@@ -1028,8 +1091,8 @@
     "selection_rank": null,
     "editorial_score": 97,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "2d09b2a1d2fed0",
@@ -1059,8 +1122,8 @@
     "selection_rank": null,
     "editorial_score": 83,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "9e452ebec9bcd9",
@@ -1090,8 +1153,8 @@
     "selection_rank": null,
     "editorial_score": 83,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "84a7faabca3e8b",
@@ -1120,8 +1183,8 @@
     "selection_rank": null,
     "editorial_score": 38,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "c3b33d9c00503f",
@@ -1150,8 +1213,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "bf94b3ad77c392",
@@ -1179,8 +1242,8 @@
     "selection_rank": null,
     "editorial_score": 15,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "ebb0752ca9bd63",
@@ -1211,8 +1274,8 @@
     "selection_rank": null,
     "editorial_score": 95,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "f1ce4282e4aa3a",
@@ -1242,8 +1305,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "464dda1d3d8a03",
@@ -1272,8 +1335,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "9f975ecba3107a",
@@ -1304,8 +1367,8 @@
     "selection_rank": null,
     "editorial_score": 54,
     "age_days": 2,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "2581aa327b6d01",
@@ -1336,8 +1399,8 @@
     "selection_rank": null,
     "editorial_score": 77,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "a4681ed57f75a9",
@@ -1368,8 +1431,8 @@
     "selection_rank": null,
     "editorial_score": 78,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "82815328c7d3d1",
@@ -1399,8 +1462,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "cc76b901ca79fc",
@@ -1431,8 +1494,8 @@
     "selection_rank": null,
     "editorial_score": 78,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "722948fae98ff3",
@@ -1463,8 +1526,8 @@
     "selection_rank": null,
     "editorial_score": 77,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "be090c2a4cc515",
@@ -1496,8 +1559,8 @@
     "selection_rank": null,
     "editorial_score": 89,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "7ee2bca95f3c42",
@@ -1527,8 +1590,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "8d04486dcdc98f",
@@ -1559,8 +1622,8 @@
     "selection_rank": null,
     "editorial_score": 54,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "790defeec38b46",
@@ -1590,8 +1653,8 @@
     "selection_rank": null,
     "editorial_score": 34,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "79d7417ad6b7f2",
@@ -1622,8 +1685,8 @@
     "selection_rank": null,
     "editorial_score": 78,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "4b3c2cc616d949",
@@ -1653,8 +1716,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "7af8ffaf754c03",
@@ -1684,8 +1747,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "dd1f3f531cdf17",
@@ -1715,8 +1778,8 @@
     "selection_rank": null,
     "editorial_score": 52,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "b3f4ad01564f58",
@@ -1746,8 +1809,8 @@
     "selection_rank": null,
     "editorial_score": 24,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "34feefe1789274",
@@ -1778,8 +1841,8 @@
     "selection_rank": null,
     "editorial_score": 67,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "0ae43ad0544876",
@@ -1811,8 +1874,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "23b408b92ada5c",
@@ -1842,8 +1905,8 @@
     "selection_rank": null,
     "editorial_score": 28,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "5409f8cde6586e",
@@ -1873,8 +1936,8 @@
     "selection_rank": null,
     "editorial_score": 24,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "86f1af7c811c8d",
@@ -1903,8 +1966,8 @@
     "selection_rank": null,
     "editorial_score": 10,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "5872b6792e1469",
@@ -1934,8 +1997,8 @@
     "selection_rank": null,
     "editorial_score": 24,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "fbc390ea2a6a66",
@@ -1967,8 +2030,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "c3ea7219923ec0",
@@ -1999,8 +2062,8 @@
     "selection_rank": null,
     "editorial_score": 67,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "4a25aa58fbd568",
@@ -2030,8 +2093,8 @@
     "selection_rank": null,
     "editorial_score": 24,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "aecd1db356740a",
@@ -2063,8 +2126,8 @@
     "selection_rank": null,
     "editorial_score": 88,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "f537f4c2af94ba",
@@ -2095,8 +2158,8 @@
     "selection_rank": null,
     "editorial_score": 65,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "457404c8e51c9a",
@@ -2128,8 +2191,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 4,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "d43963d5935ad2",
@@ -2159,8 +2222,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 5,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38"
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36"
   },
   {
     "id": "f6988f5edba44b",
@@ -2189,8 +2252,8 @@
     "selection_rank": null,
     "editorial_score": 83,
     "age_days": 5,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38",
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36",
     "synced_at": "2026-11-19T07:49:31.098238+00:00"
   },
   {
@@ -2212,8 +2275,8 @@
     "selection_rank": null,
     "editorial_score": 23,
     "age_days": 5,
-    "last_sync": "2026-11-21T17:38:35+01:00",
-    "last_sync_label": "21/11/2026 à 17:38",
+    "last_sync": "2026-11-21T18:36:27+01:00",
+    "last_sync_label": "21/11/2026 à 18:36",
     "synced_at": "2026-11-19T07:49:31.098238+00:00",
     "report_image": null
   }
