@@ -1,5 +1,35 @@
 [
   {
+    "id": "7efaef0f93e9a3",
+    "title": "Paris FC : Diego Coppola frappe à la porte de la Squadra Azzurra",
+    "url": "https://morning-foot.com/ligue-1/pfc/paris-fc-diego-coppola-frappe-a-la-porte-de-la-squadra-azzurra/",
+    "date": "2026-11-25",
+    "published_at": "2026-11-25T10:30:48+01:00",
+    "category": "MATCH",
+    "score": 58,
+    "reasons": [
+      "Fiche statistique",
+      "Photo disponible"
+    ],
+    "report": true,
+    "image": "assets/7efaef0f93e9a3-ds9-fb8062091a.jpg",
+    "report_image": "assets/7efaef0f93e9a3-ds9-fb8062091a.jpg",
+    "report_source": "https://morning-foot.com/wp-content/uploads/2026/11/fiche-d-coppola-2026-11-24-871x1024.png",
+    "photo": "assets/7efaef0f93e9a3-photo.jpg",
+    "cover_image": "assets/7efaef0f93e9a3-photo.jpg",
+    "intro": "Étincelant contre Angers, Diego Coppola confirme sa progression au Paris FC. De quoi retrouver la sélection italienne ?",
+    "caption": "Paris FC : Diego Coppola frappe à la porte de la Squadra Azzurra\n\nÉtincelant contre Angers, Diego Coppola confirme sa progression au Paris FC. De quoi retrouver la sélection italienne ?\n\n📊 Décryptage et statistiques avec les données DataScout.\n\n💬 Quel est votre avis ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
+    "question": "Quel est votre avis ?",
+    "status": "brouillon",
+    "build_version": 9,
+    "selected": true,
+    "selection_rank": 2,
+    "editorial_score": 88,
+    "age_days": 0,
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
+  },
+  {
     "id": "a24fb74171bc85",
     "title": "PSG – Roma : Luis Enrique prévient, un piège attend Paris",
     "url": "https://morning-foot.com/ligue-1/psg/psg-roma-defi-tactique-luis-enrique/",
@@ -26,8 +56,8 @@
     "selection_rank": null,
     "editorial_score": 60,
     "age_days": 0,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "de4225e95c2fc1",
@@ -56,8 +86,8 @@
     "selection_rank": null,
     "editorial_score": 60,
     "age_days": 0,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "3213e27031b18b",
@@ -87,8 +117,8 @@
     "selection_rank": 1,
     "editorial_score": 103,
     "age_days": 0,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "7e7314eeda1aeb",
@@ -118,8 +148,8 @@
     "selection_rank": null,
     "editorial_score": 70,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "e0dd465de10729",
@@ -148,8 +178,8 @@
     "selection_rank": null,
     "editorial_score": 45,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "4645002001b238",
@@ -176,11 +206,11 @@
     "status": "brouillon",
     "build_version": 9,
     "selected": true,
-    "selection_rank": 2,
+    "selection_rank": 3,
     "editorial_score": 98,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "6809e41ff3c9e4",
@@ -209,8 +239,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "6e3fc43909d9de",
@@ -239,8 +269,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "83b9a589f5752e",
@@ -267,11 +297,11 @@
     "status": "brouillon",
     "build_version": 9,
     "selected": true,
-    "selection_rank": 4,
+    "selection_rank": 5,
     "editorial_score": 92,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "67f01a6c7bc6af",
@@ -298,11 +328,11 @@
     "status": "brouillon",
     "build_version": 9,
     "selected": true,
-    "selection_rank": 3,
+    "selection_rank": 4,
     "editorial_score": 93,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "b6b29cc7a00c2c",
@@ -331,8 +361,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "cf299077d2542c",
@@ -362,8 +392,8 @@
     "selection_rank": null,
     "editorial_score": 70,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "e81c2bef1c3e7c",
@@ -393,8 +423,8 @@
     "selection_rank": null,
     "editorial_score": 70,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "c7ce2e94b43c1c",
@@ -423,8 +453,8 @@
     "selection_rank": null,
     "editorial_score": 50,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "c3eb181e9bf8f9",
@@ -455,8 +485,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 1,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "74534c266d3e5b",
@@ -486,8 +516,8 @@
     "selection_rank": null,
     "editorial_score": 60,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "f004fb237447ca",
@@ -516,8 +546,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "533d74ffa1b8af",
@@ -546,8 +576,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "ad423206fc6d5a",
@@ -575,8 +605,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "594c378633d5c5",
@@ -604,11 +634,11 @@
     "status": "brouillon",
     "build_version": 9,
     "selected": true,
-    "selection_rank": 5,
+    "selection_rank": 6,
     "editorial_score": 103,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "debb3a5c9e0ecc",
@@ -635,11 +665,11 @@
     "status": "brouillon",
     "build_version": 9,
     "selected": true,
-    "selection_rank": 6,
+    "selection_rank": 7,
     "editorial_score": 88,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "d5ee19a873f0d3",
@@ -669,8 +699,8 @@
     "selection_rank": null,
     "editorial_score": 54,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "481e3d0a0f96c8",
@@ -700,8 +730,8 @@
     "selection_rank": null,
     "editorial_score": 57,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "3cc31178b414d5",
@@ -730,8 +760,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "6962282ee5716d",
@@ -757,12 +787,12 @@
     "question": "Quel est votre avis ?",
     "status": "brouillon",
     "build_version": 9,
-    "selected": true,
-    "selection_rank": 7,
+    "selected": false,
+    "selection_rank": null,
     "editorial_score": 80,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "35bb5caceb9c7e",
@@ -791,8 +821,8 @@
     "selection_rank": null,
     "editorial_score": 39,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "06fa495cf4a971",
@@ -821,8 +851,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "138bd0a403246a",
@@ -851,8 +881,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 2,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "7dd2b8d39b0039",
@@ -880,8 +910,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "fd4c2ff736d8e9",
@@ -910,8 +940,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "2f4273fc23cd28",
@@ -940,8 +970,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "379bd86d9b11bf",
@@ -969,8 +999,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "85a774288d37b4",
@@ -999,8 +1029,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "0386d00a00c50b",
@@ -1028,8 +1058,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "3aed7c260eac31",
@@ -1058,8 +1088,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "3f3bda1cc136d1",
@@ -1089,8 +1119,8 @@
     "selection_rank": null,
     "editorial_score": 78,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "7cdaf7b1422cb7",
@@ -1119,8 +1149,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "0e39aec955072e",
@@ -1149,8 +1179,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "7144943bec8440",
@@ -1180,8 +1210,8 @@
     "selection_rank": null,
     "editorial_score": 47,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "b935076d14071c",
@@ -1210,8 +1240,8 @@
     "selection_rank": null,
     "editorial_score": 32,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "23b9e594df8a59",
@@ -1241,8 +1271,8 @@
     "selection_rank": null,
     "editorial_score": 78,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "698a12a1407a81",
@@ -1271,8 +1301,8 @@
     "selection_rank": null,
     "editorial_score": 35,
     "age_days": 3,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "63f8addc779ec5",
@@ -1302,8 +1332,8 @@
     "selection_rank": null,
     "editorial_score": 45,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "8b63cccdfd6137",
@@ -1331,8 +1361,8 @@
     "selection_rank": null,
     "editorial_score": 10,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "619b40940810df",
@@ -1362,8 +1392,8 @@
     "selection_rank": null,
     "editorial_score": 45,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "810406cf0e79f2",
@@ -1392,8 +1422,8 @@
     "selection_rank": null,
     "editorial_score": 53,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "2e3b412840a10b",
@@ -1422,8 +1452,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "e2ecc5188b6bba",
@@ -1452,8 +1482,8 @@
     "selection_rank": null,
     "editorial_score": 53,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "f4d6f3d810b4e9",
@@ -1483,8 +1513,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "57a0896659cbbf",
@@ -1514,8 +1544,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "060c21b99c7caf",
@@ -1546,8 +1576,8 @@
     "selection_rank": null,
     "editorial_score": 80,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "07fea8cc031121",
@@ -1576,8 +1606,8 @@
     "selection_rank": null,
     "editorial_score": 30,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "4ec715518ae43f",
@@ -1605,8 +1635,8 @@
     "selection_rank": null,
     "editorial_score": 10,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "17c7492a33f5ee",
@@ -1635,8 +1665,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "3bd02f20f0fcc7",
@@ -1664,8 +1694,8 @@
     "selection_rank": null,
     "editorial_score": 10,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "e941dddeb6cbfb",
@@ -1694,8 +1724,8 @@
     "selection_rank": null,
     "editorial_score": 24,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "9f6ad8617a4802",
@@ -1726,8 +1756,8 @@
     "selection_rank": null,
     "editorial_score": 82,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "31c06fc41e39ce",
@@ -1757,8 +1787,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "699afcc489a0ac",
@@ -1786,8 +1816,8 @@
     "selection_rank": null,
     "editorial_score": 10,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "840888f21710d1",
@@ -1816,8 +1846,8 @@
     "selection_rank": null,
     "editorial_score": 53,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "2a031e6784f801",
@@ -1847,8 +1877,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 4,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "82c59cdf4adf8d",
@@ -1877,8 +1907,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "e9113a7b018389",
@@ -1908,8 +1938,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "067c4413b65685",
@@ -1939,8 +1969,8 @@
     "selection_rank": null,
     "editorial_score": 61,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "461b8ca69e82f8",
@@ -1969,8 +1999,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "eb8cf0e5f57e7c",
@@ -2000,8 +2030,8 @@
     "selection_rank": null,
     "editorial_score": 63,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "361323211d445e",
@@ -2031,8 +2061,8 @@
     "selection_rank": null,
     "editorial_score": 63,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "6e5f3c136feeb2",
@@ -2061,8 +2091,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "cd1796ebe305ea",
@@ -2092,8 +2122,8 @@
     "selection_rank": null,
     "editorial_score": 63,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "541577983ed7e0",
@@ -2122,8 +2152,8 @@
     "selection_rank": null,
     "editorial_score": 25,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "106100d612d29f",
@@ -2152,8 +2182,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "2ebb3b5ea8f6d6",
@@ -2182,8 +2212,8 @@
     "selection_rank": null,
     "editorial_score": 23,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "5b786239c9537a",
@@ -2212,8 +2242,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "9e4d10054ad666",
@@ -2243,8 +2273,8 @@
     "selection_rank": null,
     "editorial_score": 63,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "53abb93e9e7ef3",
@@ -2274,8 +2304,8 @@
     "selection_rank": null,
     "editorial_score": 40,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "6269db046bf4ed",
@@ -2304,8 +2334,8 @@
     "selection_rank": null,
     "editorial_score": 48,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "69d0dedc17ebd8",
@@ -2335,8 +2365,8 @@
     "selection_rank": null,
     "editorial_score": 33,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "f8b736eb93c2ca",
@@ -2365,8 +2395,8 @@
     "selection_rank": null,
     "editorial_score": 20,
     "age_days": 5,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "566adba756ffe7",
@@ -2395,8 +2425,8 @@
     "selection_rank": null,
     "editorial_score": 43,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "7d62ad7da9d3aa",
@@ -2425,8 +2455,8 @@
     "selection_rank": null,
     "editorial_score": 15,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "83668439b1ef9e",
@@ -2455,8 +2485,8 @@
     "selection_rank": null,
     "editorial_score": 43,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "028cf7b967b264",
@@ -2485,8 +2515,8 @@
     "selection_rank": null,
     "editorial_score": 43,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "5b7cdee9bac575",
@@ -2517,8 +2547,8 @@
     "selection_rank": null,
     "editorial_score": 72,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "2d09b2a1d2fed0",
@@ -2548,8 +2578,8 @@
     "selection_rank": null,
     "editorial_score": 58,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "9e452ebec9bcd9",
@@ -2579,8 +2609,8 @@
     "selection_rank": null,
     "editorial_score": 58,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "84a7faabca3e8b",
@@ -2609,8 +2639,8 @@
     "selection_rank": null,
     "editorial_score": 13,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "c3b33d9c00503f",
@@ -2639,8 +2669,8 @@
     "selection_rank": null,
     "editorial_score": 43,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "bf94b3ad77c392",
@@ -2668,8 +2698,8 @@
     "selection_rank": null,
     "editorial_score": -10,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "ebb0752ca9bd63",
@@ -2700,8 +2730,8 @@
     "selection_rank": null,
     "editorial_score": 70,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "f1ce4282e4aa3a",
@@ -2731,8 +2761,8 @@
     "selection_rank": null,
     "editorial_score": 15,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "464dda1d3d8a03",
@@ -2761,8 +2791,8 @@
     "selection_rank": null,
     "editorial_score": 0,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "9f975ecba3107a",
@@ -2793,8 +2823,8 @@
     "selection_rank": null,
     "editorial_score": 29,
     "age_days": 6,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "2581aa327b6d01",
@@ -2825,8 +2855,8 @@
     "selection_rank": null,
     "editorial_score": 52,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "a4681ed57f75a9",
@@ -2857,8 +2887,8 @@
     "selection_rank": null,
     "editorial_score": 53,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "82815328c7d3d1",
@@ -2888,8 +2918,8 @@
     "selection_rank": null,
     "editorial_score": 10,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "cc76b901ca79fc",
@@ -2920,8 +2950,8 @@
     "selection_rank": null,
     "editorial_score": 53,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "722948fae98ff3",
@@ -2952,8 +2982,8 @@
     "selection_rank": null,
     "editorial_score": 52,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "be090c2a4cc515",
@@ -2985,8 +3015,8 @@
     "selection_rank": null,
     "editorial_score": 64,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "7ee2bca95f3c42",
@@ -3016,8 +3046,8 @@
     "selection_rank": null,
     "editorial_score": 10,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "8d04486dcdc98f",
@@ -3048,8 +3078,8 @@
     "selection_rank": null,
     "editorial_score": 29,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "790defeec38b46",
@@ -3079,8 +3109,8 @@
     "selection_rank": null,
     "editorial_score": 9,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "79d7417ad6b7f2",
@@ -3111,8 +3141,8 @@
     "selection_rank": null,
     "editorial_score": 53,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "4b3c2cc616d949",
@@ -3142,8 +3172,8 @@
     "selection_rank": null,
     "editorial_score": 10,
     "age_days": 7,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "7af8ffaf754c03",
@@ -3173,8 +3203,8 @@
     "selection_rank": null,
     "editorial_score": 5,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "dd1f3f531cdf17",
@@ -3204,8 +3234,8 @@
     "selection_rank": null,
     "editorial_score": 32,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "b3f4ad01564f58",
@@ -3235,8 +3265,8 @@
     "selection_rank": null,
     "editorial_score": 4,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "34feefe1789274",
@@ -3267,8 +3297,8 @@
     "selection_rank": null,
     "editorial_score": 47,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "0ae43ad0544876",
@@ -3300,8 +3330,8 @@
     "selection_rank": null,
     "editorial_score": 62,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "23b408b92ada5c",
@@ -3331,8 +3361,8 @@
     "selection_rank": null,
     "editorial_score": 8,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "5409f8cde6586e",
@@ -3362,8 +3392,8 @@
     "selection_rank": null,
     "editorial_score": 4,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "86f1af7c811c8d",
@@ -3392,8 +3422,8 @@
     "selection_rank": null,
     "editorial_score": -10,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "5872b6792e1469",
@@ -3423,8 +3453,8 @@
     "selection_rank": null,
     "editorial_score": 4,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "fbc390ea2a6a66",
@@ -3456,8 +3486,8 @@
     "selection_rank": null,
     "editorial_score": 62,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "c3ea7219923ec0",
@@ -3488,8 +3518,8 @@
     "selection_rank": null,
     "editorial_score": 47,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "4a25aa58fbd568",
@@ -3519,8 +3549,8 @@
     "selection_rank": null,
     "editorial_score": 4,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "aecd1db356740a",
@@ -3552,8 +3582,8 @@
     "selection_rank": null,
     "editorial_score": 68,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "f537f4c2af94ba",
@@ -3584,8 +3614,8 @@
     "selection_rank": null,
     "editorial_score": 45,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "457404c8e51c9a",
@@ -3617,8 +3647,8 @@
     "selection_rank": null,
     "editorial_score": 62,
     "age_days": 8,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   },
   {
     "id": "d43963d5935ad2",
@@ -3648,38 +3678,7 @@
     "selection_rank": null,
     "editorial_score": 0,
     "age_days": 9,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57"
-  },
-  {
-    "id": "f6988f5edba44b",
-    "title": "ASSE : la Breum-dépendance crève les yeux et inquiète",
-    "url": "https://morning-foot.com/ligue-2/asse-jakob-breum-dependance-statistiques/",
-    "date": "2026-11-16",
-    "category": "STATS",
-    "score": 93,
-    "reasons": [
-      "Fiche statistique",
-      "Statistiques",
-      "Sujet populaire",
-      "Photo disponible"
-    ],
-    "report": false,
-    "image": null,
-    "report_image": null,
-    "photo": "assets/f6988f5edba44b-photo.jpg",
-    "cover_image": "assets/f6988f5edba44b-photo.jpg",
-    "intro": "À l'ASSE, Jakob Breum s'impose comme le principal créateur offensif. Ses statistiques impressionnent, mais soulèvent une question.",
-    "caption": "ASSE : la Breum-dépendance crève les yeux et inquiète\n\nÀ l'ASSE, Jakob Breum s'impose comme le principal créateur offensif. Ses statistiques impressionnent, mais soulèvent une question.\n\n📊 Décryptage et statistiques avec les données DataScout.\n\n💬 Que vous inspirent ces chiffres ?\n\n🔗 Article complet sur morning-foot.com — lien en bio.",
-    "question": "Que vous inspirent ces chiffres ?",
-    "status": "brouillon",
-    "build_version": 7,
-    "selected": false,
-    "selection_rank": null,
-    "editorial_score": 63,
-    "age_days": 9,
-    "last_sync": "2026-11-25T09:57:41+01:00",
-    "last_sync_label": "25/11/2026 à 09:57",
-    "synced_at": "2026-11-19T07:49:31.098238+00:00"
+    "last_sync": "2026-11-25T11:08:48+01:00",
+    "last_sync_label": "25/11/2026 à 11:08"
   }
 ]
